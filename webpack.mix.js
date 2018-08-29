@@ -11,5 +11,29 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.browserSync('127.0.0.1:8000')
+
+mix.webpackConfig({
+ module: {
+   rules: [{
+     test: /\.(png|jpe?g|gif)$/,
+     loader: 'file-loader',
+     options: {
+         name: 'images/[name].[hash].[ext]',
+         publicPath: '/'
+     }
+   }]
+ }
+})
+
+mix.js('resources/assets/js/app.js', 'public/js').extract(['vue'])
+mix.js('resources/assets/js/members.show.js', 'public/js')
+mix.js('resources/assets/js/tasks.create.js', 'public/js')
+mix.sass('resources/assets/scss/app.scss', 'public/css')
+mix.sass('resources/assets/scss/layout.default.scss', 'public/css')
+mix.sass('resources/assets/scss/pages.login.scss', 'public/css')
+mix.sass('resources/assets/scss/home.scss', 'public/css')
+mix.sass('resources/assets/scss/pages.index.scss', 'public/css')
+mix.sass('resources/assets/scss/pages.show.scss', 'public/css')
+mix.sass('resources/assets/scss/pages.edit.scss', 'public/css')
+mix.sass('resources/assets/scss/tasks.create.scss', 'public/css')

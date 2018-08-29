@@ -1,0 +1,91 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Lato|Raleway:400,300,600,800,900');
+
+// Bootstrap
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+// @import "node_modules/bootstrap/scss/print";
+@import "node_modules/bootstrap/scss/reboot";
+@import "node_modules/bootstrap/scss/type";
+@import "node_modules/bootstrap/scss/images";
+// @import "node_modules/bootstrap/scss/code";
+@import "node_modules/bootstrap/scss/grid";
+@import "node_modules/bootstrap/scss/tables";
+@import "node_modules/bootstrap/scss/forms";
+@import "node_modules/bootstrap/scss/buttons";
+@import "node_modules/bootstrap/scss/transitions";
+@import "node_modules/bootstrap/scss/dropdown";
+@import "node_modules/bootstrap/scss/button-group";
+@import "node_modules/bootstrap/scss/input-group";
+// @import "node_modules/bootstrap/scss/custom-forms";
+@import "node_modules/bootstrap/scss/nav";
+@import "node_modules/bootstrap/scss/navbar";
+@import "node_modules/bootstrap/scss/card";
+// @import "node_modules/bootstrap/scss/breadcrumb";
+@import "node_modules/bootstrap/scss/pagination";
+@import "node_modules/bootstrap/scss/badge";
+// @import "node_modules/bootstrap/scss/jumbotron";
+// @import "node_modules/bootstrap/scss/alert";
+@import "node_modules/bootstrap/scss/progress";
+@import "node_modules/bootstrap/scss/media";
+@import "node_modules/bootstrap/scss/list-group";
+@import "node_modules/bootstrap/scss/close";
+@import "node_modules/bootstrap/scss/modal";
+// @import "node_modules/bootstrap/scss/tooltip";
+// @import "node_modules/bootstrap/scss/popover";
+// @import "node_modules/bootstrap/scss/carousel";
+@import "node_modules/bootstrap/scss/utilities";
+
+html {
+  font-size: 16px;
+
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+  }
+}
+
+img {
+  vertical-align: unset;
+}
+
+.btn {
+  padding: 0.5rem 0.75rem;
+}
+
+.container {
+
+  @media screen and (min-width: 1300px) {
+    max-width: 1240px;
+  }
+}
+.page {
+  @extend .container;
+}
+.page-header, .page-content {
+  @extend .row;
+}
+
+select.form-control:not([size]):not([multiple]) {
+  height: calc(2.5rem + 2px);
+}
+
+form {
+  width: 100%;
+}
+
+.form-control {
+  color: #534741;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border: 0.0625rem solid rgba(#534741, 0.42);
+  border-radius: unset;
+
+  &:hover {
+    border-color: rgba(#534741, 0.87);
+  }
+  &:focus {
+    border-color: rgba(#534741, 1);
+    box-shadow: unset;
+  }
+}

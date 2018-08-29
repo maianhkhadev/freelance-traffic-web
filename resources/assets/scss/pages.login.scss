@@ -1,0 +1,38 @@
+body {
+  background-image: url('/images/bim.jpeg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+
+  &::before {
+    content: '';
+    background-color: rgba(#000000, 0.25);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.box {
+
+  .box-header {
+    background-color: #000000;
+    padding: 2rem;
+
+    .title {
+      color: #ffffff;
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+  .box-content {
+    background-color: #ffffff;
+    padding: 2rem;
+  }
+}

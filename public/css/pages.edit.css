@@ -1,0 +1,77 @@
+.page-header {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.page-header .title {
+  color: #000000;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.page-header .breadcumb ul {
+  list-style-type: none;
+  -webkit-padding-start: unset;
+  margin-bottom: unset;
+}
+
+.page-header .breadcumb ul li {
+  display: inline-block;
+}
+
+.page-header .breadcumb ul li a {
+  color: #787868;
+  font-size: 1rem;
+}
+
+.page-header .breadcumb ul li a:hover {
+  color: #000000;
+  text-decoration: unset;
+}
+
+.page-header .breadcumb ul li::after {
+  content: "-";
+  color: #787868;
+  padding-left: 0.75rem;
+  padding-right: 0.5rem;
+}
+
+.page-header .breadcumb ul li:last-child::after {
+  content: unset;
+}
+
+.page-content {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.page-content .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.page-content .form-group label {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.page-content .form-group .form-control {
+  padding: 0.5rem 0.75rem;
+}
+
+.page-content .form-check {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.page-content .form-check .form-check-input {
+  margin-top: 0.4rem;
+  margin-left: -1.5rem;
+}
+
+.page-content .form-check .form-check-label {
+  font-size: 1;
+  font-weight: 400;
+  margin-bottom: unset;
+}
+

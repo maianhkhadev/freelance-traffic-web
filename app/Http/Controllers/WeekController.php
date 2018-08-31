@@ -25,7 +25,7 @@ class WeekController extends Controller
      */
     public function index()
     {
-        $weeks = Week::orderBy('created_at', 'ASC')->get();
+        $weeks = Week::orderBy('created_at', 'ASC')->paginate(10);
         return view('weeks.index', ['weeks' => $weeks]);
     }
 

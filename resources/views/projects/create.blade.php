@@ -1,8 +1,4 @@
-@extends('layouts.default')
-
-@section('stylesheet')
-  <link href="{{ asset('css/pages.edit.css') }}" rel="stylesheet">
-@endsection
+@extends('layouts.fullscreen')
 
 @section('content')
   <div class="page">

@@ -16,7 +16,7 @@ class ProjectController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +24,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::orderBy('created_at', 'ASC')->get();
+        $projects = Project::orderBy('created_at', 'ASC')->paginate(10);
         return view('projects.index', ['projects' => $projects]);
     }
 

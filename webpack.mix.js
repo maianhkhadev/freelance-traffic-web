@@ -26,14 +26,14 @@ mix.webpackConfig({
  }
 })
 
+mix.styles([
+  'node_modules/selectize/dist/css/selectize.css',
+  // 'node_modules/selectize/dist/css/selectize.default.css',
+], 'public/css/vendor.css');
+
+mix.sass('resources/assets/scss/main.scss', 'public/css');
+
 mix.js('resources/assets/js/app.js', 'public/js').extract(['vue'])
 mix.js('resources/assets/js/members.show.js', 'public/js')
 mix.js('resources/assets/js/tasks.create.js', 'public/js')
-mix.sass('resources/assets/scss/app.scss', 'public/css')
-mix.sass('resources/assets/scss/layout.default.scss', 'public/css')
-mix.sass('resources/assets/scss/pages.login.scss', 'public/css')
-mix.sass('resources/assets/scss/home.scss', 'public/css')
-mix.sass('resources/assets/scss/pages.index.scss', 'public/css')
-mix.sass('resources/assets/scss/pages.show.scss', 'public/css')
-mix.sass('resources/assets/scss/pages.edit.scss', 'public/css')
-mix.sass('resources/assets/scss/tasks.create.scss', 'public/css')
+mix.js('resources/assets/js/weeks.show.js', 'public/js')

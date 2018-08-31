@@ -1,42 +1,60 @@
-@extends('layouts.default')
-
-@section('stylesheet')
-  <link href="{{ asset('css/pages.edit.css') }}" rel="stylesheet">
-@endsection
+@extends('layouts.fullscreen')
 
 @section('content')
-  <div class="page">
-    <div class="page-header">
-      <div class="col-xl-12">
-        <div class="title">Create a new Member</div>
-        <div class="breadcumb">
-          <ul>
-            <li><a href="{{ route('home') }}">Home</a></li>
-            <li><a href="{{ route('members.index') }}">Members</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="page-content">
-      <form action="/members" method="POST">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="col-xl-6">
-          <div class="form-group">
-            <label>Name</label>
-            <input name="name" type="text" class="form-control" placeholder="Enter name">
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input name="email" type="text" class="form-control" placeholder="Enter email">
-          </div>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="checkbox-disabled" name="disabled">
-            <label class="form-check-label" for="checkbox-disabled">Disable this member</label>
-          </div>
+  <div class="page page-create">
 
-          <button class="btn btn-dark">Save & Close</button>
+    <a class="btn btn-dark btn-close" href="{{ route('members.index') }}">&#10005;</a>
+
+    <div class="page-header">
+      <h4>Create a new Member</h4>
+    </div>
+
+    <div class="page-content">
+      <form class="block-form" action="/members" method="POST">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="disabled" value="on">
+
+        <div class="form-group">
+          <label>What's your name?</label>
+          <input name="name" type="text" class="form-control" placeholder="Enter name" autocomplete="off">
         </div>
-      </div>
+        <div class="form-group">
+          <label>Could you send me your email address?</label>
+          <input name="email" type="text" class="form-control" placeholder="Enter email" autocomplete="off">
+        </div>
+        <div class="form-group form-select">
+          <label>Choose Your Team</label>
+          <select name="team_id" class="">
+            @foreach ($teams as $team)
+            <option value="{{ $team->id }}">{{ $team->name }}</option>
+            @endforeach
+          </select>
+        </div>
+
+        <button class="btn btn-dark">Save & Close</button>
+      </form>
     </div>
   </div>
+@endsection
+
+@section('javascript')
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      $('select').selectize();
+
+      let rules = [
+        {
+          require: {
+            names: [
+              'name',
+              'email'
+            ]
+          }
+        }
+      ]
+
+      let validation = window.Validation('.page-create form', rules)
+    })
+  </script>
 @endsection

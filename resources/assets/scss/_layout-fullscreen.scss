@@ -1,0 +1,14 @@
+.layout-fullscreen {
+
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow-y: hidden;
+
+    .page {
+      width: 27.5rem;
+    }
+  }
+}

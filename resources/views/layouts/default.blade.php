@@ -11,12 +11,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/layout.default.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vendor.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     @yield('stylesheet')
 </head>
 <body>
-    <div id="root">
+    <div id="root" class="layout-default">
       <header>
         <div class="container">
           <div class="row">

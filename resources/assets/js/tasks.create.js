@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+  $('#week_id').selectize()
+
   document.querySelector('select[name=week_id]').addEventListener('change', function () {
     tasks()
   })

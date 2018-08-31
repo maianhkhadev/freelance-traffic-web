@@ -8,6 +8,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.Validation = require('./plugins/validation').default
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -1,15 +1,10 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/css/layout.default.css": "/css/layout.default.css",
-    "/css/pages.login.css": "/css/pages.login.css",
-    "/css/home.css": "/css/home.css",
-    "/css/pages.index.css": "/css/pages.index.css",
-    "/css/pages.show.css": "/css/pages.show.css",
-    "/css/pages.edit.css": "/css/pages.edit.css",
-    "/css/tasks.create.css": "/css/tasks.create.css",
+    "/css/main.css": "/css/main.css",
     "/js/vendor.js": "/js/vendor.js",
+    "/js/weeks.show.js": "/js/weeks.show.js",
     "/js/tasks.create.js": "/js/tasks.create.js",
     "/js/members.show.js": "/js/members.show.js",
-    "/js/manifest.js": "/js/manifest.js"
+    "/js/manifest.js": "/js/manifest.js",
+    "/css/vendor.css": "/css/vendor.css"
 }

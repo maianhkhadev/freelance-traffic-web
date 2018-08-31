@@ -23,6 +23,7 @@
         "lodash": "^4.17.4",
         "popper.js": "^1.12.9",
         "progressbar.js": "^1.0.1",
+        "selectize": "^0.12.6",
         "vue": "^2.5.13"
     }
 }

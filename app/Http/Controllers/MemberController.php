@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Team;
 use App\Member;
 use App\Week;
 use App\Task;
@@ -26,7 +27,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = Member::orderBy('created_at', 'ASC')->get();
+        $members = Member::orderBy('created_at', 'ASC')->paginate(10);
         return view('members.index', ['members' => $members]);
     }
 
@@ -69,7 +70,8 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return view('members.create');
+        $teams = Team::all();
+        return view('members.create', ['teams' => $teams]);
     }
 
     /**

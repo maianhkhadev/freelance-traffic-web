@@ -1,17 +1,20 @@
-webpackJsonp([2],{
+webpackJsonp([3],{
 
-/***/ 53:
+/***/ 228:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(54);
+module.exports = __webpack_require__(229);
 
 
 /***/ }),
 
-/***/ 54:
+/***/ 229:
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
+
+  $('#week_id').selectize();
+
   document.querySelector('select[name=week_id]').addEventListener('change', function () {
     tasks();
   });
@@ -40,4 +43,4 @@ function tasks() {
 
 /***/ })
 
-},[53]);
+},[228]);

@@ -27,10 +27,10 @@
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="form-group">
             <label>Choose a Week</label>
-            <select name="week_id" class="form-control">
-              @foreach ($weeks as $week)
+            <select id="week_id" class="form-control">
+              {{-- @foreach ($weeks as $week)
               <option value="{{ $week->id }}">{{ $week->name }}</option>
-              @endforeach
+              @endforeach --}}
             </select>
           </div>
           <div class="form-group">

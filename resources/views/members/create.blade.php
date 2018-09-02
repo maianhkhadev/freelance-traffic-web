@@ -12,15 +12,14 @@
     <div class="page-content">
       <form class="block-form" action="/members" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input type="hidden" name="disabled" value="on">
 
         <div class="form-group">
           <label>What's your name?</label>
-          <input name="name" type="text" class="form-control" placeholder="Enter name" autocomplete="off">
+          <input name="name" type="text" class="form-control" placeholder="Enter name..." autocomplete="off">
         </div>
         <div class="form-group">
-          <label>Could you send me your email address?</label>
-          <input name="email" type="text" class="form-control" placeholder="Enter email" autocomplete="off">
+          <label>Could you send me your email?</label>
+          <input name="email" type="text" class="form-control" placeholder="Enter email..." autocomplete="off">
         </div>
         <div class="form-group form-select">
           <label>Choose Your Team</label>

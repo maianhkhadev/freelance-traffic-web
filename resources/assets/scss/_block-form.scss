@@ -63,16 +63,17 @@
   .form-check {
     padding-left: 1.5rem;
     margin-bottom: 1.25rem;
-
+    
     .form-check-input {
-      margin-top: 0.4rem;
       margin-left: -1.5rem;
+      cursor: pointer;
     }
 
     .form-check-label {
       font-size: 1;
       font-weight: 400;
       margin-bottom: unset;
+      cursor: pointer;
     }
   }
 

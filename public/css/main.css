@@ -9047,6 +9047,18 @@ a:hover {
   border-color: #fdd20a;
 }
 
+.btn-gold:hover {
+  color: #000000;
+  background-color: #dfb802;
+  border-color: #dfb802;
+}
+
+.btn-gold.focus,
+.btn-gold:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(253, 210, 10, 0.5);
+          box-shadow: 0 0 0 0.2rem rgba(253, 210, 10, 0.5);
+}
+
 .layout-default header {
   background-color: #000000;
   padding-top: 1.25rem;
@@ -9109,6 +9121,39 @@ a:hover {
 
 .layout-fullscreen main .page {
   width: 27.5rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.125rem;
+  padding: 2rem;
+}
+
+.layout-fullscreen main .page .btn-close {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  font-size: 1.25rem;
+  padding: 0.75rem 1.25rem;
+  -webkit-transition: all 0.35s ease-in;
+  transition: all 0.35s ease-in;
+  z-index: 1080;
+}
+
+@media screen and (max-width: 600px) {
+  .layout-fullscreen main .page .btn-close {
+    top: unset;
+    bottom: 1rem;
+  }
+}
+
+.layout-fullscreen main .page .page-header {
+  margin-bottom: 2.25rem;
+}
+
+.layout-fullscreen main .page .page-header h4 {
+  color: #000000;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
 }
 
 .page-list .page-header {
@@ -9145,40 +9190,127 @@ a:hover {
   margin-top: 1.25rem;
 }
 
-.page-create {
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.125rem;
-  padding: 2rem;
+.page-show .page-header {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 
-.page-create .btn-close {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
-  font-size: 1.25rem;
-  padding: 0.75rem 1.25rem;
-  -webkit-transition: all 0.35s ease-in;
-  transition: all 0.35s ease-in;
-  z-index: 1080;
-}
-
-@media screen and (max-width: 600px) {
-  .page-create .btn-close {
-    top: unset;
-    bottom: 1rem;
-  }
-}
-
-.page-create .page-header {
-  margin-bottom: 2.25rem;
-}
-
-.page-create .page-header h4 {
+.page-show .page-header .title {
   color: #000000;
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin-bottom: 0.25rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.page-show .page-header .breadcumb ul {
+  list-style-type: none;
+  -webkit-padding-start: unset;
+  margin-bottom: unset;
+}
+
+.page-show .page-header .breadcumb ul li {
+  display: inline-block;
+}
+
+.page-show .page-header .breadcumb ul li a {
+  color: #787868;
+  font-size: 1rem;
+}
+
+.page-show .page-header .breadcumb ul li a:hover {
+  color: #000000;
+  text-decoration: unset;
+}
+
+.page-show .page-header .breadcumb ul li::after {
+  content: "-";
+  color: #787868;
+  padding-left: 0.75rem;
+  padding-right: 0.5rem;
+}
+
+.page-show .page-header .breadcumb ul li:last-child::after {
+  content: unset;
+}
+
+.page-show .page-content {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.page-show .page-content .form-view {
+  margin-bottom: 1.25rem;
+}
+
+.page-show .page-content .form-view label {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.page-show .page-content .form-view a {
+  display: block;
+  text-decoration: underline;
+}
+
+.page-show .page-content .form-check {
+  padding-left: 1.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.page-show .page-content .form-check.member {
+  padding-left: 3.5rem;
+}
+
+.page-show .page-content .form-check .form-check-input {
+  margin-top: 0.25rem;
+  margin-left: -1.75rem;
+}
+
+.page-show .chart-container {
+  position: relative;
+  height: 20rem;
+}
+
+.page-show .projects,
+.page-show .teams {
+  max-height: 20rem;
+  overflow-y: auto;
+}
+
+.page-show .members {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.page-show .members:last-child {
+  margin-bottom: unset;
+}
+
+.page-show .members::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0.5rem;
+  bottom: 1.25rem;
+  border-left: 0.0625rem dotted #9dbdd6;
+  z-index: 1;
+}
+
+.page-show .members .form-check {
+  position: relative;
+}
+
+.page-show .members .form-check::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 1.125rem;
+  left: 0.5rem;
+  width: 0.75rem;
+  border-top: 0.0625rem dotted #9dbdd6;
+  z-index: 1;
 }
 
 .block-breadcrumb ul {
@@ -9275,14 +9407,15 @@ a:hover {
 }
 
 .block-form .form-check .form-check-input {
-  margin-top: 0.4rem;
   margin-left: -1.5rem;
+  cursor: pointer;
 }
 
 .block-form .form-check .form-check-label {
   font-size: 1;
   font-weight: 400;
   margin-bottom: unset;
+  cursor: pointer;
 }
 
 .block-form button {

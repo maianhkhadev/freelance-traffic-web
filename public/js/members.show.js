@@ -11,11 +11,7 @@ module.exports = __webpack_require__(227);
 /***/ 227:
 /***/ (function(module, exports) {
 
-$(document).ready(function () {
-  document.querySelector('select[name=week_id]').addEventListener('change', function (event) {
-    window.location.href = '/members/' + memberId + '/week/' + event.target.value;
-  });
-});
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/maianhkha/projects/freelance/traffic-web/resources/assets/js/members.show.js'");
 
 /***/ })
 

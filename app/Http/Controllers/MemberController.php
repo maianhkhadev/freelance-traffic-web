@@ -27,8 +27,14 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = Member::orderBy('created_at', 'ASC')->paginate(10);
+        $members = Member::orderBy('created_at', 'DESC')->paginate(10);
         return view('members.index', ['members' => $members]);
+    }
+
+    public function search()
+    {
+        $members = Member::orderBy('created_at', 'DESC')->get();
+        return json_encode($members);
     }
 
     /**
@@ -40,27 +46,7 @@ class MemberController extends Controller
     {
         $member = Member::find($id);
 
-        $week = $week_id === null ? Week::latest()->first() : Week::find($week_id);
-        $tasks = Task::where([ ['week_id', $week->id], ['member_id', $id] ])->get();
-
-        $projects = array();
-        foreach($tasks as $task) {
-
-          $index = array_search($task->project->id, array_column($projects, 'id'));
-          if ($index === FALSE) {
-            $project = new \stdClass();
-            $project->id = $task->project->id;
-            $project->name = $task->project->name;
-            $project->value = $task->value;
-            array_push($projects, $project);
-          } else {
-            $projects[$index]->value += $task->value;
-          }
-        }
-
-        $weeks = Week::orderBy('created_at', 'ASC')->get();
-
-        return view('members.show', ['member' => $member, 'weeks' => $weeks, 'week' => $week, 'projects' => $projects, 'tasks' => $tasks]);
+        return view('members.show', ['member' => $member]);
     }
 
     /**
@@ -86,11 +72,12 @@ class MemberController extends Controller
 
         $member->name = $request->input('name');
         $member->email = $request->input('email');
-        $member->disabled = $request->input('disabled') === 'on' ? true : false;
+        $member->team_id = $request->input('team_id');
+        $member->disabled = false;
 
         $member->save();
 
-        return redirect()->route('members.show', $member);
+        return redirect()->route('members.index');
     }
 
     /**
@@ -101,7 +88,8 @@ class MemberController extends Controller
     public function edit($id)
     {
         $member = Member::find($id);
-        return view('members.edit', ['member' => $member]);
+        $teams = Team::all();
+        return view('members.edit', ['member' => $member, 'teams' => $teams]);
     }
 
     /**
@@ -121,6 +109,6 @@ class MemberController extends Controller
 
         $member->save();
 
-        return redirect()->route('members.show', $member);
+        return redirect()->route('members.index');
     }
 }

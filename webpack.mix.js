@@ -34,6 +34,3 @@ mix.styles([
 mix.sass('resources/assets/scss/main.scss', 'public/css');
 
 mix.js('resources/assets/js/app.js', 'public/js').extract(['vue'])
-mix.js('resources/assets/js/members.show.js', 'public/js')
-mix.js('resources/assets/js/tasks.create.js', 'public/js')
-mix.js('resources/assets/js/weeks.show.js', 'public/js')

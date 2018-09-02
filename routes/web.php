@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::resource('teams', 'TeamController');
+Route::resource('members', 'MemberController');
+Route::resource('projects', 'ProjectController');
+Route::resource('weeks', 'WeekController');
+Route::resource('tasks', 'TaskController');

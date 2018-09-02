@@ -66,7 +66,7 @@
               </div>
               <div class="block-content">
                 @foreach ($members as $member)
-                <div class="block-record">
+                <div class="block-record {{ $member->updated_at }}">
                   <span class="block-cell">
                     <span class="avatar-name">HL</span>
                     {{ $member->name }}

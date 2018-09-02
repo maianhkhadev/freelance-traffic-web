@@ -27,4 +27,13 @@ a {
   color: #5c5e5c;
   background-color: #fdd20a;
   border-color: #fdd20a;
+
+  &:hover {
+    color: #000000;
+    background-color: darken(#fdd20a, 7.5%);
+    border-color: darken(#fdd20a, 7.5%);
+  }
+  &.focus, &:focus {
+    box-shadow: 0 0 0 .2rem rgba(#fdd20a, 0.5);
+  }
 }

@@ -24,29 +24,26 @@ const Validation = function(selector, rules) {
       errorElement.classList.remove('error')
     })
 
-    rules.forEach(function(rule) {
+    if(rules.require !== undefined) {
 
-      if(rule.require !== undefined) {
+      let names = rules.require.names
+      names.forEach(function(name) {
 
-        let names = rule.require.names
-        names.forEach(function(name) {
+        let element = form.querySelector(`[name="${name}"]`)
+        if(element === null || element.value === '') {
+          isClear = false
 
-          let element = form.querySelector(`[name="${name}"]`)
-          if(element === null || element.value === '') {
-            isClear = false
+          let group = element.closest('.form-group')
 
-            let group = element.closest('.form-group')
+          if(group.classList.contains('error') === false) {
 
-            if(group.classList.contains('error') === false) {
-
-              group.classList.add('error')
-              let error = group.querySelector('.error-message')
-              error.innerHTML = '* This field is required.'
-            }
+            group.classList.add('error')
+            let error = group.querySelector('.error-message')
+            error.innerHTML = '* This field is required.'
           }
-        })
-      }
-    })
+        }
+      })
+    }
 
     return isClear
   }
@@ -57,7 +54,7 @@ const Validation = function(selector, rules) {
       console.log(errorElement)
     })
   }
-
+  
   form.addEventListener('submit', function(event) {
     event.preventDefault()
 

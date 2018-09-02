@@ -32339,6 +32339,9 @@ var root = new Vue({
 
 window.root = root;
 
+__webpack_require__(238);
+__webpack_require__(239);
+
 /***/ }),
 /* 150 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -70905,29 +70908,26 @@ var Validation = function Validation(selector, rules) {
       errorElement.classList.remove('error');
     });
 
-    rules.forEach(function (rule) {
+    if (rules.require !== undefined) {
 
-      if (rule.require !== undefined) {
+      var names = rules.require.names;
+      names.forEach(function (name) {
 
-        var names = rule.require.names;
-        names.forEach(function (name) {
+        var element = form.querySelector('[name="' + name + '"]');
+        if (element === null || element.value === '') {
+          isClear = false;
 
-          var element = form.querySelector('[name="' + name + '"]');
-          if (element === null || element.value === '') {
-            isClear = false;
+          var group = element.closest('.form-group');
 
-            var group = element.closest('.form-group');
+          if (group.classList.contains('error') === false) {
 
-            if (group.classList.contains('error') === false) {
-
-              group.classList.add('error');
-              var error = group.querySelector('.error-message');
-              error.innerHTML = '* This field is required.';
-            }
+            group.classList.add('error');
+            var error = group.querySelector('.error-message');
+            error.innerHTML = '* This field is required.';
           }
-        });
-      }
-    });
+        }
+      });
+    }
 
     return isClear;
   }
@@ -70960,6 +70960,101 @@ var Validation = function Validation(selector, rules) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */
+/***/ (function(module, exports) {
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  var memberValidation = document.querySelector('.member-validation');
+
+  if (memberValidation === null) {
+    return;
+  }
+
+  $('select').selectize();
+
+  var rules = {
+    require: {
+      names: ['name', 'email']
+    },
+    email: {
+      names: ['email']
+    }
+  };
+
+  window.Validation('.member-validation form', rules);
+});
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports) {
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  // document.querySelector('select[name=week_id]').addEventListener('change', function (event) {
+  //
+  //   axios.get(`/tasks-filter?week_id=${event.target.value}&member_id=${memberId}`).then(response => {
+  //
+  //     console.log(response.data)
+  //   })
+  // })
+
+  // renderChart('chart', window.tasks)
+  console.log(window.tasks);
+});
+
+function renderChart(chartId, members) {
+  var labels = [];
+  var values = [];
+  members.forEach(function (member) {
+    labels.push(member.name);
+    values.push(member.value);
+  });
+
+  var context = document.getElementById(chartId).getContext('2d');
+  var chart = new Chart(context, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: values,
+        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+        borderColor: ['rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+
+  return chart;
+}
 
 /***/ })
 ],[148]);

@@ -1,0 +1,133 @@
+.page-show  {
+
+  .page-header {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+
+    .title {
+      color: #000000;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .breadcumb {
+
+      ul {
+        list-style-type: none;
+        -webkit-padding-start: unset;
+        margin-bottom: unset;
+
+        li {
+          display: inline-block;
+
+          a {
+            color: #787868;
+            font-size: 1rem;
+
+            &:hover {
+              color: #000000;
+              text-decoration: unset;
+            }
+          }
+
+          &::after {
+            content: "-";
+            color: #787868;
+            padding-left: 0.75rem;
+            padding-right: 0.5rem;
+          }
+
+          &:last-child {
+
+            &::after {
+              content: unset;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .page-content {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+
+    .form-view {
+      margin-bottom: 1.25rem;
+
+      label {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
+
+      a {
+        display: block;
+        text-decoration: underline;
+      }
+    }
+
+    .form-check {
+      padding-left: 1.75rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      // margin-bottom: 0.75rem;
+
+      &.member {
+        padding-left: 3.5rem;
+      }
+
+      .form-check-input {
+        margin-top: 0.25rem;
+        margin-left: -1.75rem;
+      }
+      .form-check-label {
+
+      }
+    }
+  }
+
+  .chart-container {
+    position: relative;
+    height: 20rem;
+  }
+
+  .projects, .teams {
+    max-height: 20rem;
+    overflow-y: auto;
+  }
+
+  .members {
+    position: relative;
+    margin-bottom: 2rem;
+
+    &:last-child {
+      margin-bottom: unset;
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0.5rem;
+      bottom: 1.25rem;
+      border-left: 0.0625rem dotted #9dbdd6;
+      z-index: 1;
+    }
+
+    .form-check {
+      position: relative;
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 1.125rem;
+        left: 0.5rem;
+        width: 0.75rem;
+        border-top: 0.0625rem dotted #9dbdd6;
+        z-index: 1;
+      }
+    }
+  }
+}

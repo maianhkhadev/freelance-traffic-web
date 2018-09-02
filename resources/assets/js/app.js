@@ -32,3 +32,6 @@ const root = new Vue({
 })
 
 window.root = root
+
+require('./member-validation');
+require('./members-show');

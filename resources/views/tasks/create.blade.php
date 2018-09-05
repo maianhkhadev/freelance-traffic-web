@@ -1,73 +1,74 @@
 @extends('layouts.default')
 
-@section('stylesheet')
-  <link href="{{ asset('css/pages.edit.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/tasks.create.css') }}" rel="stylesheet">
-@endsection
-
-@section('javascript')
-  <script src="{{ asset('js/tasks.create.js') }}"></script>
-@endsection
-
 @section('content')
-  <div class="page">
+  <div class="page page-task-create">
+
     <div class="page-header">
-      <div class="col-xl-12">
-        <div class="title">Create a new Task</div>
-        <div class="breadcumb">
-          <ul>
-            <li><a href="{{ route('home') }}">Home</a></li>
-          </ul>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <h2 class="title">Create a new Task</h2>
+            <div class="block-breadcrumb">
+              <ul>
+                <li><a href="{{ route('home') }}">Home</a></li>
+                <li><a href="{{ route('tasks.create') }}">Tasks</a></li>
+                <li><a href="">Create</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
     <div class="page-content">
-      <div class="col-xl-6">
-        <form action="/tasks" method="POST">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <div class="form-group">
-            <label>Choose a Week</label>
-            <select id="week_id" class="form-control">
-              {{-- @foreach ($weeks as $week)
-              <option value="{{ $week->id }}">{{ $week->name }}</option>
-              @endforeach --}}
-            </select>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-6">
+            <form class="block-form" action="/tasks" method="POST">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <div class="form-group form-select">
+                <label>Choose a Week</label>
+                <select name="week_id">
+                  @foreach ($weeks as $week)
+                  <option value="{{ $week->id }}">{{ $week->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group form-select">
+                <label>Choose a Project</label>
+                <select name="project_id">
+                  @foreach ($projects as $project)
+                  <option value="{{ $project->id }}">{{ $project->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Name of Task</label>
+                <input name="name" type="text" class="form-control" required>
+              </div>
+              <div class="form-group form-select">
+                <label>Who follow this Task?</label>
+                <select name="member_id">
+                  @foreach ($members as $member)
+                  <option value="{{ $member->id }}">{{ $member->name }}</option>
+                  @endforeach
+                </select>
+                <small class="form-text text-muted">
+                  This member do <span class="value" v-text="tasks_create.value"></span> values this week.
+                </small>
+              </div>
+              <div class="form-group">
+                <label>Value</label>
+                <input name="value" type="number" min="0" max="100" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label>Note</label>
+                <textarea name="note" class="form-control" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-dark">Save & Close</button>
+            </form>
           </div>
-          <div class="form-group">
-            <label>Choose a Project</label>
-            <select name="project_id" class="form-control">
-              @foreach ($projects as $project)
-              <option value="{{ $project->id }}">{{ $project->name }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Name of Task</label>
-            <input name="name" type="text" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Who follow this Task?</label>
-            <select name="member_id" class="form-control">
-              @foreach ($members as $member)
-              <option value="{{ $member->id }}">{{ $member->name }}</option>
-              @endforeach
-            </select>
-            <small class="form-text text-muted">
-              This member do <span class="value" v-text="tasks_create.value"></span> values this week.
-            </small>
-          </div>
-          <div class="form-group">
-            <label>Value</label>
-            <input name="value" type="number" min="0" max="100" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Note</label>
-            <textarea name="note" class="form-control" rows="3"></textarea>
-          </div>
-          <button type="submit" class="btn btn-dark">Save & Close</button>
-        </form>
-      </div>
-      <div class="col-xl-6">
+          <div class="col-xl-6">
         <div class="form-group">
           <label>Member's week tasks</label>
           <table class="table table-bordered">
@@ -94,6 +95,8 @@
               </tr>
             </thead>
           </table>
+        </div>
+      </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,17 @@
+.block-redirect {
+  display: flex;
+  align-items: flex-start;
+  background-color: #ffffff;
+  box-shadow: 0 1px 15px 1px rgba(62, 57, 107, .07);
+  border-radius: 0.35rem;
+  padding: 1.5rem;
+  cursor: pointer;
+
+  .icon {
+    width: 2.5rem;
+  }
+
+  .block-content {
+    flex: 1;
+  }
+}

@@ -16,7 +16,7 @@
     @yield('stylesheet')
 </head>
 <body>
-  <div id="root" class="layout-fullscreen">
+  <div id="root" class="layout-auth">
     <main class="main">
       @yield('content')
     </main>

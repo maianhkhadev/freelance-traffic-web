@@ -1,4 +1,106 @@
 .page-home {
 
+  .section-01 {
+    position: relative;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
 
+    .video-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      clip-path: polygon(50% 0, 50% 30%, 30% 30%, 30% 50%, 50% 50%, 100% 0, 100% 100%, 70% 100%, 70% 75%, 50% 100%, 0 100%, 0 0);
+      overflow: hidden;
+      z-index: -1;
+
+      video {
+        width: auto;
+        height: 100%;
+      }
+    }
+  }
+
+  .section-02 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+    .block {
+      background-color: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      border-radius: 0.1875rem;
+      box-shadow: 0 1px 0.125rem rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.25rem;
+
+      .block-header {
+        padding: 0.9375rem 1.25rem;
+      }
+    }
+  }
+
+  .section-slider {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+    .section-content {
+      position: relative;
+      min-height: 75vh;
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        transition: all 0.25s ease-in;
+
+        &:nth-child(1) {
+          background-image: url('/images/pages/home/section-slider/im-01.jpg');
+        }
+
+        &:nth-child(2) {
+          background-image: url('/images/pages/home/section-slider/im-02.jpg');
+        }
+
+        &:nth-child(3) {
+          background-image: url('/images/pages/home/section-slider/im-03.jpg');
+        }
+
+        &:nth-child(4) {
+          background-image: url('/images/pages/home/section-slider/im-04.jpg');
+        }
+
+        &:nth-child(even).hide {
+          mask: url('/images/pages/home/section-slider/transition-01.png');
+          mask-size: 2300% 100%;
+          animation: mask-transition 1s steps(22) forwards;
+        }
+
+        &:nth-child(odd).hide {
+          mask: url('/images/pages/home/section-slider/transition-02.png');
+          mask-size: 7100% 100%;
+          animation: mask-transition 1s steps(70) forwards;
+        }
+
+        @keyframes mask-transition {
+          from {
+            mask-position: 0% 0;
+          }
+          to {
+            mask-position: 100% 0;
+          }
+        }
+      }
+    }
+  }
+
+  .section-members {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
 }

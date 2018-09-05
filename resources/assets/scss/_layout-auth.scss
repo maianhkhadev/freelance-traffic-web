@@ -1,0 +1,20 @@
+.layout-auth {
+  background-image: url('/images/layout-auth-bim.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow-y: hidden;
+
+    .page {
+      width: 22rem;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+  }
+}

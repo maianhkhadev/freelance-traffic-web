@@ -31,6 +31,6 @@ mix.styles([
   // 'node_modules/selectize/dist/css/selectize.default.css',
 ], 'public/css/vendor.css');
 
-mix.sass('resources/assets/scss/main.scss', 'public/css');
+mix.sass('resources/assets/scss/app.scss', 'public/css');
 
 mix.js('resources/assets/js/app.js', 'public/js').extract(['vue'])

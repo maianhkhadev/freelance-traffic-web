@@ -47,4 +47,13 @@ class TaskController extends Controller
 
         return redirect()->route('weeks.show', $week);
     }
+
+    public function find(Request $request) {
+
+      $week_id = $request->query('week_id');
+      $member_id = $request->query('member_id');
+      
+      $tasks = Task::where([ ['week_id', $week_id], ['member_id', $member_id] ])->get();
+      return $tasks;
+    }
 }

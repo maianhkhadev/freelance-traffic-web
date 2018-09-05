@@ -9059,6 +9059,33 @@ a:hover {
           box-shadow: 0 0 0 0.2rem rgba(253, 210, 10, 0.5);
 }
 
+.layout-auth {
+  background-image: url("/images/layout-auth-bim.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.layout-auth main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.layout-auth main .page {
+  width: 22rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
 .layout-default header {
   background-color: #000000;
   padding-top: 1.25rem;
@@ -9154,6 +9181,30 @@ a:hover {
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 0.25rem;
+}
+
+.page-login .page-header {
+  background-color: #fdd20b;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.page-login .page-header h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: unset;
+}
+
+.page-login .page-content {
+  background-color: #ffffff;
+  padding: 2rem;
+}
+
+.page-login button {
+  display: block;
+  width: 100%;
+  text-transform: uppercase;
 }
 
 .page-list .page-header {
@@ -9269,12 +9320,12 @@ a:hover {
 
 .page-show .chart-container {
   position: relative;
-  height: 20rem;
+  height: 25rem;
 }
 
 .page-show .projects,
 .page-show .teams {
-  max-height: 20rem;
+  max-height: 25rem;
   overflow-y: auto;
 }
 

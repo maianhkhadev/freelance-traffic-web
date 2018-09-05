@@ -1,7 +1,7 @@
 @extends('layouts.fullscreen')
 
 @section('content')
-  <div class="page page-edit member-validation">
+  <div class="page page-edit page-member-edit">
 
     <a class="btn btn-dark btn-close" href="{{ route('members.index') }}">&#10005;</a>
 

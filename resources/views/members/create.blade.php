@@ -1,7 +1,7 @@
 @extends('layouts.fullscreen')
 
 @section('content')
-  <div class="page page-create">
+  <div class="page page-create page-member-create">
 
     <a class="btn btn-dark btn-close" href="{{ route('members.index') }}">&#10005;</a>
 
@@ -34,26 +34,4 @@
       </form>
     </div>
   </div>
-@endsection
-
-@section('javascript')
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-
-      $('select').selectize();
-
-      let rules = [
-        {
-          require: {
-            names: [
-              'name',
-              'email'
-            ]
-          }
-        }
-      ]
-
-      let validation = window.Validation('.page-create form', rules)
-    })
-  </script>
 @endsection

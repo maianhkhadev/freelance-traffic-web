@@ -51,11 +51,8 @@ class WeekController extends Controller
             $member->id = $task->member->id;
             $member->name = $task->member->name;
             $member->team_id = $task->member->team_id;
-            $member->value = $task->value;
+            
             array_push($members, $member);
-          }
-          else {
-            $members[$index]->value += $task->value;
           }
 
           $index = array_search($task->project->id, array_column($projects, 'id'));
@@ -63,11 +60,8 @@ class WeekController extends Controller
             $project = new \stdClass();
             $project->id = $task->project->id;
             $project->name = $task->project->name;
-            $project->value = $task->value;
+
             array_push($projects, $project);
-          }
-          else {
-            $projects[$index]->value += $task->value;
           }
         }
 

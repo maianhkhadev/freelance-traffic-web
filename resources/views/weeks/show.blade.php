@@ -110,35 +110,37 @@
       </div>
     </div>
     <div class="page-content">
-      <div class="col-xl-12">
-        <div class="form-group">
-          <label>Tasks</label>
-
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th width="50"></th>
-                <th>Name</th>
-                <th>Project</th>
-                <th>Member</th>
-                <th class="text-center">Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($week->tasks as $task)
-              <tr>
-                <td class="text-center">{{ $loop->index + 1 }}</td>
-                <td>{{ $task->name }}</td>
-                <td>{{ $task->project->name }}</td>
-                <td>{{ $task->member->name }}</td>
-                <td class="text-center">{{ $task->value }}</td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
+      <div class="container">
+        <div class="block-table block-table-tasks">
+          <div class="block-header">
+            <span class="block-title">
+              Project
+            </span>
+            <span class="block-title">
+              Task
+            </span>
+            <span class="block-title">
+              Member
+            </span>
+            <span class="block-title flex-center">
+              Value
+            </span>
+            <span class="block-title">
+              Note
+            </span>
+          </div>
+          <div class="block-content">
+            @foreach ($week->tasks as $task)
+            <div class="block-record">
+              <span class="block-cell">{{ $task->project->name }}</span>
+              <span class="block-cell">{{ $task->name }}</span>
+              <span class="block-cell">{{ $task->member->name }}</span>
+              <span class="block-cell flex-center">{{ $task->value }}</span>
+              <span class="block-cell">Note</span>
+            </div>
+            @endforeach
+          </div>
         </div>
-
-        <a class="btn btn-dark" href="{{ route('tasks.create') }}">New Task in this Week</a>
       </div>
     </div>
   </div>

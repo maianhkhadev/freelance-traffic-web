@@ -53,9 +53,6 @@
                   <option value="{{ $member->id }}">{{ $member->name }}</option>
                   @endforeach
                 </select>
-                <small class="form-text text-muted">
-                  This member do <span class="value" v-text="tasks_create.value"></span> values this week.
-                </small>
               </div>
               <div class="form-group">
                 <label>Value</label>

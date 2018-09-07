@@ -9945,6 +9945,20 @@ a:hover {
   margin-right: 0.5rem;
 }
 
+.block-table .flex-center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.block-table-tasks .block-header {
+  grid-template-columns: 25% 25% 25% 12.5% 12.5%;
+}
+
+.block-table-tasks .block-content .block-record {
+  grid-template-columns: 25% 25% 25% 12.5% 12.5%;
+}
+
 .block-table-actions {
   text-align: right;
 }

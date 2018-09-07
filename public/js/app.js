@@ -32297,7 +32297,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(149);
-module.exports = __webpack_require__(229);
+module.exports = __webpack_require__(227);
 
 
 /***/ }),
@@ -32339,8 +32339,8 @@ var root = new Vue({
 
 window.root = root;
 
-__webpack_require__(227);
-__webpack_require__(228);
+__webpack_require__(225);
+__webpack_require__(226);
 
 // GOLBAL FUNCTION
 function findTasks() {
@@ -71090,9 +71090,7 @@ var Validation = function Validation(selector, rules) {
 /* harmony default export */ __webpack_exports__["default"] = (Validation);
 
 /***/ }),
-/* 225 */,
-/* 226 */,
-/* 227 */
+/* 225 */
 /***/ (function(module, exports) {
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -71149,7 +71147,7 @@ function renderChart(chartId, members) {
 }
 
 /***/ }),
-/* 228 */
+/* 226 */
 /***/ (function(module, exports) {
 
 window.week = {
@@ -71354,7 +71352,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /***/ }),
-/* 229 */
+/* 227 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

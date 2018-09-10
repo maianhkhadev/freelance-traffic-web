@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-  <div class="page page-task-create">
+  <div class="page page-create page-task page-task-create">
 
     <div class="page-header">
       <div class="container">
@@ -11,8 +11,7 @@
             <div class="block-breadcrumb">
               <ul>
                 <li><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="{{ route('tasks.create') }}">Tasks</a></li>
-                <li><a href="">Create</a></li>
+                <li><a href="">Create Task</a></li>
               </ul>
             </div>
           </div>
@@ -26,14 +25,7 @@
           <div class="col-xl-6">
             <form class="block-form" action="/tasks" method="POST">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <div class="form-group form-select">
-                <label>Choose a Week</label>
-                <select name="week_id">
-                  @foreach ($weeks as $week)
-                  <option value="{{ $week->id }}">{{ $week->name }}</option>
-                  @endforeach
-                </select>
-              </div>
+
               <div class="form-group form-select">
                 <label>Choose a Project</label>
                 <select name="project_id">
@@ -42,10 +34,21 @@
                   @endforeach
                 </select>
               </div>
+
+              <div class="form-group form-select">
+                <label>Choose a Week</label>
+                <select name="week_id">
+                  @foreach ($weeks as $week)
+                  <option value="{{ $week->id }}">{{ $week->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+
               <div class="form-group">
                 <label>Name of Task</label>
                 <input name="name" type="text" class="form-control" required>
               </div>
+
               <div class="form-group form-select">
                 <label>Who follow this Task?</label>
                 <select name="member_id">
@@ -54,14 +57,17 @@
                   @endforeach
                 </select>
               </div>
+
               <div class="form-group">
                 <label>Value</label>
                 <input name="value" type="number" min="0" max="100" class="form-control" required>
               </div>
+
               <div class="form-group">
                 <label>Note</label>
                 <textarea name="note" class="form-control" rows="3"></textarea>
               </div>
+
               <button type="submit" class="btn btn-dark">Save & Close</button>
             </form>
           </div>
@@ -71,15 +77,13 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th width="50"></th>
                 <th>Task name</th>
                 <th class="text-center">Value</th>
               </tr>
             </thead>
             <tbody>
-              <template v-for="(task, index) in tasks_create.tasks">
+              <template v-for="task in tasks_create.tasks">
                 <tr>
-                  <td class="text-center" v-text="index + 1"></td>
                   <td v-text="task.name"></td>
                   <td class="text-center" v-text="task.value"></td>
                 </tr>
@@ -87,7 +91,7 @@
             </tbody>
             <thead>
               <tr>
-                <th class="text-center" colspan="2">Total</th>
+                <th class="text-center">Total</th>
                 <th class="text-center" v-text="tasks_create.value"></th>
               </tr>
             </thead>

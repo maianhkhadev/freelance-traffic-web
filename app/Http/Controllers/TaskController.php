@@ -32,27 +32,26 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $week = Week::latest()->first();
-
         $task = new Task();
 
-        $task->member_id = $request->input('member_id');
         $task->project_id = $request->input('project_id');
-        $task->week_id = $week->id;
+        $task->week_id = $request->input('week_id');
+        $task->member_id = $request->input('member_id');
         $task->name = $request->input('name');
         $task->value = $request->input('value');
         $task->note = $request->input('note');
+        $task->deleted = false;
 
         $task->save();
 
-        return redirect()->route('weeks.show', $week);
+        return redirect()->route('home');
     }
 
     public function find(Request $request) {
 
       $week_id = $request->query('week_id');
       $member_id = $request->query('member_id');
-      
+
       $tasks = Task::where([ ['week_id', $week_id], ['member_id', $member_id] ])->get();
       return $tasks;
     }

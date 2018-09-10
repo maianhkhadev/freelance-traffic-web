@@ -21,6 +21,7 @@
 @import "page-create";
 @import "page-edit";
 @import "page-show";
+@import "page-task-create";
 
 // BLOCKS
 @import "block-breadcrumb";
@@ -29,5 +30,7 @@
 @import "block-redirect";
 @import "block-search";
 @import "block-table";
+@import "block-mini-table-members";
+@import "block-mini-table-weeks";
 @import "block-table-tasks";
 @import "block-table-actions";

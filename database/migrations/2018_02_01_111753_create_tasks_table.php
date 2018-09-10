@@ -21,7 +21,7 @@ class CreateTasksTable extends Migration
             $table->string('name');
             $table->integer('value')->default(0);
             $table->text('note');
-            $table->boolean('closed');
+            $table->boolean('deleted');
             $table->timestamps();
         });
     }

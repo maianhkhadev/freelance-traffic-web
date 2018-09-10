@@ -132,65 +132,77 @@ window.week = {
       return chart
     },
 
-    fetchData: function(chart, items) {
-      chart.data.labels = []
-      chart.data.datasets.forEach((dataset) => {
-          dataset.data = []
-      })
-      items.forEach((item) => {
-        chart.data.labels.push(item.name)
-        chart.data.datasets.forEach((dataset) => {
-          dataset.data.push(item.value)
-        })
-      })
+    fetchData: function(chart, labels, datasets) {
+      chart.data.labels = labels
+      chart.data.datasets = datasets
+
       chart.update()
     }
   }
 }
 
-
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
-  let limit = 30;
 
+  let page = document.querySelector('.page-week-show')
 
+  if(page === null) {
+    return
+  }
 
   $('.team input[type=checkbox]').on('change', function(event) {
-    if(event.target.checked) {
-      let teamId = event.target.dataset.teamId
-      let checkBoxes = document.querySelectorAll(`.team-${teamId} input[type=checkbox]`)
-      checkBoxes.forEach(function(checkBox) {
-        checkBox.checked = true
-      })
 
-      let sdcds = document.querySelectorAll('.member input[type=checkbox]:checked')
-      let members = findCheckedItems(window.members, sdcds)
-      fetchData(window.chart.members, members)
+    let teamId = event.target.value
+    let checkboxes = document.querySelectorAll(`[data-team-id="${teamId}"]`)
+
+    if(event.target.checked === true) {
+
+      checkboxes.forEach(function(checkbox) {
+        checkbox.checked = true
+      })
     }
+    else {
+
+      checkboxes.forEach(function(checkbox) {
+        checkbox.checked = false
+      })
+    }
+
+    let { labels, datasets } = window.week.show.calculateTasksForMember()
+    window.week.show.fetchData(window.chart.members, labels, datasets)
   })
 
   $('.member input[type=checkbox]').on('change', function(event) {
-    if ($('.member input[type=checkbox]:checked').length > limit) {
-      $(this).prop('checked', false)
+
+    let teamId = event.target.dataset.teamId
+
+    if(event.target.checked === true) {
+      let allCheckboxChecked = true
+
+      let checkboxes = document.querySelectorAll(`[data-team-id="${teamId}"]`)
+      checkboxes.forEach(function(checkbox) {
+        if(checkbox.checked === false) {
+          allCheckboxChecked = false
+        }
+      })
+
+      if(allCheckboxChecked === true) {
+        let checkbox = document.querySelector(`#select-team-${teamId}`)
+        checkbox.checked = true
+      }
     }
     else {
-      let checkBoxes = document.querySelectorAll('.member input[type=checkbox]:checked')
-      let members = findCheckedItems(window.members, checkBoxes)
-      fetchData(window.chart.members, members)
+      let checkbox = document.querySelector(`#select-team-${teamId}`)
+      checkbox.checked = false
     }
+
+    let { labels, datasets } = window.week.show.calculateTasksForMember()
+    window.week.show.fetchData(window.chart.members, labels, datasets)
   })
 
   $('.project input[type=checkbox]').on('change', function(event) {
-    if ($('.project input[type=checkbox]:checked').length > limit) {
-      $(this).prop('checked', false)
-    }
-    else {
-      let checkBoxes = document.querySelectorAll('.project input[type=checkbox]:checked')
-      let projects = findCheckedItems(window.projects, checkBoxes)
-      fetchData(window.chart.projects, projects)
-    }
+
+    let { labels, datasets } = window.week.show.calculateTasksForProject()
+    window.week.show.fetchData(window.chart.projects, labels, datasets)
   })
 
   window.chart = {}
@@ -200,9 +212,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let projectChartData = window.week.show.calculateTasksForProject()
   window.chart.projects =  window.week.show.renderChart('chart-projects', projectChartData.labels, projectChartData.datasets)
-  // checkSelected(members, '.member #select-member')
-
-  // let projects = _.take(window.projects, limit)
-  // window.chart.projects = renderChart('chart-projects', projects)
-  // checkSelected(projects, '.project #select-project')
 })

@@ -21,7 +21,7 @@
         <div class="container">
           <div class="row">
             <div class="col-6">
-              <a class="home" href="{{ route('home') }}">Focus Asia</a>
+              <a class="navi-brand" href="{{ route('home') }}">Focus Asia</a>
             </div>
             <div class="col-6">
               <div class="user">
@@ -34,6 +34,82 @@
                   {{ csrf_field() }}
                 </form>
               </div>
+            </div>
+            <div class="col-xl-12">
+              <nav class="navi-bar">
+
+                <ul class="navi">
+                  <li class="navi-item">
+                    <a class="navi-link" href="{{ route('tasks.create') }}">Create A New Task</a>
+                  </li>
+                  <li class="navi-item navi-item-project has-sub">
+                    <a class="navi-link">Projects</a>
+
+                    <ul class="sub-navi">
+                      <li class="sub-navi-item">
+                        <a class="sub-navi-link" href="{{ route('projects.create') }}">Create a new Project</a>
+                      </li>
+                      <li class="sub-navi-item">
+                        <a class="sub-navi-link" href="{{ route('projects.index') }}">List of Project</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="navi-item navi-item-week has-sub">
+                    <a class="navi-link">Weeks</a>
+
+                    <ul class="sub-navi">
+                      <li class="sub-navi-item">
+                        <a class="sub-navi-link" href="{{ route('weeks.create') }}">Create a new Week</a>
+                      </li>
+                      <li class="sub-navi-item">
+                        <a class="sub-navi-link" href="{{ route('weeks.index') }}">List of Week</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="navi-item navi-item-team has-sub">
+                    <a class="navi-link">Teams</a>
+
+                    <ul class="sub-navi">
+                      <li class="sub-navi-item">
+                        <a class="sub-navi-link" href="{{ route('teams.index') }}">List of Team</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="navi-item navi-item-member has-sub">
+                    <a class="navi-link">Members</a>
+
+                    <ul class="sub-navi">
+                      <li class="sub-navi-item">
+                        <a class="sub-navi-link" href="{{ route('members.create') }}">Create a new Member</a>
+                      </li>
+                      <li class="sub-navi-item">
+                        <a class="sub-navi-link" href="{{ route('members.index') }}">List of Member</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="navi-item has-sub">
+                    <a class="navi-link">Settings</a>
+
+                    <ul class="sub-navi">
+                      <li class="sub-navi-item">
+                        <a class="sub-navi-link" href="#">Change password</a>
+                      </li>
+                      <li class="sub-navi-item">
+                        <a class="sub-navi-link" href="#">Create a new Account</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <button class="navi-icon">
+                  <span class="icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                </button>
+              </nav>
             </div>
           </div>
         </div>

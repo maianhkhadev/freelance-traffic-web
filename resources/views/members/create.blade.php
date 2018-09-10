@@ -1,12 +1,19 @@
 @extends('layouts.fullscreen')
 
 @section('content')
-  <div class="page page-create page-member-create">
+  <div class="page page-create page-member page-member-create">
 
     <a class="btn btn-dark btn-close" href="{{ route('members.index') }}">&#10005;</a>
 
     <div class="page-header">
       <h4>Create a new Member</h4>
+      <div class="block-breadcrumb">
+        <ul>
+          <li><a href="{{ route('home') }}">Home</a></li>
+          <li><a href="{{ route('members.index') }}">Members</a></li>
+          <li><a href="">Create</a></li>
+        </ul>
+      </div>
     </div>
 
     <div class="page-content">

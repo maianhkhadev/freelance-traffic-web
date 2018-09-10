@@ -1,44 +1,56 @@
 @extends('layouts.default')
 
 @section('content')
-  <div class="page page-show">
+  <div class="page page-show page-week page-week-show">
+
     <div class="page-header">
-      <div class="col-xl-12">
-        <div class="title">Overview Week {{ $week->name }}</div>
-        <div class="breadcumb">
-          <ul>
-            <li><a href="{{ route('home') }}">Home</a></li>
-            <li><a href="{{ route('weeks.index') }}">Weeks</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="page-content">
-      <div class="col-xl-6">
-        <div class="form-group">
-          <label>Name</label>
-          <div>{{ $week->name }}</div>
-        </div>
-      </div>
-      <div class="col-xl-6">
-        <div class="form-group">
-          <label>Data</label>
-          <div><b>{{ count($projects) }}</b> Projects - <b>{{ count($week->tasks) }}</b> Tasks - <b>{{ count($members) }}</b> Members</div>
-        </div>
-      </div>
-      <div class="col-xl-6">
-        <div class="form-group">
-          <label>Status</label>
-          <div>
-            @if ($week->closed === 0)
-              <span class="badge badge-success">opened</span>
-            @else
-              <span class="badge badge-secondary">closed</span>
-            @endif
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="title">Overview Week {{ $week->name }}</div>
+            <div class="breadcumb">
+              <ul>
+                <li><a href="{{ route('home') }}">Home</a></li>
+                <li><a href="{{ route('weeks.index') }}">Weeks</a></li>
+                <li><a href="">Overview</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="page-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-6">
+            <div class="form-group">
+              <label>Name</label>
+              <div>{{ $week->name }}</div>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <div class="form-group">
+              <label>Data</label>
+              <div><b>{{ count($projects) }}</b> Projects - <b>{{ count($week->tasks) }}</b> Tasks - <b>{{ count($members) }}</b> Members</div>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <div class="form-group">
+              <label>Status</label>
+              <div>
+                @if ($week->closed === 0)
+                  <span class="badge badge-success">opened</span>
+                @else
+                  <span class="badge badge-secondary">closed</span>
+                @endif
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="page-content">
       <div class="container">
         <div class="row">
@@ -52,7 +64,7 @@
             <div class="teams">
               @foreach ($teams as $team)
                 <div class="form-check team">
-                  <input class="form-check-input" type="checkbox" data-team-id="{{ $team->id }}" value="{{ $team->id }}" id="select-team-{{ $team->id }}" checked>
+                  <input class="form-check-input" type="checkbox" value="{{ $team->id }}" id="select-team-{{ $team->id }}" checked>
                   <label class="form-check-label" for="select-team-{{ $team->id }}">
                     {{ $team->name }} Team
                   </label>
@@ -60,7 +72,7 @@
                 <div class="members">
                 @foreach ($members as $member)
                   @if ($member->team_id === $team->id)
-                  <div class="form-check team-{{ $team->id }} member">
+                  <div class="form-check member">
                     <input class="form-check-input" type="checkbox" data-team-id="{{ $team->id }}" value="{{ $member->id }}" id="select-member-{{ $member->id }}" checked>
                     <label class="form-check-label" for="select-member-{{ $member->id }}">
                       {{ $member->name }}
@@ -80,6 +92,7 @@
         </div>
       </div>
     </div>
+
     <div class="page-content">
       <div class="container">
         <div class="row">
@@ -109,6 +122,7 @@
         </div>
       </div>
     </div>
+    
     <div class="page-content">
       <div class="container">
         <div class="block-table block-table-tasks">
@@ -162,6 +176,18 @@
     @endforeach
 
     let colors = [
+      'rgb(217, 255, 102)',
+      'rgb(140, 255, 102)',
+      'rgb(102, 255, 140)',
+      'rgb(102, 255, 217)',
+      'rgb(102, 217, 255)',
+      'rgb(255, 140, 102)',
+      'rgb(255, 217, 102)',
+      'rgb(102, 140, 255)',
+      'rgb(140, 102, 255)',
+      'rgb(179, 102, 255)',
+      'rgb(255, 102, 255)',
+      'rgb(255, 102, 179)',
       'rgb(255, 102, 102)',
       'rgb(255, 179, 102)',
       'rgb(255, 255, 102)',
@@ -178,18 +204,6 @@
       'rgb(255, 102, 140)',
       'rgb(255, 140, 102)',
       'rgb(255, 217, 102)',
-      'rgb(217, 255, 102)',
-      'rgb(140, 255, 102)',
-      'rgb(102, 255, 140)',
-      'rgb(102, 255, 217)',
-      'rgb(102, 217, 255)',
-      'rgb(255, 140, 102)',
-      'rgb(255, 217, 102)',
-      'rgb(102, 140, 255)',
-      'rgb(140, 102, 255)',
-      'rgb(179, 102, 255)',
-      'rgb(255, 102, 255)',
-      'rgb(255, 102, 179)',
       'rgb(255, 102, 102)'
     ]
 

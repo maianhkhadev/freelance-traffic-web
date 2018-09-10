@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-  <div class="page page-list">
+  <div class="page page-list page-project">
 
     <div class="page-header">
       <div class="container">

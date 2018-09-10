@@ -14,6 +14,6 @@ $factory->define(App\Task::class, function (Faker $faker) {
         'member_id' => $faker->randomElement($members),
         'week_id' => $faker->randomElement($weeks),
         'project_id' => $faker->randomElement($projects),
-        'closed' => false
+        'deleted' => false
     ];
 });

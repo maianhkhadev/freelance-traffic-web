@@ -51,7 +51,7 @@ class WeekController extends Controller
             $member->id = $task->member->id;
             $member->name = $task->member->name;
             $member->team_id = $task->member->team_id;
-            
+
             array_push($members, $member);
           }
 
@@ -89,7 +89,7 @@ class WeekController extends Controller
         $week = new Week();
 
         $week->name = $request->input('name');
-        $week->closed = $request->input('closed') === 'on' ? true : false;
+        $week->closed = false;
 
         $week->save();
 

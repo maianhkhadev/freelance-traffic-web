@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-  <div class="page page-show">
+  <div class="page page-member page-show">
     <div class="page-header">
       <div class="container">
         <div class="title">Overview the Member</div>
@@ -78,31 +78,35 @@
     </div>
     <div class="page-content">
       <div class="container">
-        <div class="form-view">
-          <label>Tasks of the Week that you choose</label>
-
-          {{-- <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th width="50"></th>
-                <th>Name</th>
-                <th>Project</th>
-                <th>Week</th>
-                <th class="text-center">Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($tasks as $task)
-              <tr>
-                <td class="text-center">{{ $loop->index + 1 }}</td>
-                <td>{{ $task->name }}</td>
-                <td>{{ $task->project->name }}</td>
-                <td>{{ $task->week->name }}</td>
-                <td class="text-center">{{ $task->value }}</td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table> --}}
+        <div class="block-table block-table-tasks">
+          <div class="block-header">
+            <span class="block-title">
+              Project
+            </span>
+            <span class="block-title">
+              Week
+            </span>
+            <span class="block-title">
+              Task
+            </span>
+            <span class="block-title flex-center">
+              Value
+            </span>
+            <span class="block-title">
+              Note
+            </span>
+          </div>
+          <div class="block-content">
+            @foreach ($member->tasks as $task)
+            <div class="block-record task-{{ $task->id }}">
+              <span class="block-cell">{{ $task->project->name }}</span>
+              <span class="block-cell">{{ $task->week->name }}</span>
+              <span class="block-cell">{{ $task->name }}</span>
+              <span class="block-cell flex-center">{{ $task->value }}</span>
+              <span class="block-cell">Note</span>
+            </div>
+            @endforeach
+          </div>
         </div>
       </div>
     </div>

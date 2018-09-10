@@ -32389,6 +32389,16 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+// LAYOUT DEFAULT
+document.addEventListener('DOMContentLoaded', function () {
+
+  var layout = document.querySelector('.layout-default');
+
+  if (layout === null) {
+    return;
+  }
+});
+
 // PAGE HOME
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -32448,6 +32458,58 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   window.Validation('.member-validation form', rules);
+});
+
+// PAGE PROJECT
+document.addEventListener('DOMContentLoaded', function () {
+
+  var page = document.querySelector('.page-project');
+
+  if (page === null) {
+    return;
+  }
+
+  var naviItem = document.querySelector('.navi-bar .navi .navi-item-project');
+  naviItem.classList.add('active');
+});
+
+// PAGE WEEK
+document.addEventListener('DOMContentLoaded', function () {
+
+  var page = document.querySelector('.page-week');
+
+  if (page === null) {
+    return;
+  }
+
+  var naviItem = document.querySelector('.navi-bar .navi .navi-item-week');
+  naviItem.classList.add('active');
+});
+
+// PAGE TEAM
+document.addEventListener('DOMContentLoaded', function () {
+
+  var page = document.querySelector('.page-team');
+
+  if (page === null) {
+    return;
+  }
+
+  var naviItem = document.querySelector('.navi-bar .navi .navi-item-team');
+  naviItem.classList.add('active');
+});
+
+// PAGE MEMBER
+document.addEventListener('DOMContentLoaded', function () {
+
+  var page = document.querySelector('.page-member');
+
+  if (page === null) {
+    return;
+  }
+
+  var naviItem = document.querySelector('.navi-bar .navi .navi-item-member');
+  naviItem.classList.add('active');
 });
 
 // PAGE TASK CREATE
@@ -71284,57 +71346,83 @@ window.week = {
       return chart;
     },
 
-    fetchData: function fetchData(chart, items) {
-      chart.data.labels = [];
-      chart.data.datasets.forEach(function (dataset) {
-        dataset.data = [];
-      });
-      items.forEach(function (item) {
-        chart.data.labels.push(item.name);
-        chart.data.datasets.forEach(function (dataset) {
-          dataset.data.push(item.value);
-        });
-      });
+    fetchData: function fetchData(chart, labels, datasets) {
+      chart.data.labels = labels;
+      chart.data.datasets = datasets;
+
       chart.update();
     }
   }
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-  var limit = 30;
+
+  var page = document.querySelector('.page-week-show');
+
+  if (page === null) {
+    return;
+  }
 
   $('.team input[type=checkbox]').on('change', function (event) {
-    if (event.target.checked) {
-      var teamId = event.target.dataset.teamId;
-      var checkBoxes = document.querySelectorAll('.team-' + teamId + ' input[type=checkbox]');
-      checkBoxes.forEach(function (checkBox) {
-        checkBox.checked = true;
-      });
 
-      var sdcds = document.querySelectorAll('.member input[type=checkbox]:checked');
-      var _members = findCheckedItems(window.members, sdcds);
-      fetchData(window.chart.members, _members);
+    var teamId = event.target.value;
+    var checkboxes = document.querySelectorAll('[data-team-id="' + teamId + '"]');
+
+    if (event.target.checked === true) {
+
+      checkboxes.forEach(function (checkbox) {
+        checkbox.checked = true;
+      });
+    } else {
+
+      checkboxes.forEach(function (checkbox) {
+        checkbox.checked = false;
+      });
     }
+
+    var _window$week$show$cal = window.week.show.calculateTasksForMember(),
+        labels = _window$week$show$cal.labels,
+        datasets = _window$week$show$cal.datasets;
+
+    window.week.show.fetchData(window.chart.members, labels, datasets);
   });
 
   $('.member input[type=checkbox]').on('change', function (event) {
-    if ($('.member input[type=checkbox]:checked').length > limit) {
-      $(this).prop('checked', false);
+
+    var teamId = event.target.dataset.teamId;
+
+    if (event.target.checked === true) {
+      var allCheckboxChecked = true;
+
+      var checkboxes = document.querySelectorAll('[data-team-id="' + teamId + '"]');
+      checkboxes.forEach(function (checkbox) {
+        if (checkbox.checked === false) {
+          allCheckboxChecked = false;
+        }
+      });
+
+      if (allCheckboxChecked === true) {
+        var checkbox = document.querySelector('#select-team-' + teamId);
+        checkbox.checked = true;
+      }
     } else {
-      var checkBoxes = document.querySelectorAll('.member input[type=checkbox]:checked');
-      var _members2 = findCheckedItems(window.members, checkBoxes);
-      fetchData(window.chart.members, _members2);
+      var _checkbox = document.querySelector('#select-team-' + teamId);
+      _checkbox.checked = false;
     }
+
+    var _window$week$show$cal2 = window.week.show.calculateTasksForMember(),
+        labels = _window$week$show$cal2.labels,
+        datasets = _window$week$show$cal2.datasets;
+
+    window.week.show.fetchData(window.chart.members, labels, datasets);
   });
 
   $('.project input[type=checkbox]').on('change', function (event) {
-    if ($('.project input[type=checkbox]:checked').length > limit) {
-      $(this).prop('checked', false);
-    } else {
-      var checkBoxes = document.querySelectorAll('.project input[type=checkbox]:checked');
-      var _projects = findCheckedItems(window.projects, checkBoxes);
-      fetchData(window.chart.projects, _projects);
-    }
+    var _window$week$show$cal3 = window.week.show.calculateTasksForProject(),
+        labels = _window$week$show$cal3.labels,
+        datasets = _window$week$show$cal3.datasets;
+
+    window.week.show.fetchData(window.chart.projects, labels, datasets);
   });
 
   window.chart = {};
@@ -71344,11 +71432,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var projectChartData = window.week.show.calculateTasksForProject();
   window.chart.projects = window.week.show.renderChart('chart-projects', projectChartData.labels, projectChartData.datasets);
-  // checkSelected(members, '.member #select-member')
-
-  // let projects = _.take(window.projects, limit)
-  // window.chart.projects = renderChart('chart-projects', projects)
-  // checkSelected(projects, '.project #select-project')
 });
 
 /***/ }),

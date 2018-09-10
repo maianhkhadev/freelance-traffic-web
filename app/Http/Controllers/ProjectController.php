@@ -88,7 +88,7 @@ class ProjectController extends Controller
         $project = new Project();
 
         $project->name = $request->input('name');
-        $project->closed = $request->input('closed') === 'on' ? true : false;
+        $project->closed = false;
 
         $project->save();
 

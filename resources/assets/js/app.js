@@ -83,6 +83,16 @@ document.addEventListener('DOMContentLoaded', function() {
   })
 })
 
+// LAYOUT DEFAULT
+document.addEventListener('DOMContentLoaded', function() {
+
+  let layout = document.querySelector('.layout-default')
+
+  if(layout === null) {
+    return
+  }
+})
+
 // PAGE HOME
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -150,6 +160,57 @@ document.addEventListener('DOMContentLoaded', function() {
   window.Validation('.member-validation form', rules)
 })
 
+// PAGE PROJECT
+document.addEventListener('DOMContentLoaded', function() {
+
+  let page = document.querySelector('.page-project')
+
+  if(page === null) {
+    return
+  }
+
+  let naviItem = document.querySelector('.navi-bar .navi .navi-item-project')
+  naviItem.classList.add('active')
+})
+
+// PAGE WEEK
+document.addEventListener('DOMContentLoaded', function() {
+
+  let page = document.querySelector('.page-week')
+
+  if(page === null) {
+    return
+  }
+
+  let naviItem = document.querySelector('.navi-bar .navi .navi-item-week')
+  naviItem.classList.add('active')
+})
+
+// PAGE TEAM
+document.addEventListener('DOMContentLoaded', function() {
+
+  let page = document.querySelector('.page-team')
+
+  if(page === null) {
+    return
+  }
+
+  let naviItem = document.querySelector('.navi-bar .navi .navi-item-team')
+  naviItem.classList.add('active')
+})
+
+// PAGE MEMBER
+document.addEventListener('DOMContentLoaded', function() {
+
+  let page = document.querySelector('.page-member')
+
+  if(page === null) {
+    return
+  }
+
+  let naviItem = document.querySelector('.navi-bar .navi .navi-item-member')
+  naviItem.classList.add('active')
+})
 
 // PAGE TASK CREATE
 document.addEventListener('DOMContentLoaded', function() {

@@ -1,37 +1,30 @@
-@extends('layouts.default')
-
-@section('stylesheet')
-  <link href="{{ asset('css/pages.edit.css') }}" rel="stylesheet">
-@endsection
+@extends('layouts.fullscreen')
 
 @section('content')
-  <div class="page">
+  <div class="page page-create page-week page-week-create">
+
+    <a class="btn btn-dark btn-close" href="{{ route('weeks.index') }}">&#10005;</a>
+
     <div class="page-header">
-      <div class="col-xl-12">
-        <div class="title">Create a new Week</div>
-        <div class="breadcumb">
-          <ul>
-            <li><a href="{{ route('home') }}">Home</a></li>
-            <li><a href="{{ route('weeks.index') }}">Weeks</a></li>
-          </ul>
-        </div>
+      <h4>Create a new Week</h4>
+      <div class="block-breadcrumb">
+        <ul>
+          <li><a href="{{ route('home') }}">Home</a></li>
+          <li><a href="{{ route('weeks.index') }}">Weeks</a></li>
+          <li><a href="">Create</a></li>
+        </ul>
       </div>
     </div>
     <div class="page-content">
       <form action="/weeks" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="col-xl-6">
-          <div class="form-group">
-            <label>Name</label>
-            <input name="name" type="text" class="form-control" placeholder="Enter name">
-          </div>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="checkbox-closed" name="closed">
-            <label class="form-check-label" for="checkbox-closed">Close this week</label>
-          </div>
 
-          <button class="btn btn-dark">Save & Close</button>
+        <div class="form-group">
+          <label>Name of Week</label>
+          <input name="name" type="text" class="form-control" placeholder="Enter name..." autocomplete="off">
         </div>
+
+        <button class="btn btn-dark">Save & Close</button>
       </div>
     </div>
   </div>

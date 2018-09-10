@@ -1,0 +1,15 @@
+.block-mini-table-members {
+
+  .block-header {
+    grid-template-columns: 75% 25%;
+  }
+
+  .block-content {
+    max-height: 30rem;
+    overflow-y: auto;
+
+    .block-record {
+      grid-template-columns: 75% 25%;
+    }
+  }
+}

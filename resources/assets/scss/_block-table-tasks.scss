@@ -7,9 +7,13 @@
   .block-content {
     max-height: 30rem;
     overflow-y: auto;
-    
+
     .block-record {
       grid-template-columns: 25% 25% 25% 12.5% 12.5%;
+
+      &.hidden {
+        display: none;
+      }
     }
   }
 }

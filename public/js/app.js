@@ -32297,7 +32297,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(149);
-module.exports = __webpack_require__(227);
+module.exports = __webpack_require__(226);
 
 
 /***/ }),
@@ -32340,7 +32340,6 @@ var root = new Vue({
 window.root = root;
 
 __webpack_require__(225);
-__webpack_require__(226);
 
 // GOLBAL FUNCTION
 function findTasks() {
@@ -32470,6 +32469,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   var naviItem = document.querySelector('.navi-bar .navi .navi-item-project');
+
+  if (naviItem === null) {
+    return;
+  }
+
   naviItem.classList.add('active');
 });
 
@@ -32483,6 +32487,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   var naviItem = document.querySelector('.navi-bar .navi .navi-item-week');
+
+  if (naviItem === null) {
+    return;
+  }
+
   naviItem.classList.add('active');
 });
 
@@ -32496,6 +32505,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   var naviItem = document.querySelector('.navi-bar .navi .navi-item-team');
+
+  if (naviItem === null) {
+    return;
+  }
+
   naviItem.classList.add('active');
 });
 
@@ -32509,7 +32523,91 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   var naviItem = document.querySelector('.navi-bar .navi .navi-item-member');
+
+  if (naviItem === null) {
+    return;
+  }
+
   naviItem.classList.add('active');
+});
+
+// PAGE MEMBER LIST
+document.addEventListener('DOMContentLoaded', function () {
+
+  var page = document.querySelector('.page-member-list');
+
+  if (page === null) {
+    return;
+  }
+
+  var deleteButtons = document.querySelectorAll('.block-table .delete');
+  deleteButtons.forEach(function (deleteButton) {
+    var memberId = deleteButton.dataset.memberId;
+    deleteButton.addEventListener('click', function (event) {
+      event.preventDefault();
+
+      // let input = document.querySelector('.modal-member-delete input[name="id"]')
+      // input.value = memberId
+
+      $('.modal-member-delete').modal('show');
+    });
+  });
+
+  // let confirmDelete = document.querySelector('.modal-member-delete .confirm-button')
+  // confirmDelete.addEventListener('click', function() {
+  //
+  //   axios.get('/api/members/', {
+  //     params: {
+  //       week_id: weekId,
+  //       member_id: memberId
+  //     }
+  //   }).then(response => {
+  //
+  //     let value = 0
+  //     response.data.forEach(function(task) {
+  //       value += task.value
+  //     })
+  //
+  //     root.tasks_create.value = value
+  //     root.tasks_create.tasks = response.data
+  //   })
+  // })
+});
+
+// PAGE MEMBER SHOW
+document.addEventListener('DOMContentLoaded', function () {
+
+  var page = document.querySelector('.page-member-show');
+
+  if (page === null) {
+    return;
+  }
+
+  $('select').selectize({
+    onChange: function onChange(value) {
+
+      var projectId = document.querySelector('.select-project').value;
+      var weekId = document.querySelector('.select-week').value;
+
+      var blocks = document.querySelectorAll('.block-record');
+
+      if (projectId === 'none' || weekId === 'none') {
+        blocks.forEach(function (block) {
+          block.classList.remove('hidden');
+        });
+      }
+
+      blocks.forEach(function (block) {
+        if (projectId !== 'none' && block.classList.contains('project-' + projectId)) {
+          block.classList.remove('hidden');
+        } else if (weekId !== 'none' && block.classList.contains('week-' + weekId)) {
+          block.classList.remove('hidden');
+        } else {
+          block.classList.add('hidden');
+        }
+      });
+    }
+  });
 });
 
 // PAGE TASK CREATE
@@ -32523,7 +32621,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   $('select').selectize({
     onChange: function onChange(value) {
-      console.log(1);
       findTasks();
     }
   });
@@ -71155,63 +71252,6 @@ var Validation = function Validation(selector, rules) {
 /* 225 */
 /***/ (function(module, exports) {
 
-document.addEventListener('DOMContentLoaded', function () {
-
-  // document.querySelector('select[name=week_id]').addEventListener('change', function (event) {
-  //
-  //   axios.get(`/tasks-filter?week_id=${event.target.value}&member_id=${memberId}`).then(response => {
-  //
-  //     console.log(response.data)
-  //   })
-  // })
-
-  // renderChart('chart', window.tasks)
-  console.log(window.tasks);
-});
-
-function renderChart(chartId, members) {
-  var labels = [];
-  var values = [];
-  members.forEach(function (member) {
-    labels.push(member.name);
-    values.push(member.value);
-  });
-
-  var context = document.getElementById(chartId).getContext('2d');
-  var chart = new Chart(context, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        data: values,
-        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
-        borderColor: ['rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      legend: {
-        display: false
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
-      }
-    }
-  });
-
-  return chart;
-}
-
-/***/ }),
-/* 226 */
-/***/ (function(module, exports) {
-
 window.week = {
 
   show: {
@@ -71324,7 +71364,23 @@ window.week = {
           },
           tooltips: {
             mode: 'index',
-            intersect: false
+            intersect: false,
+            callbacks: {
+              label: function label(tooltipItem, data) {
+                if (tooltipItem.yLabel === 0) {
+                  return;
+                }
+
+                var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                if (label) {
+                  label += ': ';
+                }
+
+                label += Math.round(tooltipItem.yLabel * 100) / 100;
+                return label;
+              }
+            }
           },
           scales: {
             xAxes: [{
@@ -71435,7 +71491,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /***/ }),
-/* 227 */
+/* 226 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

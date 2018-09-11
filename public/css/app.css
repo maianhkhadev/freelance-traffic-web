@@ -9566,50 +9566,52 @@ a:hover {
   text-transform: uppercase;
 }
 
-.page-home .section-01 {
-  position: relative;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+.page-home section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
-.page-home .section-01 .video-container {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  -webkit-clip-path: polygon(50% 0, 50% 30%, 30% 30%, 30% 50%, 50% 50%, 100% 0, 100% 100%, 70% 100%, 70% 75%, 50% 100%, 0 100%, 0 0);
-          clip-path: polygon(50% 0, 50% 30%, 30% 30%, 30% 50%, 50% 50%, 100% 0, 100% 100%, 70% 100%, 70% 75%, 50% 100%, 0 100%, 0 0);
+.page-home .section-introduce .section-content .col-xl-6 {
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.page-home .section-introduce .section-content .section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.page-home .section-introduce .section-content p {
+  font-size: 1rem;
+  margin-bottom: unset;
+}
+
+.page-home .section-introduce .video-container {
+  -webkit-clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 25% 50%, 0% 0%);
+          clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 25% 50%, 0% 0%);
   overflow: hidden;
-  z-index: -1;
 }
 
-.page-home .section-01 .video-container video {
-  width: auto;
-  height: 100%;
+.page-home .section-introduce .video-container video {
+  width: 100%;
+  height: auto;
 }
 
-.page-home .section-02 {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+.page-home .section-slider .section-header {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-.page-home .section-02 .block {
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.1875rem;
-  -webkit-box-shadow: 0 1px 0.125rem rgba(0, 0, 0, 0.05);
-          box-shadow: 0 1px 0.125rem rgba(0, 0, 0, 0.05);
-  margin-bottom: 1.25rem;
+.page-home .section-slider .section-header .section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
-.page-home .section-02 .block .block-header {
-  padding: 0.9375rem 1.25rem;
-}
-
-.page-home .section-slider {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+.page-home .section-slider .section-header p {
+  font-size: 1rem;
+  margin-bottom: unset;
 }
 
 .page-home .section-slider .section-content {
@@ -9688,11 +9690,6 @@ a:hover {
   }
 }
 
-.page-home .section-members {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-}
-
 .page-list .page-header {
   margin-bottom: 2rem;
 }
@@ -9715,16 +9712,32 @@ a:hover {
   padding-bottom: 0.75rem;
 }
 
-.page-list .page-content .block-table .block-header {
-  grid-template-columns: 30% calc(70% - 20rem) 7.5rem 12.5rem;
-}
-
-.page-list .page-content .block-table .block-content .block-record {
-  grid-template-columns: 30% calc(70% - 20rem) 7.5rem 12.5rem;
-}
-
 .page-list .page-footer {
   margin-top: 1.25rem;
+}
+
+.page-project-list .page-content .block-table .block-header,
+.page-week-list .page-content .block-table .block-header,
+.page-member-list .page-content .block-table .block-header {
+  grid-template-columns: 30% calc(70% - 20rem) 7.5rem 12.5rem;
+}
+
+.page-project-list .page-content .block-table .block-content .block-record,
+.page-week-list .page-content .block-table .block-content .block-record,
+.page-member-list .page-content .block-table .block-content .block-record {
+  grid-template-columns: 30% calc(70% - 20rem) 7.5rem 12.5rem;
+}
+
+.page-team-list .page-header {
+  margin-bottom: unset;
+}
+
+.page-team-list .page-content .block-table .block-header {
+  grid-template-columns: 30% 25% 45%;
+}
+
+.page-team-list .page-content .block-table .block-content .block-record {
+  grid-template-columns: 30% 25% 45%;
 }
 
 .page-show .page-header {
@@ -9894,6 +9907,35 @@ a:hover {
 
 .block-breadcrumb ul li:last-child a {
   pointer-events: none;
+}
+
+.block-filter {
+  margin-bottom: 1.25rem;
+}
+
+.block-filter fieldset legend {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.block-filter fieldset .form-group {
+  margin-bottom: unset;
+}
+
+.block-filter fieldset .form-group label {
+  -ms-flex-item-align: center;
+      align-self: center;
+  font-size: 1rem;
+  margin-left: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.block-filter fieldset .form-group .selectize-control .selectize-input {
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.125rem;
+  padding: 0.625rem 1rem;
 }
 
 .block-form .form-control {
@@ -10209,6 +10251,10 @@ a:hover {
 
 .block-table-tasks .block-content .block-record {
   grid-template-columns: 25% 25% 25% 12.5% 12.5%;
+}
+
+.block-table-tasks .block-content .block-record.hidden {
+  display: none;
 }
 
 .block-table-actions {

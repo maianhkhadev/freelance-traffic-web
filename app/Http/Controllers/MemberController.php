@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
+use App\Week;
 use App\Team;
 use App\Member;
-use App\Week;
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -42,11 +43,21 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $week_id = null)
+    public function show($id)
     {
         $member = Member::find($id);
+        $projects = Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
+                    ->where('tasks.member_id', $id)
+                    ->select('projects.*')
+                    ->distinct()
+                    ->get();
+        $weeks = Week::leftJoin('tasks', 'weeks.id', '=', 'tasks.week_id')
+                    ->where('tasks.member_id', $id)
+                    ->select('weeks.*')
+                    ->distinct()
+                    ->get();
 
-        return view('members.show', ['member' => $member]);
+        return view('members.show', ['member' => $member, 'projects' => $projects, 'weeks' => $weeks]);
     }
 
     /**
@@ -106,6 +117,17 @@ class MemberController extends Controller
         $member->name = $request->input('name');
         $member->email = $request->input('email');
         $member->disabled = $request->input('disabled') === 'on' ? true : false;
+
+        $member->save();
+
+        return redirect()->route('members.index');
+    }
+
+    public function destroy($id)
+    {
+        $member = Member::find($id);
+
+        $member->disabled = true;
 
         $member->save();
 

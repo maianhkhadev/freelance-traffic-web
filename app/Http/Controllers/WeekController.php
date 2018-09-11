@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Team;
+use App\Project;
 use App\Week;
+use App\Team;
+use App\Member;
 use Illuminate\Http\Request;
 
 class WeekController extends Controller
@@ -38,32 +40,17 @@ class WeekController extends Controller
     public function show($id)
     {
         $week = Week::find($id);
-
         $teams = Team::orderBy('created_at', 'ASC')->get();
-
-        $members = array();
-        $projects = array();
-
-        foreach($week->tasks as $task) {
-          $index = array_search($task->member->id, array_column($members, 'id'));
-          if ($index === FALSE) {
-            $member = new \stdClass();
-            $member->id = $task->member->id;
-            $member->name = $task->member->name;
-            $member->team_id = $task->member->team_id;
-
-            array_push($members, $member);
-          }
-
-          $index = array_search($task->project->id, array_column($projects, 'id'));
-          if ($index === FALSE) {
-            $project = new \stdClass();
-            $project->id = $task->project->id;
-            $project->name = $task->project->name;
-
-            array_push($projects, $project);
-          }
-        }
+        $projects = Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
+                    ->where('tasks.week_id', $id)
+                    ->select('projects.*')
+                    ->distinct()
+                    ->get();
+        $members = Member::leftJoin('tasks', 'members.id', '=', 'tasks.member_id')
+                    ->where('tasks.week_id', $id)
+                    ->select('members.*')
+                    ->distinct()
+                    ->get();
 
         return view('weeks.show', ['teams' => $teams, 'week' => $week, 'projects' => $projects, 'members' => $members]);
     }

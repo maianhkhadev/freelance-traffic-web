@@ -110,7 +110,23 @@ window.week = {
           },
           tooltips: {
 						mode: 'index',
-						intersect: false
+						intersect: false,
+            callbacks: {
+              label: function(tooltipItem, data) {
+                  if(tooltipItem.yLabel === 0) {
+                    return
+                  }
+
+                  let label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                  if (label) {
+                      label += ': ';
+                  }
+
+                  label += Math.round(tooltipItem.yLabel * 100) / 100;
+                  return label;
+              }
+            }
 					},
           scales: {
             xAxes: [{

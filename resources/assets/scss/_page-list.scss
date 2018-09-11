@@ -24,6 +24,17 @@
 
   .page-content {
 
+  }
+
+  .page-footer {
+    margin-top: 1.25rem;
+  }
+}
+
+.page-project-list, .page-week-list, .page-member-list {
+
+  .page-content {
+
     .block-table {
 
       .block-header {
@@ -38,8 +49,28 @@
       }
     }
   }
+}
 
-  .page-footer {
-    margin-top: 1.25rem;
+.page-team-list {
+
+  .page-header {
+    margin-bottom: unset;
+  }
+  
+  .page-content {
+
+    .block-table {
+
+      .block-header {
+        grid-template-columns: 30% 25% 45%;
+      }
+
+      .block-content {
+
+        .block-record {
+          grid-template-columns: 30% 25% 45%;
+        }
+      }
+    }
   }
 }

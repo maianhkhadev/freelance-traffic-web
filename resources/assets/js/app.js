@@ -33,7 +33,6 @@ const root = new Vue({
 
 window.root = root
 
-require('./members-show');
 require('./weeks-show');
 
 // GOLBAL FUNCTION
@@ -170,6 +169,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   let naviItem = document.querySelector('.navi-bar .navi .navi-item-project')
+
+  if(naviItem === null) {
+    return
+  }
+
   naviItem.classList.add('active')
 })
 
@@ -183,6 +187,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   let naviItem = document.querySelector('.navi-bar .navi .navi-item-week')
+
+  if(naviItem === null) {
+    return
+  }
+
   naviItem.classList.add('active')
 })
 
@@ -196,6 +205,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   let naviItem = document.querySelector('.navi-bar .navi .navi-item-team')
+
+  if(naviItem === null) {
+    return
+  }
+
   naviItem.classList.add('active')
 })
 
@@ -209,7 +223,93 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   let naviItem = document.querySelector('.navi-bar .navi .navi-item-member')
+
+  if(naviItem === null) {
+    return
+  }
+
   naviItem.classList.add('active')
+})
+
+
+// PAGE MEMBER LIST
+document.addEventListener('DOMContentLoaded', function() {
+
+  let page = document.querySelector('.page-member-list')
+
+  if(page === null) {
+    return
+  }
+
+  let deleteButtons = document.querySelectorAll('.block-table .delete')
+  deleteButtons.forEach(function(deleteButton) {
+    let memberId = deleteButton.dataset.memberId
+    deleteButton.addEventListener('click', function(event) {
+      event.preventDefault()
+
+      // let input = document.querySelector('.modal-member-delete input[name="id"]')
+      // input.value = memberId
+
+      $('.modal-member-delete').modal('show')
+    })
+  })
+
+  // let confirmDelete = document.querySelector('.modal-member-delete .confirm-button')
+  // confirmDelete.addEventListener('click', function() {
+  //
+  //   axios.get('/api/members/', {
+  //     params: {
+  //       week_id: weekId,
+  //       member_id: memberId
+  //     }
+  //   }).then(response => {
+  //
+  //     let value = 0
+  //     response.data.forEach(function(task) {
+  //       value += task.value
+  //     })
+  //
+  //     root.tasks_create.value = value
+  //     root.tasks_create.tasks = response.data
+  //   })
+  // })
+})
+
+// PAGE MEMBER SHOW
+document.addEventListener('DOMContentLoaded', function() {
+
+  let page = document.querySelector('.page-member-show')
+
+  if(page === null) {
+    return
+  }
+
+  $('select').selectize({
+    onChange: function(value) {
+
+      let projectId = document.querySelector('.select-project').value
+      let weekId = document.querySelector('.select-week').value
+
+      let blocks = document.querySelectorAll('.block-record')
+
+      if(projectId === 'none' || weekId === 'none') {
+        blocks.forEach(function(block) {
+          block.classList.remove('hidden')
+        })
+      }
+
+      blocks.forEach(function(block) {
+        if(projectId !== 'none' && block.classList.contains(`project-${projectId}`)) {
+          block.classList.remove('hidden')
+        }
+        else if(weekId !== 'none' && block.classList.contains(`week-${weekId}`)) {
+          block.classList.remove('hidden')
+        } else {
+          block.classList.add('hidden')
+        }
+      })
+    }
+  })
 })
 
 // PAGE TASK CREATE
@@ -223,7 +323,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   $('select').selectize({
     onChange: function(value) {
-      console.log(1)
       findTasks()
     }
   })

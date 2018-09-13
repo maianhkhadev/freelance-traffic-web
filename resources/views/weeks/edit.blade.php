@@ -17,7 +17,7 @@
     </div>
 
     <div class="page-content">
-      <form action="/weeks/{{ $week->id }}" method="POST">
+      <form class="block-form" action="/weeks/{{ $week->id }}" method="POST">
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

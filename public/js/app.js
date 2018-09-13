@@ -32297,7 +32297,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(149);
-module.exports = __webpack_require__(226);
+module.exports = __webpack_require__(230);
 
 
 /***/ }),
@@ -32322,13 +32322,18 @@ window.Validation = __webpack_require__(224).default;
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('block-record-project', __webpack_require__(225));
+Vue.component('block-record-week', __webpack_require__(236));
+Vue.component('block-record-member', __webpack_require__(239));
 
 var root = new Vue({
   el: '#root',
   data: function data() {
     return {
       name: 'maianhkha',
+      projects: [],
+      weeks: [],
+      members: [],
       tasks_create: {
         value: 0,
         tasks: []
@@ -32338,302 +32343,6 @@ var root = new Vue({
 });
 
 window.root = root;
-
-__webpack_require__(225);
-
-// GOLBAL FUNCTION
-function findTasks() {
-
-  var page = document.querySelector('.page-task-create');
-
-  if (page === null) {
-    return;
-  }
-
-  var weekId = document.querySelector('select[name=week_id]').value;
-  var memberId = document.querySelector('select[name=member_id').value;
-
-  axios.get('/api/findTasks', {
-    params: {
-      week_id: weekId,
-      member_id: memberId
-    }
-  }).then(function (response) {
-
-    var value = 0;
-    response.data.forEach(function (task) {
-      value += task.value;
-    });
-
-    root.tasks_create.value = value;
-    root.tasks_create.tasks = response.data;
-  });
-}
-
-// LAYOUT SIDEBAR
-document.addEventListener('DOMContentLoaded', function () {
-
-  var layout = document.querySelector('.layout-sidebar');
-
-  if (layout === null) {
-    return;
-  }
-
-  var menuItems = document.querySelectorAll('.menu-item.has-sub');
-  menuItems.forEach(function (menuItem) {
-
-    menuItem.addEventListener('click', function () {
-      menuItem.classList.toggle('active');
-    });
-  });
-});
-
-// LAYOUT DEFAULT
-document.addEventListener('DOMContentLoaded', function () {
-
-  var layout = document.querySelector('.layout-default');
-
-  if (layout === null) {
-    return;
-  }
-});
-
-// PAGE HOME
-document.addEventListener('DOMContentLoaded', function () {
-
-  var page = document.querySelector('.page-home');
-
-  if (page === null) {
-    return;
-  }
-
-  var slides = document.querySelectorAll('.slide');
-  slides.forEach(function (slide) {
-    slide.style.zIndex = '10';
-  });
-
-  var firstSlide = document.querySelector('.slide:last-child');
-  firstSlide.classList.add('active');
-
-  setInterval(function () {
-    var slide = document.querySelector('.slide.active');
-    slide.style.zIndex = '30';
-
-    var nextSlide = slide.nextElementSibling === null ? document.querySelector('.slide:first-child') : slide.nextElementSibling;
-    nextSlide.classList.add('active');
-    nextSlide.style.zIndex = '20';
-
-    slide.classList.remove('active');
-    slide.classList.add('hide');
-
-    setTimeout(function () {
-      nextSlide.style.zIndex = '40';
-      slide.style.zIndex = '10';
-    }, 1000);
-
-    setTimeout(function () {
-      slide.classList.remove('hide');
-    }, 2000);
-  }, 5000);
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-
-  var page = document.querySelector('.page-member-create') || document.querySelector('.page-member-edit');
-
-  if (page === null) {
-    return;
-  }
-
-  $('select').selectize();
-
-  var rules = {
-    require: {
-      names: ['name', 'email']
-    },
-    email: {
-      names: ['email']
-    }
-  };
-
-  window.Validation('.member-validation form', rules);
-});
-
-// PAGE PROJECT
-document.addEventListener('DOMContentLoaded', function () {
-
-  var page = document.querySelector('.page-project');
-
-  if (page === null) {
-    return;
-  }
-
-  var naviItem = document.querySelector('.navi-bar .navi .navi-item-project');
-
-  if (naviItem === null) {
-    return;
-  }
-
-  naviItem.classList.add('active');
-});
-
-// PAGE WEEK
-document.addEventListener('DOMContentLoaded', function () {
-
-  var page = document.querySelector('.page-week');
-
-  if (page === null) {
-    return;
-  }
-
-  var naviItem = document.querySelector('.navi-bar .navi .navi-item-week');
-
-  if (naviItem === null) {
-    return;
-  }
-
-  naviItem.classList.add('active');
-});
-
-// PAGE TEAM
-document.addEventListener('DOMContentLoaded', function () {
-
-  var page = document.querySelector('.page-team');
-
-  if (page === null) {
-    return;
-  }
-
-  var naviItem = document.querySelector('.navi-bar .navi .navi-item-team');
-
-  if (naviItem === null) {
-    return;
-  }
-
-  naviItem.classList.add('active');
-});
-
-// PAGE MEMBER
-document.addEventListener('DOMContentLoaded', function () {
-
-  var page = document.querySelector('.page-member');
-
-  if (page === null) {
-    return;
-  }
-
-  var naviItem = document.querySelector('.navi-bar .navi .navi-item-member');
-
-  if (naviItem === null) {
-    return;
-  }
-
-  naviItem.classList.add('active');
-});
-
-// PAGE MEMBER LIST
-document.addEventListener('DOMContentLoaded', function () {
-
-  var page = document.querySelector('.page-member-list');
-
-  if (page === null) {
-    return;
-  }
-
-  var deleteButtons = document.querySelectorAll('.block-table .delete');
-  deleteButtons.forEach(function (deleteButton) {
-    var memberId = deleteButton.dataset.memberId;
-    deleteButton.addEventListener('click', function (event) {
-      event.preventDefault();
-
-      // let input = document.querySelector('.modal-member-delete input[name="id"]')
-      // input.value = memberId
-
-      $('.modal-member-delete').modal('show');
-    });
-  });
-
-  // let confirmDelete = document.querySelector('.modal-member-delete .confirm-button')
-  // confirmDelete.addEventListener('click', function() {
-  //
-  //   axios.get('/api/members/', {
-  //     params: {
-  //       week_id: weekId,
-  //       member_id: memberId
-  //     }
-  //   }).then(response => {
-  //
-  //     let value = 0
-  //     response.data.forEach(function(task) {
-  //       value += task.value
-  //     })
-  //
-  //     root.tasks_create.value = value
-  //     root.tasks_create.tasks = response.data
-  //   })
-  // })
-});
-
-// PAGE MEMBER SHOW
-document.addEventListener('DOMContentLoaded', function () {
-
-  var page = document.querySelector('.page-member-show');
-
-  if (page === null) {
-    return;
-  }
-
-  $('select').selectize({
-    onChange: function onChange(value) {
-
-      var projectId = document.querySelector('.select-project').value;
-      var weekId = document.querySelector('.select-week').value;
-
-      var blocks = document.querySelectorAll('.block-record');
-
-      if (projectId === 'none' || weekId === 'none') {
-        blocks.forEach(function (block) {
-          block.classList.remove('hidden');
-        });
-      }
-
-      blocks.forEach(function (block) {
-        if (projectId !== 'none' && block.classList.contains('project-' + projectId)) {
-          block.classList.remove('hidden');
-        } else if (weekId !== 'none' && block.classList.contains('week-' + weekId)) {
-          block.classList.remove('hidden');
-        } else {
-          block.classList.add('hidden');
-        }
-      });
-    }
-  });
-});
-
-// PAGE TASK CREATE
-document.addEventListener('DOMContentLoaded', function () {
-
-  var page = document.querySelector('.page-task-create');
-
-  if (page === null) {
-    return;
-  }
-
-  $('select').selectize({
-    onChange: function onChange(value) {
-      findTasks();
-    }
-  });
-
-  document.querySelector('select[name=week_id]').addEventListener('change', function () {
-    findTasks();
-  });
-  document.querySelector('select[name=member_id]').addEventListener('change', function () {
-    findTasks();
-  });
-
-  findTasks();
-});
 
 /***/ }),
 /* 150 */
@@ -71250,251 +70959,500 @@ var Validation = function Validation(selector, rules) {
 
 /***/ }),
 /* 225 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-window.week = {
+var disposed = false
+var normalizeComponent = __webpack_require__(226)
+/* script */
+var __vue_script__ = __webpack_require__(227)
+/* template */
+var __vue_template__ = __webpack_require__(228)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/block-record-project.vue"
 
-  show: {
-
-    findCheckedItems: function findCheckedItems(items, checkBoxes) {
-      var checkedItems = [];
-      checkBoxes.forEach(function (checkBox) {
-        items.forEach(function (item) {
-          if (item.id == checkBox.value) {
-            checkedItems.push(item);
-          }
-        });
-      });
-      return checkedItems;
-    },
-
-    calculateTasksForMember: function calculateTasksForMember() {
-      var checkBoxes = document.querySelectorAll('.member input[type=checkbox]:checked');
-      var members = window.week.show.findCheckedItems(window.members, checkBoxes);
-
-      var labels = [];
-      members.forEach(function (member) {
-        labels.push(member.name);
-      });
-
-      var datasets = [];
-      projects.forEach(function (project) {
-
-        var data = [];
-        members.forEach(function (member) {
-
-          var value = 0;
-          tasks.forEach(function (task) {
-            if (task.memberId === member.id && task.projectId === project.id) {
-              value += task.value;
-            }
-          });
-
-          data.push(value);
-        });
-
-        datasets.push({
-          label: project.name,
-          backgroundColor: project.color,
-          data: data
-        });
-      });
-      console.log({
-        labels: labels,
-        datasets: datasets
-      });
-      return {
-        labels: labels,
-        datasets: datasets
-      };
-    },
-
-    calculateTasksForProject: function calculateTasksForProject() {
-      var checkBoxes = document.querySelectorAll('.project input[type=checkbox]:checked');
-      var projects = window.week.show.findCheckedItems(window.projects, checkBoxes);
-
-      var labels = [];
-      projects.forEach(function (project) {
-        labels.push(project.name);
-      });
-
-      var datasets = [];
-      members.forEach(function (member) {
-
-        var data = [];
-        projects.forEach(function (project) {
-
-          var value = 0;
-          tasks.forEach(function (task) {
-            if (task.memberId === member.id && task.projectId === project.id) {
-              value += task.value;
-            }
-          });
-
-          data.push(value);
-        });
-
-        datasets.push({
-          label: member.name,
-          backgroundColor: member.color,
-          data: data
-        });
-      });
-
-      return {
-        labels: labels,
-        datasets: datasets
-      };
-    },
-
-    renderChart: function renderChart(chartId, labels, datasets) {
-
-      var context = document.getElementById(chartId).getContext('2d');
-      var chart = new Chart(context, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: datasets
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            display: false
-          },
-          tooltips: {
-            mode: 'index',
-            intersect: false,
-            callbacks: {
-              label: function label(tooltipItem, data) {
-                if (tooltipItem.yLabel === 0) {
-                  return;
-                }
-
-                var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-                if (label) {
-                  label += ': ';
-                }
-
-                label += Math.round(tooltipItem.yLabel * 100) / 100;
-                return label;
-              }
-            }
-          },
-          scales: {
-            xAxes: [{
-              stacked: true,
-              ticks: {
-                display: false
-              }
-            }],
-            yAxes: [{
-              stacked: true,
-              ticks: {
-                beginAtZero: true
-              }
-            }]
-          }
-        }
-      });
-
-      return chart;
-    },
-
-    fetchData: function fetchData(chart, labels, datasets) {
-      chart.data.labels = labels;
-      chart.data.datasets = datasets;
-
-      chart.update();
-    }
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e6e60218", Component.options)
+  } else {
+    hotAPI.reload("data-v-e6e60218", Component.options)
   }
-};
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
 
-document.addEventListener('DOMContentLoaded', function () {
+module.exports = Component.exports
 
-  var page = document.querySelector('.page-week-show');
-
-  if (page === null) {
-    return;
-  }
-
-  $('.team input[type=checkbox]').on('change', function (event) {
-
-    var teamId = event.target.value;
-    var checkboxes = document.querySelectorAll('[data-team-id="' + teamId + '"]');
-
-    if (event.target.checked === true) {
-
-      checkboxes.forEach(function (checkbox) {
-        checkbox.checked = true;
-      });
-    } else {
-
-      checkboxes.forEach(function (checkbox) {
-        checkbox.checked = false;
-      });
-    }
-
-    var _window$week$show$cal = window.week.show.calculateTasksForMember(),
-        labels = _window$week$show$cal.labels,
-        datasets = _window$week$show$cal.datasets;
-
-    window.week.show.fetchData(window.chart.members, labels, datasets);
-  });
-
-  $('.member input[type=checkbox]').on('change', function (event) {
-
-    var teamId = event.target.dataset.teamId;
-
-    if (event.target.checked === true) {
-      var allCheckboxChecked = true;
-
-      var checkboxes = document.querySelectorAll('[data-team-id="' + teamId + '"]');
-      checkboxes.forEach(function (checkbox) {
-        if (checkbox.checked === false) {
-          allCheckboxChecked = false;
-        }
-      });
-
-      if (allCheckboxChecked === true) {
-        var checkbox = document.querySelector('#select-team-' + teamId);
-        checkbox.checked = true;
-      }
-    } else {
-      var _checkbox = document.querySelector('#select-team-' + teamId);
-      _checkbox.checked = false;
-    }
-
-    var _window$week$show$cal2 = window.week.show.calculateTasksForMember(),
-        labels = _window$week$show$cal2.labels,
-        datasets = _window$week$show$cal2.datasets;
-
-    window.week.show.fetchData(window.chart.members, labels, datasets);
-  });
-
-  $('.project input[type=checkbox]').on('change', function (event) {
-    var _window$week$show$cal3 = window.week.show.calculateTasksForProject(),
-        labels = _window$week$show$cal3.labels,
-        datasets = _window$week$show$cal3.datasets;
-
-    window.week.show.fetchData(window.chart.projects, labels, datasets);
-  });
-
-  window.chart = {};
-
-  var memberChartData = window.week.show.calculateTasksForMember();
-  window.chart.members = window.week.show.renderChart('chart-members', memberChartData.labels, memberChartData.datasets);
-
-  var projectChartData = window.week.show.calculateTasksForProject();
-  window.chart.projects = window.week.show.renderChart('chart-projects', projectChartData.labels, projectChartData.datasets);
-});
 
 /***/ }),
 /* 226 */
 /***/ (function(module, exports) {
 
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 227 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    data: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 228 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "block-record" }, [
+    _c("span", { staticClass: "block-cell" }, [
+      _c("span", { staticClass: "avatar-name" }, [_vm._v("HL")]),
+      _vm._v("\n    " + _vm._s(_vm.data.name) + "\n  ")
+    ]),
+    _vm._v(" "),
+    _c("span", { staticClass: "block-cell" }, [_vm._v(_vm._s(_vm.data.name))]),
+    _vm._v(" "),
+    _c("span", { staticClass: "block-cell" }, [
+      _vm.data.closed === 0
+        ? _c("span", { staticClass: "badge badge-success" }, [_vm._v("opened")])
+        : _c("span", { staticClass: "badge badge-secondary" }, [
+            _vm._v("closed")
+          ])
+    ]),
+    _vm._v(" "),
+    _c("span", { staticClass: "block-cell" }, [
+      _c("a", { attrs: { href: "/projects/" + _vm.data.id } }, [
+        _vm._v("Show")
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "/projects/" + _vm.data.id + "/edit" } }, [
+        _vm._v("Edit")
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e6e60218", module.exports)
+  }
+}
+
+/***/ }),
+/* 229 */,
+/* 230 */
+/***/ (function(module, exports) {
+
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(226)
+/* script */
+var __vue_script__ = __webpack_require__(237)
+/* template */
+var __vue_template__ = __webpack_require__(238)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/block-record-week.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-cb56dcae", Component.options)
+  } else {
+    hotAPI.reload("data-v-cb56dcae", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 237 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    data: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "block-record" }, [
+    _c("span", { staticClass: "block-cell" }, [_vm._v(_vm._s(_vm.data.name))]),
+    _vm._v(" "),
+    _c("span", { staticClass: "block-cell" }, [_vm._v(_vm._s(_vm.data.name))]),
+    _vm._v(" "),
+    _c("span", { staticClass: "block-cell" }, [
+      _vm.data.closed === 0
+        ? _c("span", { staticClass: "badge badge-success" }, [_vm._v("opened")])
+        : _c("span", { staticClass: "badge badge-secondary" }, [
+            _vm._v("closed")
+          ])
+    ]),
+    _vm._v(" "),
+    _c("span", { staticClass: "block-cell" }, [
+      _c("a", { attrs: { href: "/weeks/" + _vm.data.id } }, [_vm._v("Show")]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "/weeks/" + _vm.data.id + "/edit" } }, [
+        _vm._v("Edit")
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-cb56dcae", module.exports)
+  }
+}
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(226)
+/* script */
+var __vue_script__ = __webpack_require__(240)
+/* template */
+var __vue_template__ = __webpack_require__(241)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/block-record-member.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e5e833e2", Component.options)
+  } else {
+    hotAPI.reload("data-v-e5e833e2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 240 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    data: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 241 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "block-record" }, [
+    _c("span", { staticClass: "block-cell" }, [
+      _c("span", { staticClass: "avatar-name" }, [_vm._v("HL")]),
+      _vm._v("\n    " + _vm._s(_vm.data.name) + "\n  ")
+    ]),
+    _vm._v(" "),
+    _c("span", { staticClass: "block-cell" }, [_vm._v(_vm._s(_vm.data.email))]),
+    _vm._v(" "),
+    _c("span", { staticClass: "block-cell" }, [
+      _vm.data.disabled === 0
+        ? _c("span", { staticClass: "badge badge-success" }, [
+            _vm._v("actived")
+          ])
+        : _c("span", { staticClass: "badge badge-secondary" }, [
+            _vm._v("disabled")
+          ])
+    ]),
+    _vm._v(" "),
+    _c("span", { staticClass: "block-cell" }, [
+      _c("a", { attrs: { href: "/members/" + _vm.data.id } }, [_vm._v("Show")]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "/members/" + _vm.data.id + "/edit" } }, [
+        _vm._v("Edit")
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e5e833e2", module.exports)
+  }
+}
 
 /***/ })
 ],[148]);

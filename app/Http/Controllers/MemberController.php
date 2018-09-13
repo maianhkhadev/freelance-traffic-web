@@ -32,12 +32,6 @@ class MemberController extends Controller
         return view('members.index', ['members' => $members]);
     }
 
-    public function search()
-    {
-        $members = Member::orderBy('created_at', 'DESC')->get();
-        return json_encode($members);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -117,17 +111,6 @@ class MemberController extends Controller
         $member->name = $request->input('name');
         $member->email = $request->input('email');
         $member->disabled = $request->input('disabled') === 'on' ? true : false;
-
-        $member->save();
-
-        return redirect()->route('members.index');
-    }
-
-    public function destroy($id)
-    {
-        $member = Member::find($id);
-
-        $member->disabled = true;
 
         $member->save();
 

@@ -48,6 +48,7 @@
   }
 
   .form-select {
+    margin-bottom: 1rem;
 
     .selectize-control {
 
@@ -60,10 +61,17 @@
     }
   }
 
+  .form-color {
+
+    input {
+      height: 2.875rem;
+    }
+  }
+
   .form-check {
     padding-left: 1.5rem;
     margin-bottom: 1.25rem;
-    
+
     .form-check-input {
       margin-left: -1.5rem;
       cursor: pointer;
@@ -74,6 +82,42 @@
       font-weight: 400;
       margin-bottom: unset;
       cursor: pointer;
+    }
+  }
+
+  .form-file {
+    margin-bottom: 2rem;
+
+    .avatar {
+      position: relative;
+      width: 6rem;
+      height: 6rem;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border: 0.125rem dashed #63b9fd;
+      border-radius: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      cursor: pointer;
+
+      &::after {
+        content: '+';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #63b9fd;
+        font-size: 3rem;
+      }
+
+      &:hover {
+        border-color: darken(#63b9fd, 10%);
+
+        &::after {
+          color: darken(#63b9fd, 10%);
+        }
+      }
     }
   }
 

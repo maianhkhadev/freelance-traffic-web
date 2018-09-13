@@ -66,26 +66,14 @@
               </div>
               <div class="block-content">
                 @foreach ($members as $member)
-                <div class="block-record {{ $member->updated_at }}">
-                  <span class="block-cell">
-                    <span class="avatar-name">HL</span>
-                    {{ $member->name }}
-                  </span>
-                  <span class="block-cell">{{ $member->email }}</span>
-                  <span class="block-cell">
-                    @if ($member->disabled === 0)
-                      <span class="badge badge-success">actived</span>
-                    @else
-                      <span class="badge badge-secondary">disabled</span>
-                    @endif
-                  </span>
-                  <span class="block-cell">
-                    <a class="" href="{{ route('members.show', ['id' => $member->id]) }}">Show</a>
-                    <a class="" href="{{ route('members.edit', ['id' => $member->id]) }}">Edit</a>
-                    <a class="remove delete" data-member-id={{ $member->id }} href="#">Remove</a>
-                  </span>
-                </div>
+                  <block-record-member :data="{{ $member }}"></block-record-member>
                 @endforeach
+              </div>
+
+              <div class="block-content">
+                <template v-for="member in members">
+                  <block-record-member :data="member"></block-record-member>
+                </template>
               </div>
             </div>
           </div>
@@ -103,36 +91,6 @@
             {{ $members->links('vendor.pagination.default') }}
           </div>
         </div>
-      </div>
-    </div>
-
-    <form class="modal-content" action="/members/10" method="GET">
-      <input type="hidden" name="_token" value="{{ csrf_token() }}">
-      <input type="hidden" name="_method" value="DELETE">
-      <button type="submit" class="btn btn-danger">Remove</button>
-    </form>
-
-    <div class="modal modal-member-delete fade">
-      <div class="modal-dialog">
-        <form class="modal-content" action="/members/10" method="POST">
-          <input type="hidden" name="_method" value="DELETE">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          {{-- <input type="hidden" name="id" value=""> --}}
-          <button type="submit" class="btn btn-danger">Remove</button>
-          {{-- <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Do you want remove this member?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-danger">Remove</button>
-          </div> --}}
-        </form>
       </div>
     </div>
   </div>

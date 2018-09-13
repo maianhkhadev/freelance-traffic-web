@@ -16,12 +16,17 @@
       </div>
     </div>
     <div class="page-content">
-      <form action="/weeks" method="POST">
+      <form class="block-form" action="/weeks" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <div class="form-group">
           <label>Name of Week</label>
           <input name="name" type="text" class="form-control" placeholder="Enter name..." autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label>From {date} to {date}</label>
+          <input name="range" type="text" class="form-control" placeholder="Enter name..." autocomplete="off">
         </div>
 
         <button class="btn btn-dark">Save & Close</button>

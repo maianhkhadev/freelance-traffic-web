@@ -88,6 +88,7 @@ class ProjectController extends Controller
         $project = new Project();
 
         $project->name = $request->input('name');
+        $project->color = $request->input('color');
         $project->closed = false;
 
         $project->save();

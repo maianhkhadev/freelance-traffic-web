@@ -9041,6 +9041,10 @@ a:hover {
   color: inherit;
 }
 
+.hidden {
+  display: none;
+}
+
 .btn-gold {
   color: #5c5e5c;
   background-color: #fdd20a;
@@ -9984,11 +9988,19 @@ a:hover {
   max-height: unset;
 }
 
+.block-form .form-select {
+  margin-bottom: 1rem;
+}
+
 .block-form .form-select .selectize-control .selectize-input {
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.125rem;
   padding: 0.625rem 1rem;
+}
+
+.block-form .form-color input {
+  height: 2.875rem;
 }
 
 .block-form .form-check {
@@ -10006,6 +10018,43 @@ a:hover {
   font-weight: 400;
   margin-bottom: unset;
   cursor: pointer;
+}
+
+.block-form .form-file {
+  margin-bottom: 2rem;
+}
+
+.block-form .form-file .avatar {
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 0.125rem dashed #63b9fd;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+.block-form .form-file .avatar::after {
+  content: '+';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #63b9fd;
+  font-size: 3rem;
+}
+
+.block-form .form-file .avatar:hover {
+  border-color: #31a2fc;
+}
+
+.block-form .form-file .avatar:hover::after {
+  color: #31a2fc;
 }
 
 .block-form button {
@@ -10185,11 +10234,6 @@ a:hover {
   font-weight: 500;
   text-transform: uppercase;
   margin-left: 0.75rem;
-}
-
-.block-table .block-content .block-record .block-cell a.delete,
-.block-table .block-content .block-record .block-cell a.remove {
-  color: #cb2431;
 }
 
 .block-table .avatar-name {

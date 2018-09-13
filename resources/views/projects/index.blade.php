@@ -66,26 +66,19 @@
               </div>
               <div class="block-content">
                 @foreach ($projects as $project)
-                <div class="block-record">
-                  <span class="block-cell">
-                    <span class="avatar-name">HL</span>
-                    {{ $project->name }}
-                  </span>
-                  <span class="block-cell">{{ $project->name }}</span>
-                  <span class="block-cell">
-                    @if ($project->closed === 0)
-                      <span class="badge badge-success">opened</span>
-                    @else
-                      <span class="badge badge-secondary">closed</span>
-                    @endif
-                  </span>
-                  <span class="block-cell">
-                    <a class="" href="{{ route('projects.show', ['id' => $project->id]) }}">Show</a>
-                    <a class="" href="{{ route('projects.edit', ['id' => $project->id]) }}">Edit</a>
-                    <a class="remove" href="{{ route('projects.edit', ['id' => $project->id]) }}">Close</a>
-                  </span>
-                </div>
+                  <block-record-project :data="{{ $project }}"></block-record-project>
                 @endforeach
+              </div>
+
+              <div class="block-content" >
+
+                <div v-if="projects.length">
+                  <template v-for="project in projects">
+                    <block-record-project :data="project"></block-record-project>
+                  </template>
+                </div>
+
+                <div class="no-records" v-else>I don't have any records!</div>
               </div>
             </div>
           </div>

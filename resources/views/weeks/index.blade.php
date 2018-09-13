@@ -64,25 +64,17 @@
                   Actions
                 </span>
               </div>
+
               <div class="block-content">
                 @foreach ($weeks as $week)
-                <div class="block-record">
-                  <span class="block-cell">{{ $week->name }}</span>
-                  <span class="block-cell">{{ $week->name }}</span>
-                  <span class="block-cell">
-                    @if ($week->closed === 0)
-                      <span class="badge badge-success">opened</span>
-                    @else
-                      <span class="badge badge-secondary">closed</span>
-                    @endif
-                  </span>
-                  <span class="block-cell">
-                    <a class="" href="{{ route('weeks.show', ['id' => $week->id]) }}">Show</a>
-                    <a class="" href="{{ route('weeks.edit', ['id' => $week->id]) }}">Edit</a>
-                    <a class="remove" href="{{ route('weeks.edit', ['id' => $week->id]) }}">Close</a>
-                  </span>
-                </div>
+                  <block-record-week :data="{{ $week }}"></block-record-week>
                 @endforeach
+              </div>
+
+              <div class="block-content">
+                <template v-for="week in weeks">
+                  <block-record-week :data="week"></block-record-week>
+                </template>
               </div>
             </div>
           </div>

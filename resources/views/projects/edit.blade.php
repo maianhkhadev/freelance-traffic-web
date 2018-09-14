@@ -22,7 +22,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <span class="avatar-name">HL</span>
-        
+
         <div class="form-group">
           <label>What's the name of project?</label>
           <input name="name" type="text" class="form-control" placeholder="Enter name..." value="{{ $project->name }}" autocomplete="off">
@@ -30,7 +30,7 @@
 
         <div class="form-group form-color">
           <label>Pick a color for this project</label>
-          <input name="color" type="color" class="form-control" value="{{ $project->color }}" autocomplete="off">
+          <input name="color" type="color" class="form-control" autocomplete="off">
           <small class="text-muted">It's used to display on the graph</small>
         </div>
 

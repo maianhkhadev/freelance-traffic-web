@@ -18,7 +18,7 @@ export default {
           name: event.target.value
         }
       }).then(res => {
-
+        console.log(res)
         root.projects = res.data
       })
     })

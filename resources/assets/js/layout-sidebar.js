@@ -2,7 +2,7 @@
 export default {
 
   loaded: function() {
-    let layout = document.querySelector('.layout-default')
+    let layout = document.querySelector('.layout-sidebar')
 
     if(layout === null) {
       return

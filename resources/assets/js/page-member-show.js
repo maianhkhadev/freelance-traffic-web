@@ -2,13 +2,14 @@
 export default {
 
   loaded: function() {
-    let layout = document.querySelector('.page-member-list')
+    let layout = document.querySelector('.page-member-show')
 
     if(layout === null) {
       return
     }
 
     activeNaviItem('member')
+    addEventForNoteLink()
 
     $('select').selectize({
       onChange: function(value) {

@@ -25,10 +25,12 @@
           <label>What's your name?</label>
           <input name="name" type="text" class="form-control" placeholder="Enter name..." autocomplete="off" value="{{ $member->name }}">
         </div>
+
         <div class="form-group">
           <label>Could you send me your email?</label>
           <input name="email" type="text" class="form-control" placeholder="Enter email..." autocomplete="off" value="{{ $member->email }}">
         </div>
+
         <div class="form-group form-select">
           <label>Choose Your Team</label>
           <select name="team_id" class="">
@@ -37,6 +39,13 @@
             @endforeach
           </select>
         </div>
+
+        <div class="form-group form-color">
+          <label>Pick a color for this member</label>
+          <input name="color" type="color" class="form-control" autocomplete="off">
+          <small class="text-muted">It's used to display on the graph</small>
+        </div>
+
         <div class="form-group form-check">
           <input type="checkbox" class="form-check-input" id="checkbox-disabled" name="disabled" {{ $member->disabled === 1 ? 'checked' : '' }}>
           <label class="form-check-label" for="checkbox-disabled">Disable this member</label>

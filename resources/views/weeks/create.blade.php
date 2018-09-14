@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-group">
-          <label>From {date} to {date}</label>
+          <label>From { Date } to { Date }</label>
           <input name="range" type="text" class="form-control" placeholder="Enter name..." autocomplete="off">
         </div>
 

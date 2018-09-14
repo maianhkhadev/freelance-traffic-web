@@ -38,3 +38,16 @@ window.activeNaviItem = function(name) {
 
   naviItem.classList.add('active')
 }
+
+window.addEventForNoteLink = function() {
+
+  let noteLinks = document.querySelectorAll('.block-table .block-content .block-record .note-link')
+  noteLinks.forEach(function(noteLink) {
+    noteLink.addEventListener('click', function(event) {
+      event.preventDefault()
+
+      let note = noteLink.dataset.note
+      $('.modal-note').modal('show')
+    })
+  })
+}

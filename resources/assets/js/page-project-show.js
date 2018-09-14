@@ -56,6 +56,7 @@ export default {
     }
 
     activeNaviItem('project')
+    addEventForNoteLink()
 
     self.renderChart('chart', window.weeks)
   }

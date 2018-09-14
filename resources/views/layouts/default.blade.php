@@ -39,7 +39,7 @@
               <nav class="navi-bar">
 
                 <ul class="navi">
-                  <li class="navi-item">
+                  <li class="navi-item navi-item-task-create">
                     <a class="navi-link" href="{{ route('tasks.create') }}">Create A New Task</a>
                   </li>
                   <li class="navi-item navi-item-project has-sub">

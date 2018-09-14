@@ -115,4 +115,7 @@
       </div>
     </div>
   </div>
+
+  @include('modals.note')
+  
 @endsection

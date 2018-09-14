@@ -2,7 +2,7 @@
 export default {
 
   loaded: function() {
-    let layout = document.querySelector('.page-member-list')
+    let layout = document.querySelector('.page-task-create')
 
     if(layout === null) {
       return

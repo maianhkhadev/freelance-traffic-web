@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.fullscreen')
 
 @section('content')
   <div class="page page-edit page-week page-week-edit">
@@ -25,6 +25,12 @@
           <label>Name of Week</label>
           <input name="name" type="text" class="form-control" placeholder="Enter name..." value="{{ $week->name }}" autocomplete="off">
         </div>
+
+        <div class="form-group">
+          <label>From { Date } to { Date }</label>
+          <input name="range" type="text" class="form-control" placeholder="Enter name..." autocomplete="off">
+        </div>
+
         <div class="form-group form-check">
           <input type="checkbox" class="form-check-input" id="checkbox-closed" name="closed" {{ $week->closed === 1 ? 'checked' : '' }}>
           <label class="form-check-label" for="checkbox-closed">Close this week</label>

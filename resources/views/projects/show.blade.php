@@ -148,6 +148,9 @@
       </div>
     </div>
   </div>
+
+  @include('modals.note')
+
 @endsection
 
 @section('javascript')

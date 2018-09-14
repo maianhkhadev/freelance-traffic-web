@@ -122,7 +122,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="page-content">
       <div class="container">
         <div class="block-table block-table-tasks">
@@ -150,7 +150,9 @@
               <span class="block-cell">{{ $task->name }}</span>
               <span class="block-cell">{{ $task->member->name }}</span>
               <span class="block-cell flex-center">{{ $task->value }}</span>
-              <span class="block-cell">Note</span>
+              <span class="block-cell">
+                <a class="note-link" href="#" data-note="{{ $task->note }}">Note</a>
+              </span>
             </div>
             @endforeach
           </div>
@@ -158,6 +160,9 @@
       </div>
     </div>
   </div>
+
+  @include('modals.note')
+
 @endsection
 
 @section('javascript')

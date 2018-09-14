@@ -32418,12 +32418,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__layout_default__ = __webpack_require__(241);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__page_home__ = __webpack_require__(242);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__page_member_list__ = __webpack_require__(243);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__page_member_show__ = __webpack_require__(244);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__page_project_list__ = __webpack_require__(245);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__page_project_show__ = __webpack_require__(250);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__page_task_create__ = __webpack_require__(246);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__page_team_list__ = __webpack_require__(248);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__page_week_list__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__page_member_cu__ = __webpack_require__(252);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__page_member_show__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__page_project_list__ = __webpack_require__(245);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__page_project_cu__ = __webpack_require__(253);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__page_project_show__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__page_task_create__ = __webpack_require__(246);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__page_team_list__ = __webpack_require__(248);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__page_week_list__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__page_week_cu__ = __webpack_require__(254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__page_week_show__ = __webpack_require__(251);
+
+
+
+
+
 
 
 
@@ -32482,12 +32491,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
   __WEBPACK_IMPORTED_MODULE_1__page_home__["a" /* default */].loaded();
   __WEBPACK_IMPORTED_MODULE_2__page_member_list__["a" /* default */].loaded();
-  __WEBPACK_IMPORTED_MODULE_3__page_member_show__["a" /* default */].loaded();
-  __WEBPACK_IMPORTED_MODULE_4__page_project_list__["a" /* default */].loaded();
-  __WEBPACK_IMPORTED_MODULE_5__page_project_show__["a" /* default */].loaded();
-  __WEBPACK_IMPORTED_MODULE_6__page_task_create__["a" /* default */].loaded();
-  __WEBPACK_IMPORTED_MODULE_7__page_team_list__["a" /* default */].loaded();
-  __WEBPACK_IMPORTED_MODULE_8__page_week_list__["a" /* default */].loaded();
+  __WEBPACK_IMPORTED_MODULE_3__page_member_cu__["a" /* default */].loaded();
+  __WEBPACK_IMPORTED_MODULE_4__page_member_show__["a" /* default */].loaded();
+  __WEBPACK_IMPORTED_MODULE_5__page_project_list__["a" /* default */].loaded();
+  __WEBPACK_IMPORTED_MODULE_6__page_project_cu__["a" /* default */].loaded();
+  __WEBPACK_IMPORTED_MODULE_7__page_project_show__["a" /* default */].loaded();
+  __WEBPACK_IMPORTED_MODULE_8__page_task_create__["a" /* default */].loaded();
+  __WEBPACK_IMPORTED_MODULE_9__page_team_list__["a" /* default */].loaded();
+  __WEBPACK_IMPORTED_MODULE_10__page_week_list__["a" /* default */].loaded();
+  __WEBPACK_IMPORTED_MODULE_11__page_week_cu__["a" /* default */].loaded();
+  __WEBPACK_IMPORTED_MODULE_12__page_week_show__["a" /* default */].loaded();
 });
 
 /***/ }),
@@ -71578,9 +71591,9 @@ if (false) {
         params: {
           name: event.target.value
         }
-      }).then(function (response) {
-
-        console.log(response);
+      }).then(function (res) {
+        console.log(res);
+        root.members = res.data;
       });
     });
   }
@@ -71595,13 +71608,14 @@ if (false) {
 /* harmony default export */ __webpack_exports__["a"] = ({
 
   loaded: function loaded() {
-    var layout = document.querySelector('.page-member-list');
+    var layout = document.querySelector('.page-member-show');
 
     if (layout === null) {
       return;
     }
 
     activeNaviItem('member');
+    addEventForNoteLink();
 
     $('select').selectize({
       onChange: function onChange(value) {
@@ -71656,7 +71670,7 @@ if (false) {
           name: event.target.value
         }
       }).then(function (res) {
-
+        console.log(res);
         root.projects = res.data;
       });
     });
@@ -71672,7 +71686,7 @@ if (false) {
 /* harmony default export */ __webpack_exports__["a"] = ({
 
   loaded: function loaded() {
-    var layout = document.querySelector('.page-member-list');
+    var layout = document.querySelector('.page-task-create');
 
     if (layout === null) {
       return;
@@ -71712,9 +71726,9 @@ if (false) {
         params: {
           name: event.target.value
         }
-      }).then(function (response) {
-
-        console.log(response);
+      }).then(function (res) {
+        console.log(res);
+        root.weeks = res.data;
       });
     });
   }
@@ -71784,6 +71798,19 @@ window.activeNaviItem = function (name) {
   naviItem.classList.add('active');
 };
 
+window.addEventForNoteLink = function () {
+
+  var noteLinks = document.querySelectorAll('.block-table .block-content .block-record .note-link');
+  noteLinks.forEach(function (noteLink) {
+    noteLink.addEventListener('click', function (event) {
+      event.preventDefault();
+
+      var note = noteLink.dataset.note;
+      $('.modal-note').modal('show');
+    });
+  });
+};
+
 /***/ }),
 /* 250 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -71843,8 +71870,319 @@ window.activeNaviItem = function (name) {
     }
 
     activeNaviItem('project');
+    addEventForNoteLink();
 
     self.renderChart('chart', window.weeks);
+  }
+});
+
+/***/ }),
+/* 251 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+  findCheckedItems: function findCheckedItems(items, checkBoxes) {
+    var checkedItems = [];
+    checkBoxes.forEach(function (checkBox) {
+      items.forEach(function (item) {
+        if (item.id == checkBox.value) {
+          checkedItems.push(item);
+        }
+      });
+    });
+    return checkedItems;
+  },
+
+  calculateTasksForMember: function calculateTasksForMember() {
+    var self = this;
+    var checkBoxes = document.querySelectorAll('.member input[type=checkbox]:checked');
+    var members = self.findCheckedItems(window.members, checkBoxes);
+
+    var labels = [];
+    members.forEach(function (member) {
+      labels.push(member.name);
+    });
+
+    var datasets = [];
+    projects.forEach(function (project) {
+
+      var data = [];
+      members.forEach(function (member) {
+
+        var value = 0;
+        tasks.forEach(function (task) {
+          if (task.memberId === member.id && task.projectId === project.id) {
+            value += task.value;
+          }
+        });
+
+        data.push(value);
+      });
+
+      datasets.push({
+        label: project.name,
+        backgroundColor: project.color,
+        data: data
+      });
+    });
+    console.log({
+      labels: labels,
+      datasets: datasets
+    });
+    return {
+      labels: labels,
+      datasets: datasets
+    };
+  },
+
+  calculateTasksForProject: function calculateTasksForProject() {
+    var self = this;
+    var checkBoxes = document.querySelectorAll('.project input[type=checkbox]:checked');
+    var projects = self.findCheckedItems(window.projects, checkBoxes);
+
+    var labels = [];
+    projects.forEach(function (project) {
+      labels.push(project.name);
+    });
+
+    var datasets = [];
+    members.forEach(function (member) {
+
+      var data = [];
+      projects.forEach(function (project) {
+
+        var value = 0;
+        tasks.forEach(function (task) {
+          if (task.memberId === member.id && task.projectId === project.id) {
+            value += task.value;
+          }
+        });
+
+        data.push(value);
+      });
+
+      datasets.push({
+        label: member.name,
+        backgroundColor: member.color,
+        data: data
+      });
+    });
+
+    return {
+      labels: labels,
+      datasets: datasets
+    };
+  },
+
+  renderChart: function renderChart(chartId, labels, datasets) {
+    var self = this;
+    var context = document.getElementById(chartId).getContext('2d');
+    var chart = new Chart(context, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: datasets
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+          callbacks: {
+            label: function label(tooltipItem, data) {
+              if (tooltipItem.yLabel === 0) {
+                return;
+              }
+
+              var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+              if (label) {
+                label += ': ';
+              }
+
+              label += Math.round(tooltipItem.yLabel * 100) / 100;
+              return label;
+            }
+          }
+        },
+        scales: {
+          xAxes: [{
+            stacked: true,
+            ticks: {
+              display: false
+            }
+          }],
+          yAxes: [{
+            stacked: true,
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
+    return chart;
+  },
+
+  fetchData: function fetchData(chart, labels, datasets) {
+    chart.data.labels = labels;
+    chart.data.datasets = datasets;
+
+    chart.update();
+  },
+
+  loaded: function loaded() {
+    var self = this;
+    var page = document.querySelector('.page-week-show');
+
+    if (page === null) {
+      return;
+    }
+
+    activeNaviItem('week');
+    addEventForNoteLink();
+
+    $('.team input[type=checkbox]').on('change', function (event) {
+
+      var teamId = event.target.value;
+      var checkboxes = document.querySelectorAll('[data-team-id="' + teamId + '"]');
+
+      if (event.target.checked === true) {
+
+        checkboxes.forEach(function (checkbox) {
+          checkbox.checked = true;
+        });
+      } else {
+
+        checkboxes.forEach(function (checkbox) {
+          checkbox.checked = false;
+        });
+      }
+
+      var _self$calculateTasksF = self.calculateTasksForMember(),
+          labels = _self$calculateTasksF.labels,
+          datasets = _self$calculateTasksF.datasets;
+
+      self.fetchData(window.chart.members, labels, datasets);
+    });
+
+    $('.member input[type=checkbox]').on('change', function (event) {
+
+      var teamId = event.target.dataset.teamId;
+
+      if (event.target.checked === true) {
+        var allCheckboxChecked = true;
+
+        var checkboxes = document.querySelectorAll('[data-team-id="' + teamId + '"]');
+        checkboxes.forEach(function (checkbox) {
+          if (checkbox.checked === false) {
+            allCheckboxChecked = false;
+          }
+        });
+
+        if (allCheckboxChecked === true) {
+          var checkbox = document.querySelector('#select-team-' + teamId);
+          checkbox.checked = true;
+        }
+      } else {
+        var _checkbox = document.querySelector('#select-team-' + teamId);
+        _checkbox.checked = false;
+      }
+
+      var _self$calculateTasksF2 = self.calculateTasksForMember(),
+          labels = _self$calculateTasksF2.labels,
+          datasets = _self$calculateTasksF2.datasets;
+
+      self.fetchData(window.chart.members, labels, datasets);
+    });
+
+    $('.project input[type=checkbox]').on('change', function (event) {
+      var _self$calculateTasksF3 = self.calculateTasksForProject(),
+          labels = _self$calculateTasksF3.labels,
+          datasets = _self$calculateTasksF3.datasets;
+
+      self.fetchData(window.chart.projects, labels, datasets);
+    });
+
+    window.chart = {};
+
+    var memberChartData = self.calculateTasksForMember();
+    window.chart.members = self.renderChart('chart-members', memberChartData.labels, memberChartData.datasets);
+
+    var projectChartData = self.calculateTasksForProject();
+    window.chart.projects = self.renderChart('chart-projects', projectChartData.labels, projectChartData.datasets);
+  }
+});
+
+/***/ }),
+/* 252 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+  loaded: function loaded() {
+    var page = document.querySelector('.page-member-create') || document.querySelector('.page-member-edit');
+
+    if (page === null) {
+      return;
+    }
+
+    $('select').selectize();
+
+    var rules = {
+      require: {
+        names: ['name', 'email']
+      },
+      email: {
+        names: ['email']
+      }
+    };
+
+    window.Validation('.member-validation form', rules);
+  }
+});
+
+/***/ }),
+/* 253 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+  loaded: function loaded() {
+    var page = document.querySelector('.page-member-create') || document.querySelector('.page-member-edit');
+
+    if (page === null) {
+      return;
+    }
+  }
+});
+
+/***/ }),
+/* 254 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+  loaded: function loaded() {
+    var page = document.querySelector('.page-week-create') || document.querySelector('.page-week-edit');
+
+    if (page === null) {
+      return;
+    }
   }
 });
 

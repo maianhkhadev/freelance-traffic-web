@@ -17,9 +17,9 @@ export default {
         params: {
           name: event.target.value
         }
-      }).then(response => {
-
-        console.log(response)
+      }).then(res => {
+        console.log(res)
+        root.weeks = res.data
       })
     })
   }

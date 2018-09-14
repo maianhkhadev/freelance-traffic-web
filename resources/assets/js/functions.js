@@ -47,6 +47,8 @@ window.addEventForNoteLink = function() {
       event.preventDefault()
 
       let note = noteLink.dataset.note
+      document.querySelector('.modal-note #note').innerText = note
+
       $('.modal-note').modal('show')
     })
   })

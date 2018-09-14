@@ -10314,3 +10314,13 @@ a:hover {
   width: 1.25rem;
 }
 
+.modal-note .close:focus {
+  -webkit-box-shadow: unset;
+          box-shadow: unset;
+  outline: unset;
+}
+
+.modal-note #note {
+  margin-top: 1rem;
+}
+

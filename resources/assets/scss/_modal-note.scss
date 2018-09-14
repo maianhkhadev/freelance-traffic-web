@@ -1,0 +1,14 @@
+.modal-note {
+
+  .close {
+
+    &:focus {
+      box-shadow: unset;
+      outline: unset;
+    }
+  }
+  
+  #note {
+    margin-top: 1rem;
+  }
+}

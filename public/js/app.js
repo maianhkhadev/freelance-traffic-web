@@ -71806,6 +71806,8 @@ window.addEventForNoteLink = function () {
       event.preventDefault();
 
       var note = noteLink.dataset.note;
+      document.querySelector('.modal-note #note').innerText = note;
+
       $('.modal-note').modal('show');
     });
   });

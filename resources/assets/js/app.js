@@ -1,4 +1,14 @@
+import LayoutDefault from './layout-default'
+import LayoutSidebar from './layout-default'
 
+import PageHome from './page-home'
+import PageMemberList from './page-member-list'
+import PageMemberShow from './page-member-show'
+import PageProjectList from './page-project-list'
+import PageProjectShow from './page-project-show'
+import PageTaskCreate from './page-task-create'
+import PageTeamList from './page-team-list'
+import PageWeekList from './page-week-list'
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -6,6 +16,7 @@
  */
 
 require('./bootstrap');
+require('./functions');
 
 window.Vue = require('vue');
 window.Validation = require('./plugins/validation').default
@@ -37,3 +48,18 @@ const root = new Vue({
 })
 
 window.root = root
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  LayoutDefault.loaded()
+  LayoutSidebar.loaded()
+
+  PageHome.loaded()
+  PageMemberList.loaded()
+  PageMemberShow.loaded()
+  PageProjectList.loaded()
+  PageProjectShow.loaded()
+  PageTaskCreate.loaded()
+  PageTeamList.loaded()
+  PageWeekList.loaded()
+})

@@ -1,5 +1,5 @@
 // GOLBAL FUNCTION
-function findTasks() {
+window.findTasks = function() {
 
   let page = document.querySelector('.page-task-create')
 
@@ -25,4 +25,16 @@ function findTasks() {
     root.tasks_create.value = value
     root.tasks_create.tasks = response.data
   })
+}
+
+// ACTIVE NAVIBAR
+window.activeNaviItem = function(name) {
+
+  let naviItem = document.querySelector(`.navi-bar .navi .navi-item-${name}`)
+
+  if(naviItem === null) {
+    return
+  }
+
+  naviItem.classList.add('active')
 }

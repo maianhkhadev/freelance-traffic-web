@@ -68,53 +68,36 @@
 
     <div class="page-content">
       <div class="container">
-        <div class="row">
-          <div class="col-xl-6">
-            <div class="block-table block-mini-table-members">
-              <div class="block-header">
-                <span class="block-title">
-                  Member
-                </span>
-                <span class="block-title">
-                  Total Value
-                </span>
-              </div>
-              <div class="block-content">
-                @foreach ($members as $member)
-                <div class="block-record">
-                  <span class="block-cell">{{ $member->name }}</span>
-                  <span class="block-cell flex-center">{{ $member->value }}</span>
+        <div class="block-filter">
+          <fieldset>
+            <legend>Filter:</legend>
+            <div class="row">
+              <div class="col-xl-3">
+                <div class="form-group">
+                  <label>Choose a week:</label>
+                  <select class="select-week">
+                    <option value="none" selected>Show All</option>
+                    @foreach ($weeks as $week)
+                    <option value="{{ $week->id }}">{{ $week->name }}</option>
+                    @endforeach
+                  </select>
                 </div>
-                @endforeach
+              </div>
+              <div class="col-xl-3">
+                <div class="form-group">
+                  <label>Choose a member:</label>
+                  <select class="select-member">
+                    <option value="none" selected>Show All</option>
+                    @foreach ($members as $member)
+                    <option value="{{ $member->id }}">{{ $member->name }}</option>
+                    @endforeach
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-xl-6">
-            <div class="block-table block-mini-table-weeks">
-              <div class="block-header">
-                <span class="block-title">
-                  Week
-                </span>
-                <span class="block-title">
-                  Total Value
-                </span>
-              </div>
-              <div class="block-content">
-                @foreach ($weeks as $week)
-                <div class="block-record">
-                  <span class="block-cell">{{ $week->name }}</span>
-                  <span class="block-cell flex-center">{{ $week->value }}</span>
-                </div>
-                @endforeach
-              </div>
-            </div>
-          </div>
+          </fieldset>
         </div>
-      </div>
-    </div>
-
-    <div class="page-content">
-      <div class="container">
+        
         <div class="block-table block-table-tasks">
           <div class="block-header">
             <span class="block-title">
@@ -135,7 +118,7 @@
           </div>
           <div class="block-content">
             @foreach ($project->tasks as $task)
-            <div class="block-record">
+            <div class="block-record member-{{ $task->member_id }} week-{{ $task->week_id }} task-{{ $task->id }}">
               <span class="block-cell">{{ $task->week->name }}</span>
               <span class="block-cell">{{ $task->name }}</span>
               <span class="block-cell">{{ $task->member->name }}</span>

@@ -48,7 +48,8 @@ class ProjectController extends Controller
             $member->name = $task->member->name;
             $member->value = $task->value;
             array_push($members, $member);
-          } else {
+          }
+          else {
             $members[$index]->value += $task->value;
           }
 
@@ -59,7 +60,8 @@ class ProjectController extends Controller
             $week->name = $task->week->name;
             $week->value = $task->value;
             array_push($weeks, $week);
-          } else {
+          }
+          else {
             $weeks[$index]->value += $task->value;
           }
         }

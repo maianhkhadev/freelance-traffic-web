@@ -32801,6 +32801,32 @@ document.addEventListener('DOMContentLoaded', function () {
     addEventForNoteLink();
 
     self.renderChart('chart', window.weeks);
+
+    $('select').selectize({
+      onChange: function onChange(value) {
+
+        var weekId = document.querySelector('.select-week').value;
+        var memberId = document.querySelector('.select-member').value;
+
+        var blocks = document.querySelectorAll('.block-record');
+
+        if (memberId === 'none' || weekId === 'none') {
+          blocks.forEach(function (block) {
+            block.classList.remove('hidden');
+          });
+        }
+
+        blocks.forEach(function (block) {
+          if (memberId !== 'none' && block.classList.contains('member-' + memberId)) {
+            block.classList.remove('hidden');
+          } else if (weekId !== 'none' && block.classList.contains('week-' + weekId)) {
+            block.classList.remove('hidden');
+          } else {
+            block.classList.add('hidden');
+          }
+        });
+      }
+    });
   }
 });
 

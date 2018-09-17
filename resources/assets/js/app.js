@@ -41,6 +41,7 @@ const root = new Vue({
   data () {
     return {
       name: 'maianhkha',
+      isSearch: false,
       projects: [],
       weeks: [],
       members: [],

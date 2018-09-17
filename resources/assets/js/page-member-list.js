@@ -10,17 +10,25 @@ export default {
 
     activeNaviItem('member')
 
+    root.isSearch = false
+
     let input = document.querySelector('.block-search input')
     input.addEventListener('change', function(event) {
 
-      axios.get('/api/members-search', {
-        params: {
-          name: event.target.value
-        }
-      }).then(res => {
-        console.log(res)
-        root.members = res.data
-      })
+      if(event.target.value === '') {
+        root.isSearch = false
+      }
+      else {
+        root.isSearch = true
+        axios.get('/api/members-search', {
+          params: {
+            name: event.target.value
+          }
+        }).then(res => {
+          console.log(res)
+          root.members = res.data
+        })
+      }
     })
   }
 }

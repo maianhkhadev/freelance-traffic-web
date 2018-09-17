@@ -36,7 +36,7 @@
               <a class="btn btn-dark" href="{{ route('members.create') }}">
                 <img class="icon" src="/images/blocks/block-table-actions/icon-export.png" alt=""/>
               </a>
-              <a class="btn btn-dark" href="{{ route('members.create') }}">
+              <a class="btn btn-dark" href="{{ route('histories.index', ['table_name' => 'Member']) }}">
                 <img class="icon" src="/images/blocks/block-table-actions/icon-history.png" alt=""/>
               </a>
             </div>
@@ -49,7 +49,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-12">
-            <div class="block-table">
+            <div class="block-table" v-if="isSearch === false">
               <div class="block-header">
                 <span class="block-title">
                   Name
@@ -69,26 +69,36 @@
                   <block-record-member :data="{{ $member }}"></block-record-member>
                 @endforeach
               </div>
+              <div class="block-footer">
+                Showing 1 to 17 of 17 entries
 
+                {{ $members->links('vendor.pagination.default') }}
+              </div>
+            </div>
+
+            <div class="block-table" v-else>
+              <div class="block-header">
+                <span class="block-title">
+                  Name
+                </span>
+                <span class="block-title">
+                  Email
+                </span>
+                <span class="block-title">
+                  Status
+                </span>
+                <span class="block-title">
+                  Actions
+                </span>
+              </div>
               <div class="block-content">
                 <template v-for="member in members">
                   <block-record-member :data="member"></block-record-member>
                 </template>
+
+                <div class="not-found" v-if="members.length === 0">No data found</div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="page-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-6 align-self-center">
-            Showing 1 to 17 of 17 entries
-          </div>
-          <div class="col-xl-6">
-            {{ $members->links('vendor.pagination.default') }}
           </div>
         </div>
       </div>

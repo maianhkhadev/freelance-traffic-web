@@ -10,17 +10,25 @@ export default {
 
     activeNaviItem('week')
 
+    root.isSearch = false
+
     let input = document.querySelector('.block-search input')
     input.addEventListener('change', function(event) {
 
-      axios.get('/api/weeks-search', {
-        params: {
-          name: event.target.value
-        }
-      }).then(res => {
-        console.log(res)
-        root.weeks = res.data
-      })
+      if(event.target.value === '') {
+        root.isSearch = false
+      }
+      else {
+        root.isSearch = true
+        axios.get('/api/weeks-search', {
+          params: {
+            name: event.target.value
+          }
+        }).then(res => {
+          console.log(res)
+          root.weeks = res.data
+        })
+      }
     })
   }
 }

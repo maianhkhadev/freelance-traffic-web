@@ -140,7 +140,9 @@
               <span class="block-cell">{{ $task->name }}</span>
               <span class="block-cell">{{ $task->member->name }}</span>
               <span class="block-cell flex-center">{{ $task->value }}</span>
-              <span class="block-cell">Note</span>
+              <span class="block-cell">
+                <a class="note-link" href="#" data-note="{{ $task->note }}">Note</a>
+              </span>
             </div>
             @endforeach
           </div>

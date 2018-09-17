@@ -93,7 +93,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return redirect()->route('projects.show', $project);
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -124,6 +124,6 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return redirect()->route('projects.show', $project);
+        return redirect()->route('projects.index');
     }
 }

@@ -18,8 +18,10 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
+Route::resource('names', 'NameController');
 Route::resource('teams', 'TeamController');
 Route::resource('members', 'MemberController');
 Route::resource('projects', 'ProjectController');
 Route::resource('weeks', 'WeekController');
 Route::resource('tasks', 'TaskController');
+Route::resource('histories', 'HistoryController');

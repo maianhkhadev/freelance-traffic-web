@@ -9716,10 +9716,6 @@ a:hover {
   padding-bottom: 0.75rem;
 }
 
-.page-list .page-footer {
-  margin-top: 1.25rem;
-}
-
 .page-project-list .page-content .block-table .block-header,
 .page-week-list .page-content .block-table .block-header,
 .page-member-list .page-content .block-table .block-header {
@@ -10236,6 +10232,25 @@ a:hover {
   margin-left: 0.75rem;
 }
 
+.block-table .block-content .not-found {
+  color: #969696;
+  background-color: #ffffff;
+  font-size: 1rem;
+  text-align: center;
+  -webkit-box-shadow: 0 0.25rem 1rem 0 rgba(0, 0, 0, 0.05);
+          box-shadow: 0 0.25rem 1rem 0 rgba(0, 0, 0, 0.05);
+  padding: 1.5rem 1.25rem;
+}
+
+.block-table .block-footer {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 2rem;
+}
+
 .block-table .avatar-name {
   display: inline-block;
   width: 3rem;
@@ -10256,6 +10271,32 @@ a:hover {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.block-table-histories .block-header {
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.block-table-histories .block-content {
+  max-height: 30rem;
+  overflow-y: auto;
+}
+
+.block-table-histories .block-content .block-record {
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.block-table-names .block-header {
+  grid-template-columns: 50% 37.5% 12.5%;
+}
+
+.block-table-names .block-content {
+  max-height: 30rem;
+  overflow-y: auto;
+}
+
+.block-table-names .block-content .block-record {
+  grid-template-columns: 50% 37.5% 12.5%;
 }
 
 .block-mini-table-members .block-header {

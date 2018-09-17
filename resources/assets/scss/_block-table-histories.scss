@@ -1,0 +1,15 @@
+.block-table-histories {
+
+  .block-header {
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+
+  .block-content {
+    max-height: 30rem;
+    overflow-y: auto;
+
+    .block-record {
+      grid-template-columns: 25% 25% 25% 25%;
+    }
+  }
+}

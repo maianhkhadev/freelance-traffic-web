@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Name;
 use App\Project;
 use App\Week;
 use App\Member;
@@ -18,10 +19,12 @@ class TaskController extends Controller
      */
     public function create()
     {
+        $names = Name::where('table_name', 'Task')->get();
         $projects = Project::where('closed', 0)->get();
         $weeks = Week::where('closed', 0)->get();
         $members = Member::where('disabled', 0)->get();
-        return view('tasks.create', ['projects' => $projects, 'weeks' => $weeks, 'members' => $members]);
+
+        return view('tasks.create', ['names' => $names, 'projects' => $projects, 'weeks' => $weeks, 'members' => $members]);
     }
 
     /**

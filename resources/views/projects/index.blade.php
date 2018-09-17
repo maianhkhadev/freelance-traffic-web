@@ -1,9 +1,5 @@
 @extends('layouts.default')
 
-@section('stylesheet')
-
-@endsection
-
 @section('content')
   <div class="page page-list page-project page-project-list">
 
@@ -36,7 +32,7 @@
               <a class="btn btn-dark" href="{{ route('projects.create') }}">
                 <img class="icon" src="/images/blocks/block-table-actions/icon-export.png" alt=""/>
               </a>
-              <a class="btn btn-dark" href="{{ route('projects.create') }}">
+              <a class="btn btn-dark" href="{{ route('histories.index', ['table_name' => 'Task']) }}">
                 <img class="icon" src="/images/blocks/block-table-actions/icon-history.png" alt=""/>
               </a>
             </div>
@@ -49,7 +45,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-12">
-            <div class="block-table">
+            <div class="block-table" v-if="isSearch === false">
               <div class="block-header">
                 <span class="block-title">
                   Name
@@ -69,31 +65,36 @@
                   <block-record-project :data="{{ $project }}"></block-record-project>
                 @endforeach
               </div>
+              <div class="block-footer">
+                Showing 1 to 17 of 17 entries
 
-              <div class="block-content" >
-
-                <div v-if="projects.length">
-                  <template v-for="project in projects">
-                    <block-record-project :data="project"></block-record-project>
-                  </template>
-                </div>
-
-                <div class="no-records" v-else>I don't have any records!</div>
+                {{ $projects->links('vendor.pagination.default') }}
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="page-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-6 align-self-center">
-            Showing 1 to 17 of 17 entries
-          </div>
-          <div class="col-xl-6">
-            {{ $projects->links('vendor.pagination.default') }}
+            <div class="block-table" v-else>
+              <div class="block-header">
+                <span class="block-title">
+                  Name
+                </span>
+                <span class="block-title">
+                  Description
+                </span>
+                <span class="block-title">
+                  Status
+                </span>
+                <span class="block-title">
+                  Actions
+                </span>
+              </div>
+              <div class="block-content">
+                <template v-for="project in projects">
+                  <block-record-project :data="project"></block-record-project>
+                </template>
+
+                <div class="not-found" v-if="projects.length === 0">No data found</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

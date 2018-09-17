@@ -92,6 +92,9 @@
 
                     <ul class="sub-navi">
                       <li class="sub-navi-item">
+                        <a class="sub-navi-link" href="{{ route('names.index', ['table_name' => 'Task']) }}">Names Of Task</a>
+                      </li>
+                      <li class="sub-navi-item">
                         <a class="sub-navi-link" href="#">Change password</a>
                       </li>
                       <li class="sub-navi-item">

@@ -80,7 +80,7 @@ class WeekController extends Controller
 
         $week->save();
 
-        return redirect()->route('weeks.show', $week);
+        return redirect()->route('weeks.index');
     }
 
     /**
@@ -110,6 +110,6 @@ class WeekController extends Controller
 
         $week->save();
 
-        return redirect()->route('weeks.show', $week);
+        return redirect()->route('weeks.index');
     }
 }

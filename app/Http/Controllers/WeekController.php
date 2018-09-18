@@ -27,7 +27,7 @@ class WeekController extends Controller
      */
     public function index()
     {
-        $weeks = Week::orderBy('created_at', 'ASC')->paginate(10);
+        $weeks = Week::orderBy('updated_at', 'DESC')->paginate(10);
         return view('weeks.index', ['weeks' => $weeks]);
     }
 
@@ -76,6 +76,7 @@ class WeekController extends Controller
         $week = new Week();
 
         $week->name = $request->input('name');
+        $week->date_range = $request->input('date_range');
         $week->closed = false;
 
         $week->save();
@@ -106,6 +107,7 @@ class WeekController extends Controller
         $week = Week::find($id);
 
         $week->name = $request->input('name');
+        $week->date_range = $request->input('date_range');
         $week->closed = $request->input('closed') === 'on' ? true : false;
 
         $week->save();

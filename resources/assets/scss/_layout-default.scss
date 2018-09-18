@@ -213,12 +213,29 @@
         }
       }
 
-      .has-sub:hover {
+      .navi .has-sub {
 
-        .sub-navi {
-          max-height: 100vh;
-          box-shadow: 0 0.25rem 0.5rem rgba(#000000, 0.1);
-          padding: 0.5rem 0;
+        .navi-link {
+          padding-right: 2.5rem;
+
+          &::after {
+            content: '\25BE';
+            position: absolute;
+            top: calc(50% - 0.25rem);
+            right: 1rem;
+            transform: translate(50%, -50%);
+            font-size: 1rem;
+            line-height: 1;
+          }
+        }
+
+        &:hover {
+
+          .sub-navi {
+            max-height: 100vh;
+            box-shadow: 0 0.25rem 0.5rem rgba(#000000, 0.1);
+            padding: 0.5rem 0;
+          }
         }
       }
     }

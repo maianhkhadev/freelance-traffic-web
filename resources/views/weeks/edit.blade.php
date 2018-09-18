@@ -26,9 +26,9 @@
           <input name="name" type="text" class="form-control" placeholder="Enter name..." value="{{ $week->name }}" autocomplete="off">
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-date-range">
           <label>From { Date } to { Date }</label>
-          <input name="range" type="text" class="form-control" placeholder="Enter name..." autocomplete="off">
+          <input name="date_range" type="text" class="form-control" placeholder="Select Dates..." value="{{ $week->date_range }}" readonly="readonly">
         </div>
 
         <div class="form-group form-check">

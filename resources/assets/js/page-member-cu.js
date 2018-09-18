@@ -24,6 +24,6 @@ export default {
       }
     }
 
-    window.Validation('.member-validation form', rules)
+    window.Validation('form', rules)
   }
 }

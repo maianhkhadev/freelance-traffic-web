@@ -28,7 +28,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = Member::orderBy('created_at', 'DESC')->paginate(10);
+        $members = Member::orderBy('updated_at', 'DESC')->paginate(10);
         return view('members.index', ['members' => $members]);
     }
 
@@ -78,6 +78,7 @@ class MemberController extends Controller
         $member->name = $request->input('name');
         $member->email = $request->input('email');
         $member->team_id = $request->input('team_id');
+        $member->color = $request->input('color');
         $member->disabled = false;
 
         $member->save();
@@ -92,9 +93,9 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        $member = Member::find($id);
         $teams = Team::all();
-        return view('members.edit', ['member' => $member, 'teams' => $teams]);
+        $member = Member::find($id);
+        return view('members.edit', ['teams' => $teams, 'member' => $member]);
     }
 
     /**
@@ -110,6 +111,7 @@ class MemberController extends Controller
 
         $member->name = $request->input('name');
         $member->email = $request->input('email');
+        $member->color = $request->input('color');
         $member->disabled = $request->input('disabled') === 'on' ? true : false;
 
         $member->save();

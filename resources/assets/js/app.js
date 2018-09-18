@@ -24,7 +24,8 @@ require('./bootstrap');
 require('./functions');
 
 window.Vue = require('vue');
-window.Validation = require('./plugins/validation').default
+window.flatpickr = require('flatpickr');
+window.Validation = require('./plugins/validation').default;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -32,9 +33,11 @@ window.Validation = require('./plugins/validation').default
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('avatar-name', require('./components/avatar-name.vue'));
 Vue.component('block-record-project', require('./components/block-record-project.vue'));
 Vue.component('block-record-week', require('./components/block-record-week.vue'));
 Vue.component('block-record-member', require('./components/block-record-member.vue'));
+Vue.component('time-from-now', require('./components/time-from-now.vue'));
 
 const root = new Vue({
   el: '#root',

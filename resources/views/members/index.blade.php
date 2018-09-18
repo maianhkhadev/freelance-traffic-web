@@ -49,7 +49,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-12">
-            <div class="block-table" v-if="isSearch === false">
+            <div class="block-table block-table-members" v-if="isSearch === false">
               <div class="block-header">
                 <span class="block-title">
                   Name
@@ -59,6 +59,9 @@
                 </span>
                 <span class="block-title">
                   Status
+                </span>
+                <span class="block-title flex-center">
+                  Update At
                 </span>
                 <span class="block-title">
                   Actions
@@ -68,15 +71,19 @@
                 @foreach ($members as $member)
                   <block-record-member :data="{{ $member }}"></block-record-member>
                 @endforeach
+
+                @if (count($members) === 0)
+                  <div class="not-found">No data found</div>
+                @endif
               </div>
               <div class="block-footer">
-                Showing 1 to 17 of 17 entries
+                Showing {{ $members->firstItem() }} to {{ $members->lastItem() }} of {{ $members->total() }} entries
 
                 {{ $members->links('vendor.pagination.default') }}
               </div>
             </div>
 
-            <div class="block-table" v-else>
+            <div class="block-table block-table-members" v-else>
               <div class="block-header">
                 <span class="block-title">
                   Name
@@ -86,6 +93,9 @@
                 </span>
                 <span class="block-title">
                   Status
+                </span>
+                <span class="block-title flex-center">
+                  Update At
                 </span>
                 <span class="block-title">
                   Actions

@@ -5,17 +5,13 @@
 
     <div class="page-header">
       <div class="container">
-        <div class="row">
-          <div class="col-xl-12">
-            <div class="title">Overview Week {{ $week->name }}</div>
-            <div class="breadcumb">
-              <ul>
-                <li><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="{{ route('weeks.index') }}">Weeks</a></li>
-                <li><a href="">Overview</a></li>
-              </ul>
-            </div>
-          </div>
+        <div class="title">Overview Week {{ $week->name }}</div>
+        <div class="block-breadcrumb">
+          <ul>
+            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('weeks.index') }}">Weeks</a></li>
+            <li><a href="">Overview</a></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -24,19 +20,19 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-6">
-            <div class="form-group">
+            <div class="form-view">
               <label>Name</label>
               <div>{{ $week->name }}</div>
             </div>
           </div>
           <div class="col-xl-6">
-            <div class="form-group">
+            <div class="form-view">
               <label>Data</label>
               <div><b>{{ count($projects) }}</b> Projects - <b>{{ count($week->tasks) }}</b> Tasks - <b>{{ count($members) }}</b> Members</div>
             </div>
           </div>
           <div class="col-xl-6">
-            <div class="form-group">
+            <div class="form-view">
               <label>Status</label>
               <div>
                 @if ($week->closed === 0)
@@ -180,44 +176,12 @@
       })
     @endforeach
 
-    let colors = [
-      'rgb(217, 255, 102)',
-      'rgb(140, 255, 102)',
-      'rgb(102, 255, 140)',
-      'rgb(102, 255, 217)',
-      'rgb(102, 217, 255)',
-      'rgb(255, 140, 102)',
-      'rgb(255, 217, 102)',
-      'rgb(102, 140, 255)',
-      'rgb(140, 102, 255)',
-      'rgb(179, 102, 255)',
-      'rgb(255, 102, 255)',
-      'rgb(255, 102, 179)',
-      'rgb(255, 102, 102)',
-      'rgb(255, 179, 102)',
-      'rgb(255, 255, 102)',
-      'rgb(179, 255, 102)',
-      'rgb(140, 255, 102)',
-      'rgb(102, 255, 102)',
-      'rgb(102, 255, 179)',
-      'rgb(102, 255, 255)',
-      'rgb(102, 179, 255)',
-      'rgb(102, 102, 255)',
-      'rgb(153, 102, 255)',
-      'rgb(217, 102, 255)',
-      'rgb(255, 102, 217)',
-      'rgb(255, 102, 140)',
-      'rgb(255, 140, 102)',
-      'rgb(255, 217, 102)',
-      'rgb(255, 102, 102)'
-    ]
-
     window.projects = []
     @foreach ($projects as $project)
       window.projects.push({
         id: {{ $project->id }},
         name: '{{ $project->name }}',
-        color: colors[{{ $project->id }}]
+        color: '{{ $project->color }}'
       })
     @endforeach
 
@@ -226,7 +190,7 @@
       window.members.push({
         id: {{ $member->id }},
         name: '{{ $member->name }}',
-        color: colors[{{ $member->id }}]
+        color: '{{ $member->color }}'
       })
     @endforeach
   </script>

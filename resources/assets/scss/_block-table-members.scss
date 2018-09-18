@@ -1,0 +1,13 @@
+.block-table-members {
+
+  .block-header {
+    grid-template-columns: 25% calc(75% - 27.5rem) 7.5rem 10rem 10rem;
+  }
+
+  .block-content {
+
+    .block-record {
+      grid-template-columns: 25% calc(75% - 27.5rem) 7.5rem 10rem 10rem;
+    }
+  }
+}

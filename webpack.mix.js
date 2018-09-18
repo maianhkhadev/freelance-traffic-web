@@ -29,6 +29,7 @@ mix.webpackConfig({
 mix.styles([
   'node_modules/selectize/dist/css/selectize.css',
   // 'node_modules/selectize/dist/css/selectize.default.css',
+  'node_modules/flatpickr/dist/flatpickr.min.css'
 ], 'public/css/vendor.css');
 
 mix.sass('resources/assets/scss/app.scss', 'public/css');

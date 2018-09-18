@@ -56,7 +56,7 @@
                 @endforeach
               </div>
               <div class="block-footer">
-                Showing 1 to 17 of 17 entries
+                Showing {{ $names->firstItem() }} to {{ $names->lastItem() }} of {{ $names->total() }} entries
 
                 {{ $names->links('vendor.pagination.default') }}
               </div>

@@ -5,17 +5,13 @@
 
     <div class="page-header">
       <div class="container">
-        <div class="row">
-          <div class="col-xl-12">
-            <div class="title">Overview Project {{ $project->name }}</div>
-            <div class="breadcumb">
-              <ul>
-                <li><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="{{ route('projects.index') }}">Projects</a></li>
-                <li><a href="">Overview</a></li>
-              </ul>
-            </div>
-          </div>
+        <div class="title">Overview Project {{ $project->name }}</div>
+        <div class="block-breadcrumb">
+          <ul>
+            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('projects.index') }}">Projects</a></li>
+            <li><a href="">Overview</a></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -24,19 +20,19 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-6">
-            <div class="form-group">
+            <div class="form-view">
               <label>Name</label>
               <div>{{ $project->name }}</div>
             </div>
           </div>
           <div class="col-xl-6">
-            <div class="form-group">
+            <div class="form-view">
               <label>Data</label>
               <div><b>{{ count($weeks) }}</b> Weeks - <b>{{ count($project->tasks) }}</b> Tasks - <b>{{ count($members) }}</b> Members</div>
             </div>
           </div>
           <div class="col-xl-6">
-            <div class="form-group">
+            <div class="form-view">
               <label>Status</label>
               <div>
                 @if ($project->closed === 0)
@@ -97,7 +93,7 @@
             </div>
           </fieldset>
         </div>
-        
+
         <div class="block-table block-table-tasks">
           <div class="block-header">
             <span class="block-title">
@@ -140,6 +136,8 @@
 
 @section('javascript')
   <script>
+    window.projectColor = '{{ $project->color }}'
+
     window.weeks = []
     @foreach ($weeks as $week)
       window.weeks.push({

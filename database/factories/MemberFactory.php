@@ -9,6 +9,7 @@ $factory->define(App\Member::class, function (Faker $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'team_id' => $faker->randomElement($teams),
+        'color' => $faker->hexcolor,
         'disabled' => false
     ];
 });

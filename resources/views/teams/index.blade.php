@@ -23,7 +23,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-12">
-            <div class="block-table">
+            <div class="block-table block-table-teams">
               <div class="block-header">
                 <span class="block-title">
                   Team
@@ -32,39 +32,32 @@
                   Leader
                 </span>
                 <span class="block-title">
-                  Members
+                  Active Members
                 </span>
               </div>
+
               <div class="block-content">
                 @foreach ($teams as $team)
                 <div class="block-record">
                   <span class="block-cell">{{ $team->name }}</span>
                   <span class="block-cell">Admin</span>
                   <span class="block-cell">
-                    <span class="avatar-name">HL</span>
-                    <span class="avatar-name">HL</span>
-                    <span class="avatar-name">HL</span>
-                    <span class="avatar-name">HL</span>
-                    <span class="avatar-name">HL</span>
-                    <span class="avatar-name">HL</span>
+                    @foreach ($team->members as $member)
+                      @if ($member->disabled === 0)
+                        <avatar-name :data="{{ $member }}"></avatar-name>
+                      @endif
+                    @endforeach
                   </span>
                 </div>
                 @endforeach
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="page-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-6 align-self-center">
-            Showing 1 to 17 of 17 entries
-          </div>
-          <div class="col-xl-6">
-            {{ $teams->links('vendor.pagination.default') }}
+              <div class="block-footer">
+                Showing {{ $teams->firstItem() }} to {{ $teams->lastItem() }} of {{ $teams->total() }} entries
+
+                {{ $teams->links('vendor.pagination.default') }}
+              </div>
+            </div>
           </div>
         </div>
       </div>

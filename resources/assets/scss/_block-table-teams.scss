@@ -1,0 +1,20 @@
+.block-table-teams {
+
+  .block-header {
+    grid-template-columns: 25% 25% 50%;
+  }
+
+  .block-content {
+
+    .block-record {
+      grid-template-columns: 25% 25% 50%;
+
+      .block-cell:last-child {
+
+        .avatar-name {
+          margin-right: -0.75rem;
+        }
+      }
+    }
+  }
+}

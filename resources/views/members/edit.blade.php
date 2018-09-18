@@ -42,7 +42,7 @@
 
         <div class="form-group form-color">
           <label>Pick a color for this member</label>
-          <input name="color" type="color" class="form-control" autocomplete="off">
+          <input name="color" type="color" class="form-control" value="{{ $member->color }}" autocomplete="off">
           <small class="text-muted">It's used to display on the graph</small>
         </div>
 

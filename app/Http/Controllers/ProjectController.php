@@ -24,7 +24,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::orderBy('created_at', 'ASC')->paginate(10);
+        $projects = Project::orderBy('updated_at', 'DESC')->paginate(10);
         return view('projects.index', ['projects' => $projects]);
     }
 
@@ -122,6 +122,7 @@ class ProjectController extends Controller
         $project = Project::find($id);
 
         $project->name = $request->input('name');
+        $project->color = $request->input('color');
         $project->closed = $request->input('closed') === 'on' ? true : false;
 
         $project->save();

@@ -2,6 +2,7 @@
 
 @section('content')
   <div class="page page-show page-member page-member-show">
+
     <div class="page-header">
       <div class="container">
         <div class="title">Overview the Member</div>
@@ -14,6 +15,7 @@
         </div>
       </div>
     </div>
+
     <div class="page-content">
       <div class="container">
         <div class="row">
@@ -32,7 +34,7 @@
           <div class="col-xl-6">
             <div class="form-view">
               <label>Team</label>
-              <a href="{{ route('teams.show', ['id' => $member->team->id]) }}">{{ $member->team->name }}</a>
+              <div>{{ $member->team->name }}</div>
             </div>
           </div>
           <div class="col-xl-6">

@@ -49,7 +49,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-12">
-            <div class="block-table" v-if="isSearch === false">
+            <div class="block-table block-table-weeks" v-if="isSearch === false">
               <div class="block-header">
                 <span class="block-title">
                   Week
@@ -59,6 +59,9 @@
                 </span>
                 <span class="block-title">
                   Status
+                </span>
+                <span class="block-title flex-center">
+                  Update At
                 </span>
                 <span class="block-title">
                   Actions
@@ -69,16 +72,20 @@
                 @foreach ($weeks as $week)
                   <block-record-week :data="{{ $week }}"></block-record-week>
                 @endforeach
+
+                @if (count($weeks) === 0)
+                  <div class="not-found">No data found</div>
+                @endif
               </div>
 
               <div class="block-footer">
-                Showing 1 to 17 of 17 entries
+                Showing {{ $weeks->firstItem() }} to {{ $weeks->lastItem() }} of {{ $weeks->total() }} entries
 
                 {{ $weeks->links('vendor.pagination.default') }}
               </div>
             </div>
 
-            <div class="block-table" v-else>
+            <div class="block-table block-table-weeks" v-else>
               <div class="block-header">
                 <span class="block-title">
                   Week
@@ -88,6 +95,9 @@
                 </span>
                 <span class="block-title">
                   Status
+                </span>
+                <span class="block-title flex-center">
+                  Update At
                 </span>
                 <span class="block-title">
                   Actions

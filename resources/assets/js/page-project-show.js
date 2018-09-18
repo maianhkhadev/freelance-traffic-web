@@ -16,11 +16,8 @@ export default {
         labels: labels,
         datasets: [{
           data: values,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)'
-          ],
           borderColor: [
-            'rgba(255,99,132,1)'
+            window.projectColor
           ],
           borderWidth: 1
         }]

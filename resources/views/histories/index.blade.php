@@ -53,9 +53,13 @@
                     <span class="block-cell">{{ $history->created_at }}</span>
                   </div>
                 @endforeach
+
+                @if (count($histories) === 0)
+                  <div class="not-found">No data found</div>
+                @endif
               </div>
               <div class="block-footer">
-                Showing 1 to 17 of 17 entries
+                Showing {{ $histories->firstItem() }} to {{ $histories->lastItem() }} of {{ $histories->total() }} entries
 
                 {{ $histories->links('vendor.pagination.default') }}
               </div>

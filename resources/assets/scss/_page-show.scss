@@ -1,49 +1,13 @@
 .page-show  {
 
   .page-header {
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
+    margin-bottom: 2rem;
 
     .title {
       color: #000000;
       font-size: 2rem;
       font-weight: 700;
-    }
-    .breadcumb {
-
-      ul {
-        list-style-type: none;
-        -webkit-padding-start: unset;
-        margin-bottom: unset;
-
-        li {
-          display: inline-block;
-
-          a {
-            color: #787868;
-            font-size: 1rem;
-
-            &:hover {
-              color: #000000;
-              text-decoration: unset;
-            }
-          }
-
-          &::after {
-            content: "-";
-            color: #787868;
-            padding-left: 0.75rem;
-            padding-right: 0.5rem;
-          }
-
-          &:last-child {
-
-            &::after {
-              content: unset;
-            }
-          }
-        }
-      }
+      margin-bottom: 0.25rem;
     }
   }
 
@@ -72,16 +36,24 @@
       padding-bottom: 0.5rem;
       // margin-bottom: 0.75rem;
 
-      &.member {
-        padding-left: 3.5rem;
-      }
-
       .form-check-input {
         margin-top: 0.25rem;
         margin-left: -1.75rem;
       }
+
       .form-check-label {
 
+      }
+
+      &.team {
+
+        .form-check-label {
+          font-weight: 700;
+        }
+      }
+
+      &.member {
+        padding-left: 3.5rem;
       }
     }
   }

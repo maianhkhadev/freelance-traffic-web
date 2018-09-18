@@ -27,26 +27,6 @@
   }
 }
 
-.page-project-list, .page-week-list, .page-member-list {
-
-  .page-content {
-
-    .block-table {
-
-      .block-header {
-        grid-template-columns: 30% calc(70% - 20rem) 7.5rem 12.5rem;
-      }
-
-      .block-content {
-
-        .block-record {
-          grid-template-columns: 30% calc(70% - 20rem) 7.5rem 12.5rem;
-        }
-      }
-    }
-  }
-}
-
 .page-team-list {
 
   .page-header {
@@ -55,18 +35,5 @@
 
   .page-content {
 
-    .block-table {
-
-      .block-header {
-        grid-template-columns: 30% 25% 45%;
-      }
-
-      .block-content {
-
-        .block-record {
-          grid-template-columns: 30% 25% 45%;
-        }
-      }
-    }
   }
 }

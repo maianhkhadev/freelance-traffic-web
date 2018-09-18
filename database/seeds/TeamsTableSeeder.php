@@ -11,6 +11,6 @@ class TeamsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Team::class, 4)->create();
+        factory(App\Team::class, 3)->create();
     }
 }

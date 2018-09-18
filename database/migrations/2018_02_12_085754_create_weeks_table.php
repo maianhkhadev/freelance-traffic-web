@@ -16,6 +16,7 @@ class CreateWeeksTable extends Migration
         Schema::create('weeks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('date_range');
             $table->boolean('closed');
             $table->timestamps();
         });

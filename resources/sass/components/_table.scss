@@ -1,0 +1,155 @@
+.table {
+
+  .table-header {
+    display: grid;
+    padding: 1.5rem 1.25rem;
+
+    .table-column-title {
+      display: flex;
+      align-items: center;
+      color: #555555;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+
+      &:first-child {
+        justify-content: flex-start;
+      }
+
+      &:last-child {
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  .table-content {
+
+    .table-row {
+      display: grid;
+      background-color: #ffffff;
+      box-shadow: 0 0.5rem 1rem 0 rgba(#000000, 0.05);
+      padding: 1.5rem 1.25rem;
+      margin-bottom: 0.75rem;
+
+      .table-cell {
+        display: flex;
+        align-items: center;
+        color: #555555;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+
+        &:first-child {
+          justify-content: flex-start;
+        }
+
+        &:last-child {
+          justify-content: flex-end;
+        }
+
+        .color {
+          width: 2.5rem;
+          height: 1rem;
+        }
+
+        a {
+          color: #555555;
+          font-size: 0.75rem;
+          font-weight: 500;
+          text-transform: uppercase;
+          margin-left: 0.75rem;
+
+          &:hover {
+            color: #000000;
+          }
+        }
+      }
+    }
+
+    .not-found {
+      color: #969696;
+      background-color: #ffffff;
+      font-size: 1rem;
+      text-align: center;
+      box-shadow: 0 0.25rem 1rem 0 rgba(#000000, 0.05);
+      padding: 1.5rem 1.25rem;
+    }
+  }
+
+  .table-footer {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    margin-top: 2rem;
+  }
+}
+
+.table-teams {
+
+  .table-header {
+    grid-template-columns: 3rem calc(100% - 23rem) 10rem 10rem;
+  }
+
+  .table-content {
+
+    .table-row {
+      grid-template-columns: 3rem calc(100% - 23rem) 10rem 10rem;
+    }
+  }
+}
+
+.table-members {
+
+  .table-header {
+    grid-template-columns: 3rem calc(50% - 11.5rem) calc(50% - 11.5rem) 10rem 10rem;
+  }
+
+  .table-content {
+
+    .table-row {
+      grid-template-columns: 3rem calc(50% - 11.5rem) calc(50% - 11.5rem) 10rem 10rem;
+    }
+  }
+}
+
+.table-projects {
+
+  .table-header {
+    grid-template-columns: 3rem calc(100% - 35rem) 6rem 6rem 10rem 10rem;
+  }
+
+  .table-content {
+
+    .table-row {
+      grid-template-columns: 3rem calc(100% - 35rem) 6rem 6rem 10rem 10rem;
+    }
+  }
+}
+
+.table-weeks {
+
+  .table-header {
+    grid-template-columns: 3rem calc(100% - 29rem) 6rem 10rem 10rem;
+  }
+
+  .table-content {
+
+    .table-row {
+      grid-template-columns: 3rem calc(100% - 29rem) 6rem 10rem 10rem;
+    }
+  }
+}
+
+.table-tasks {
+
+  .table-header {
+    grid-template-columns: 3rem calc(100% - 55rem) 10rem 10rem 6rem 6rem 10rem 10rem;
+  }
+
+  .table-content {
+
+    .table-row {
+      grid-template-columns: 3rem calc(100% - 55rem) 10rem 10rem 6rem 6rem 10rem 10rem;
+    }
+  }
+}

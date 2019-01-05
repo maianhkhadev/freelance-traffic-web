@@ -1,42 +1,34 @@
-@extends('layouts.fullscreen')
+@extends('layouts.blank')
 
 @section('content')
-  <div class="page page-edit page-week page-week-edit">
-
-    <a class="btn btn-dark btn-close" href="{{ route('weeks.index') }}">&#10005;</a>
-
+  <div class="page page-projects-create">
     <div class="page-header">
-      <h4>Edit Week's info</h4>
-      <div class="block-breadcrumb">
-        <ul>
-          <li><a href="{{ route('home') }}">Home</a></li>
-          <li><a href="{{ route('weeks.index') }}">Weeks</a></li>
-          <li><a href="">Edit</a></li>
-        </ul>
-      </div>
+      <h3 class="page-title">Create a Week</h3>
+
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('weeks.index') }}">List of Week</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Create</li>
+      </ol>
     </div>
 
     <div class="page-content">
-      <form class="block-form" action="/weeks/{{ $week->id }}" method="POST">
+      <form class="form" action="/weeks/{{ $week->id }}" enctype="multipart/form-data" method="POST">
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <div class="form-group">
-          <label>Name of Week</label>
-          <input name="name" type="text" class="form-control" placeholder="Enter name..." value="{{ $week->name }}" autocomplete="off">
+          <label>Name</label>
+          <input type="text" name="name" class="form-control" value="{{ $week->name }}" placeholder="Ex: Week 10 - 2018" autocomplete="off">
         </div>
 
-        <div class="form-group form-date-range">
-          <label>From { Date } to { Date }</label>
-          <input name="date_range" type="text" class="form-control" placeholder="Select Dates..." value="{{ $week->date_range }}" readonly="readonly">
+        <div class="form-group custom-control custom-checkbox">
+          <input type="checkbox" id="checkbox-closed" name="closed" class="custom-control-input" {{ $week->closed === false ? 'checked' : '' }}>
+          <label class="custom-control-label" for="checkbox-closed">Close this week?</label>
         </div>
 
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="checkbox-closed" name="closed" {{ $week->closed === 1 ? 'checked' : '' }}>
-          <label class="form-check-label" for="checkbox-closed">Close this week</label>
-        </div>
-
-        <button class="btn btn-dark">Save & Close</button>
+        <a class="btn btn-secondary" href="{{ route('weeks.index') }}">Cancel</a>
+        <button class="btn btn-gold">Save & Close</button>
       </form>
     </div>
   </div>

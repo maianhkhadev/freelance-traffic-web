@@ -1,58 +1,44 @@
-@extends('layouts.fullscreen')
+@extends('layouts.blank')
 
 @section('content')
-  <div class="page page-edit page-member page-member-edit">
-
-    <a class="btn btn-dark btn-close" href="{{ route('members.index') }}">&#10005;</a>
-
+  <div class="page page-members-edit">
     <div class="page-header">
-      <h4>Edit Member's info</h4>
-      <div class="block-breadcrumb">
-        <ul>
-          <li><a href="{{ route('home') }}">Home</a></li>
-          <li><a href="{{ route('members.index') }}">Members</a></li>
-          <li><a href="">Edit</a></li>
-        </ul>
-      </div>
+      <h3 class="page-title">Edit a Member</h3>
+
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('members.index') }}">List of Members</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+      </ol>
     </div>
 
     <div class="page-content">
-      <form class="block-form" action="/members/{{ $member->id }}" method="POST">
+      <form class="form" action="/members/{{ $member->id }}" enctype="multipart/form-data" method="POST">
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <div class="form-group">
-          <label>What's your name?</label>
-          <input name="name" type="text" class="form-control" placeholder="Enter name..." autocomplete="off" value="{{ $member->name }}">
-        </div>
-
-        <div class="form-group">
-          <label>Could you send me your email?</label>
-          <input name="email" type="text" class="form-control" placeholder="Enter email..." autocomplete="off" value="{{ $member->email }}">
-        </div>
-
-        <div class="form-group form-select">
-          <label>Choose Your Team</label>
-          <select name="team_id" class="">
+          <label>Team</label>
+          <select name="team_id" class="form-control">
             @foreach ($teams as $team)
-            <option value="{{ $team->id }}" @if ($team->id === $member->team_id) {{ 'selected' }} @endif>{{ $team->name }}</option>
+            <option value="{{ $team->id }}" {{ $member->team_id === $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
             @endforeach
           </select>
         </div>
 
-        <div class="form-group form-color">
-          <label>Pick a color for this member</label>
-          <input name="color" type="color" class="form-control" value="{{ $member->color }}" autocomplete="off">
-          <small class="text-muted">It's used to display on the graph</small>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" class="form-control" value="{{ $member->name }}" placeholder="Ex: Mai Anh Kha" autocomplete="off">
         </div>
 
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="checkbox-disabled" name="disabled" {{ $member->disabled === 1 ? 'checked' : '' }}>
-          <label class="form-check-label" for="checkbox-disabled">Disable this member</label>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" class="form-control" value="{{ $member->email }}" placeholder="Ex: maianhkha.dev@gmail.com" autocomplete="off">
         </div>
 
-        <button class="btn btn-dark">Save & Close</button>
-      </div>
+        <a class="btn btn-secondary" href="{{ route('members.index') }}">Cancel</a>
+        <button class="btn btn-gold">Save & Close</button>
+      </form>
     </div>
   </div>
 @endsection

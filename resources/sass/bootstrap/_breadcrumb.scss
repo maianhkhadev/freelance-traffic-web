@@ -1,0 +1,21 @@
+.breadcrumb {
+  background-color: unset;
+  padding: 0;
+  margin-bottom: unset;
+
+  .breadcrumb-item {
+    font-size: 0.75rem;
+
+    a {
+      color: #555555;
+
+      &:hover {
+        color: #000000;
+      }
+    }
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: '-';
+  }
+}

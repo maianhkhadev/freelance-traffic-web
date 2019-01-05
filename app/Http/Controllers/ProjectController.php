@@ -8,65 +8,22 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::orderBy('updated_at', 'DESC')->paginate(10);
-        return view('projects.index', ['projects' => $projects]);
-    }
+        $query = Project::orderBy('updated_at', 'DESC');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $project = Project::find($id);
-
-        $members = array();
-        $weeks = array();
-        foreach($project->tasks as $task) {
-          $index = array_search($task->member->id, array_column($members, 'id'));
-          if ($index === FALSE) {
-            $member = new \stdClass();
-            $member->id = $task->member->id;
-            $member->name = $task->member->name;
-            $member->value = $task->value;
-            array_push($members, $member);
-          }
-          else {
-            $members[$index]->value += $task->value;
-          }
-
-          $index = array_search($task->week->id, array_column($weeks, 'id'));
-          if ($index === FALSE) {
-            $week = new \stdClass();
-            $week->id = $task->week->id;
-            $week->name = $task->week->name;
-            $week->value = $task->value;
-            array_push($weeks, $week);
-          }
-          else {
-            $weeks[$index]->value += $task->value;
-          }
+        $search = $request->input('search');
+        if($search !== NULL) {
+            $query->where('name', 'like', '%'.$search.'%');
         }
 
-        return view('projects.show', ['project' => $project, 'weeks' => $weeks, 'members' => $members]);
+        $projects = $query->paginate(10);
+
+        return view('projects.index', ['projects' => $projects]);
     }
 
     /**
@@ -91,7 +48,6 @@ class ProjectController extends Controller
 
         $project->name = $request->input('name');
         $project->color = $request->input('color');
-        $project->closed = false;
 
         $project->save();
 
@@ -99,14 +55,24 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function show(Project $project)
     {
-        $project = Project::find($id);
+        return view('projects.show', ['project' => $project]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Project $project)
+    {
         return view('projects.edit', ['project' => $project]);
     }
 
@@ -114,19 +80,27 @@ class ProjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        $project = Project::find($id);
-
         $project->name = $request->input('name');
         $project->color = $request->input('color');
-        $project->closed = $request->input('closed') === 'on' ? true : false;
 
         $project->save();
 
         return redirect()->route('projects.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Project $project)
+    {
+        //
     }
 }

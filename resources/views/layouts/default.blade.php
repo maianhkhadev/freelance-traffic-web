@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
@@ -10,133 +9,88 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
     <!-- Styles -->
-    <link href="{{ asset('css/vendor.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @yield('stylesheet')
 </head>
 <body>
-    <div id="root" class="layout-default">
-      <header>
-        <div class="container">
-          <div class="row">
-            <div class="col-6">
-              <a class="navi-brand" href="{{ route('home') }}">Focus Asia</a>
-            </div>
-            <div class="col-6">
-              <div class="user">
-                <div class="name">{{ auth()->user()->name }}</div>
-                <a class="action" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                  Click to sign out
-                </a>
+    <div id="app" class="layout-default">
+      <nav class="navbar navbar-expand-xl navbar-light">
+          <div class="container">
+              <a class="navbar-brand" href="{{ url('/') }}">FOCUS ASIA</a>
 
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  {{ csrf_field() }}
-                </form>
-              </div>
-            </div>
-            <div class="col-xl-12">
-              <nav class="navi-bar">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
 
-                <ul class="navi">
-                  <li class="navi-item navi-item-task-create">
-                    <a class="navi-link" href="{{ route('tasks.create') }}">Create A New Task</a>
-                  </li>
-                  <li class="navi-item navi-item-project has-sub">
-                    <a class="navi-link">Projects</a>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <!-- Left Side Of Navbar -->
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('tasks.index') }}">Tasks</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('projects.index') }}">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('weeks.index') }}">Weeks</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('teams.index') }}">Teams</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('members.index') }}">Members</a>
+                    </li>
+                  </ul>
 
-                    <ul class="sub-navi">
-                      <li class="sub-navi-item">
-                        <a class="sub-navi-link" href="{{ route('projects.create') }}">Create a new Project</a>
+                  <!-- Right Side Of Navbar -->
+                  <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                       </li>
-                      <li class="sub-navi-item">
-                        <a class="sub-navi-link" href="{{ route('projects.index') }}">List of Project</a>
+                      <li class="nav-item">
+                        @if (Route::has('register'))
+                          <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        @endif
                       </li>
-                    </ul>
-                  </li>
-                  <li class="navi-item navi-item-week has-sub">
-                    <a class="navi-link">Weeks</a>
+                    @else
+                      <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
 
-                    <ul class="sub-navi">
-                      <li class="sub-navi-item">
-                        <a class="sub-navi-link" href="{{ route('weeks.create') }}">Create a new Week</a>
-                      </li>
-                      <li class="sub-navi-item">
-                        <a class="sub-navi-link" href="{{ route('weeks.index') }}">List of Week</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="navi-item navi-item-team has-sub">
-                    <a class="navi-link">Teams</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                    <ul class="sub-navi">
-                      <li class="sub-navi-item">
-                        <a class="sub-navi-link" href="{{ route('teams.index') }}">List of Team</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="navi-item navi-item-member has-sub">
-                    <a class="navi-link">Members</a>
+                          <a class="dropdown-item" href="{{ route('logout') }}"
+                          onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+                          {{ __('Logout') }}
+                        </a>
 
-                    <ul class="sub-navi">
-                      <li class="sub-navi-item">
-                        <a class="sub-navi-link" href="{{ route('members.create') }}">Create a new Member</a>
-                      </li>
-                      <li class="sub-navi-item">
-                        <a class="sub-navi-link" href="{{ route('members.index') }}">List of Member</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="navi-item has-sub">
-                    <a class="navi-link">Settings</a>
-
-                    <ul class="sub-navi">
-                      <li class="sub-navi-item">
-                        <a class="sub-navi-link" href="{{ route('names.index', ['table_name' => 'Task']) }}">Names Of Task</a>
-                      </li>
-                      <li class="sub-navi-item">
-                        <a class="sub-navi-link" href="#">Change password</a>
-                      </li>
-                      <li class="sub-navi-item">
-                        <a class="sub-navi-link" href="#">Create a new Account</a>
-                      </li>
-                    </ul>
-                  </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          @csrf
+                        </form>
+                      </div>
+                    </li>
+                  @endguest
                 </ul>
-
-                <button class="navi-icon">
-                  <span class="icon">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </span>
-                </button>
-              </nav>
-            </div>
+              </div>
           </div>
-        </div>
-      </header>
+      </nav>
 
       <main class="main">
-        @yield('content')
-      </main>
-
-      <footer>
         <div class="container">
-          <div class="row">
-            <div class="col-xl-12">
-              <div class="copyright">Copyright © 2018</div
-            </div>
-          </div>
+          @yield('content')
         </div>
-      </footer>
+      </main>
     </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/manifest.js') }}"></script>
-    <script src="{{ asset('js/vendor.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    @yield('javascript')
 </body>
 </html>

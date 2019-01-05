@@ -1,51 +1,42 @@
-@extends('layouts.fullscreen')
+@extends('layouts.blank')
 
 @section('content')
-  <div class="page page-create page-member page-member-create">
-
-    <a class="btn btn-dark btn-close" href="{{ route('members.index') }}">&#10005;</a>
-
+  <div class="page page-members-create">
     <div class="page-header">
-      <h4>Create a new Member</h4>
-      <div class="block-breadcrumb">
-        <ul>
-          <li><a href="{{ route('home') }}">Home</a></li>
-          <li><a href="{{ route('members.index') }}">Members</a></li>
-          <li><a href="">Create</a></li>
-        </ul>
-      </div>
+      <h3 class="page-title">Create a Member</h3>
+
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('members.index') }}">List of Members</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Create</li>
+      </ol>
     </div>
 
     <div class="page-content">
-      <form class="block-form" action="/members" method="POST">
+      <form class="form" action="/members" enctype="multipart/form-data" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <div class="form-group">
-          <label>What's your name?</label>
-          <input name="name" type="text" class="form-control" placeholder="Enter name..." autocomplete="off">
-        </div>
-
-        <div class="form-group">
-          <label>Could you send me your email?</label>
-          <input name="email" type="text" class="form-control" placeholder="Enter email..." autocomplete="off">
-        </div>
-
-        <div class="form-group form-select">
-          <label>Choose Your Team</label>
-          <select name="team_id" class="">
+          <label>Team</label>
+          <select name="team_id" class="form-control">
             @foreach ($teams as $team)
             <option value="{{ $team->id }}">{{ $team->name }}</option>
             @endforeach
           </select>
         </div>
 
-        <div class="form-group form-color">
-          <label>Pick a color for this member</label>
-          <input name="color" type="color" class="form-control" autocomplete="off">
-          <small class="text-muted">It's used to display on the graph</small>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" class="form-control" placeholder="Ex: Mai Anh Kha" autocomplete="off">
         </div>
 
-        <button class="btn btn-dark">Save & Close</button>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" class="form-control" placeholder="Ex: maianhkha.dev@gmail.com" autocomplete="off">
+        </div>
+
+        <a class="btn btn-secondary" href="{{ route('members.index') }}">Cancel</a>
+        <button class="btn btn-gold">Save & Close</button>
       </form>
     </div>
   </div>

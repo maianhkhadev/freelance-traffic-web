@@ -1,0 +1,38 @@
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  padding-left: unset;
+  margin-bottom: unset;
+
+  .page-item {
+
+    .page-link {
+      display: block;
+      color: #000000;
+      background-color: #ffffff;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      margin-left: 0.25rem;
+      margin-right: 0.25rem;
+
+      &:hover {
+        color: #ffffff;
+        background-color: lighten(#2a3140, 15%);
+        text-decoration: none;
+      }
+
+      &:focus {
+        box-shadow: unset;
+      }
+    }
+
+    &.active {
+
+      .page-link {
+        color: #ffffff;
+        background-color: #2a3140;
+      }
+    }
+  }
+}

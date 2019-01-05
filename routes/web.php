@@ -11,17 +11,22 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 
-Route::resource('names', 'NameController');
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::resource('teams', 'TeamController');
+
 Route::resource('members', 'MemberController');
+
 Route::resource('projects', 'ProjectController');
+
 Route::resource('weeks', 'WeekController');
+
 Route::resource('tasks', 'TaskController');
-Route::resource('histories', 'HistoryController');
+
+Route::resource('hints', 'HintController');

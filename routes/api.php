@@ -17,8 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('findTasks', 'TaskController@find');
+Route::apiResource('members', 'API\MemberController');
 
-Route::get('projects-search', 'ProjectAPIController@search');
-Route::get('weeks-search', 'WeekAPIController@search');
-Route::get('members-search', 'MemberAPIController@search');
+Route::apiResource('weeks', 'API\WeekController');
+
+Route::apiResource('tasks', 'API\TaskController');

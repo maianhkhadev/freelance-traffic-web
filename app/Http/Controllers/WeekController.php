@@ -2,57 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
 use App\Week;
-use App\Team;
-use App\Member;
 use Illuminate\Http\Request;
 
 class WeekController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $weeks = Week::orderBy('updated_at', 'DESC')->paginate(10);
+        $query = Week::orderBy('updated_at', 'DESC');
+
+        $search = $request->input('search');
+        if($search !== NULL) {
+            $query->where('name', 'like', '%'.$search.'%');
+        }
+
+        $weeks = $query->paginate(10);
+
         return view('weeks.index', ['weeks' => $weeks]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $week = Week::find($id);
-        $teams = Team::orderBy('created_at', 'ASC')->get();
-        $projects = Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
-                    ->where('tasks.week_id', $id)
-                    ->select('projects.*')
-                    ->distinct()
-                    ->get();
-        $members = Member::leftJoin('tasks', 'members.id', '=', 'tasks.member_id')
-                    ->where('tasks.week_id', $id)
-                    ->select('members.*')
-                    ->distinct()
-                    ->get();
-
-        return view('weeks.show', ['teams' => $teams, 'week' => $week, 'projects' => $projects, 'members' => $members]);
     }
 
     /**
@@ -76,8 +47,6 @@ class WeekController extends Controller
         $week = new Week();
 
         $week->name = $request->input('name');
-        $week->date_range = $request->input('date_range');
-        $week->closed = false;
 
         $week->save();
 
@@ -85,13 +54,24 @@ class WeekController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display the specified resource.
      *
+     * @param  \App\Week  $week
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function show(Week $week)
     {
-        $week = Week::find($id);
+        return view('weeks.show', ['week' => $week]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Week  $week
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Week $week)
+    {
         return view('weeks.edit', ['week' => $week]);
     }
 
@@ -99,19 +79,26 @@ class WeekController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Week  $week
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Week $week)
     {
-        $week = Week::find($id);
-
         $week->name = $request->input('name');
-        $week->date_range = $request->input('date_range');
-        $week->closed = $request->input('closed') === 'on' ? true : false;
 
         $week->save();
 
         return redirect()->route('weeks.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Week  $week
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Week $week)
+    {
+        //
     }
 }

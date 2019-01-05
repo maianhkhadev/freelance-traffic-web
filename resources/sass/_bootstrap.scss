@@ -1,0 +1,10 @@
+@import 'bootstrap/breadcrumb';
+@import 'bootstrap/form';
+@import 'bootstrap/pagination';
+
+.container {
+
+  @media screen and (min-width: 1200px) {
+    width: 1170px;
+  }
+}

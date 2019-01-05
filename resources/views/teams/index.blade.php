@@ -1,65 +1,62 @@
 @extends('layouts.default')
 
 @section('content')
-  <div class="page page-list page-team page-team-list">
-
+  <div class="page page-teams-index">
     <div class="page-header">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-12">
-            <h2 class="title">All Our Teams</h2>
-            <div class="block-breadcrumb">
-              <ul>
-                <li><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="">Teams</a></li>
-              </ul>
+      <div class="row">
+        <div class="col-xl-6">
+          <h3 class="page-title">List of Teams</h3>
+
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">List of Teams</li>
+          </ol>
+        </div>
+        <div class="col-xl-6">
+          <div class="tool-box">
+            <div class="field-search">
+              <img class="icon" src="/images/icon-search.png" alt="" />
+              <input type="text" class="form-control" placeholder="Type to search..."/>
             </div>
+            <a class="btn btn-gold btn-create" href="{{ route('teams.create') }}">Create</a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="page-content">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-12">
-            <div class="block-table block-table-teams">
-              <div class="block-header">
-                <span class="block-title">
-                  Team
-                </span>
-                <span class="block-title">
-                  Leader
-                </span>
-                <span class="block-title">
-                  Active Members
-                </span>
-              </div>
-
-              <div class="block-content">
-                @foreach ($teams as $team)
-                <div class="block-record">
-                  <span class="block-cell">{{ $team->name }}</span>
-                  <span class="block-cell">Admin</span>
-                  <span class="block-cell">
-                    @foreach ($team->members as $member)
-                      @if ($member->disabled === 0)
-                        <avatar-name :data="{{ $member }}"></avatar-name>
-                      @endif
-                    @endforeach
-                  </span>
-                </div>
-                @endforeach
-              </div>
-
-              <div class="block-footer">
-                Showing {{ $teams->firstItem() }} to {{ $teams->lastItem() }} of {{ $teams->total() }} entries
-
-                {{ $teams->links('vendor.pagination.default') }}
-              </div>
-            </div>
+    <div class="table table-teams">
+      <div class="table-header">
+        <span class="table-column-title">
+          #
+        </span>
+        <span class="table-column-title">
+          Name of Team
+        </span>
+        <span class="table-column-title">
+          Update At
+        </span>
+        <span class="table-column-title">
+          Actions
+        </span>
+      </div>
+      <div class="table-content">
+        @foreach ($teams as $team)
+          <div class="table-row">
+            <span class="table-cell">{{ $teams->firstItem() + $loop->index }}</span>
+            <span class="table-cell">{{ $team->name }}</span>
+            <span class="table-cell">
+              <time datetime="{{ $team->updated_at }}">{{ $team->updated_at->format('Y-m-d H:i') }}</time>
+            </span>
+            <span class="table-cell">
+              <a class="" href="{{ route('teams.edit', ['id' => $team->id]) }}">Edit</a>
+            </span>
           </div>
-        </div>
+        @endforeach
+      </div>
+      <div class="table-footer">
+        Showing {{ $teams->firstItem() }} to {{ $teams->lastItem() }} of {{ $teams->total() }} entries
+
+        {{ $teams->links('vendor.pagination.default') }}
       </div>
     </div>
   </div>

@@ -9479,6 +9479,20 @@ a:hover {
   color: inherit;
 }
 
+.btn-white {
+  color: #6c757d;
+  background-color: #ffffff;
+  border-color: #6c757d;
+}
+
+.btn-white:hover {
+  background-color: #e6e6e6;
+}
+
+.btn-white:focus {
+  box-shadow: unset;
+}
+
 .btn-gold {
   color: #5c5c5c;
   background-color: #FDD20A;
@@ -9488,6 +9502,10 @@ a:hover {
 .btn-gold:hover {
   background-color: #FDD20A;
   border-color: #FDD20A;
+}
+
+.btn-gold:focus {
+  box-shadow: unset;
 }
 
 .breadcrumb {
@@ -9559,6 +9577,29 @@ a:hover {
   .container {
     width: 1170px;
   }
+}
+
+.layout-auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.layout-auth .main {
+  width: 29.5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.layout-auth .main .page .page-header {
+  margin-bottom: 1.5rem;
+}
+
+.layout-auth .main .page .page-header .page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
 }
 
 .layout-blank {
@@ -9692,6 +9733,41 @@ a:hover {
   padding-bottom: 0;
 }
 
+.page-tasks-create .form-group .selectize-control.single .selectize-input {
+  height: calc(2.25rem + 2px);
+  background-color: #ffffff;
+  background-image: unset;
+  border: 1px solid #ced4da;
+}
+
+.page-tasks-create .form-group .selectize-control.single .selectize-input:after {
+  display: none;
+}
+
+.modal-filter .modal-body {
+  padding-bottom: 0;
+}
+
+.modal-filter .modal-body .custom-control {
+  margin-bottom: 1rem;
+}
+
+.modal-filter .modal-body .custom-radio .custom-control-label {
+  font-weight: 500;
+}
+
+.modal-filter .modal-body .custom-checkbox {
+  margin-left: 1.5rem;
+}
+
+.chart-container {
+  margin-bottom: 1.5rem;
+}
+
+.chart-container .chart {
+  margin-top: 0.5rem;
+}
+
 .table .table-header {
   display: grid;
   padding: 1.5rem 1.25rem;
@@ -9773,42 +9849,42 @@ a:hover {
 }
 
 .table-teams .table-header {
-  grid-template-columns: 3rem calc(100% - 23rem) 10rem 10rem;
+  grid-template-columns: 5rem calc(100% - 25rem) 10rem 10rem;
 }
 
 .table-teams .table-content .table-row {
-  grid-template-columns: 3rem calc(100% - 23rem) 10rem 10rem;
+  grid-template-columns: 5rem calc(100% - 25rem) 10rem 10rem;
 }
 
 .table-members .table-header {
-  grid-template-columns: 3rem calc(50% - 11.5rem) calc(50% - 11.5rem) 10rem 10rem;
+  grid-template-columns: 5rem calc(50% - 16.25rem) calc(50% - 16.25rem) 7.5rem 10rem 10rem;
 }
 
 .table-members .table-content .table-row {
-  grid-template-columns: 3rem calc(50% - 11.5rem) calc(50% - 11.5rem) 10rem 10rem;
+  grid-template-columns: 5rem calc(50% - 16.25rem) calc(50% - 16.25rem) 7.5rem 10rem 10rem;
 }
 
 .table-projects .table-header {
-  grid-template-columns: 3rem calc(100% - 35rem) 6rem 6rem 10rem 10rem;
+  grid-template-columns: 5rem calc(100% - 40rem) 7.5rem 7.5rem 10rem 10rem;
 }
 
 .table-projects .table-content .table-row {
-  grid-template-columns: 3rem calc(100% - 35rem) 6rem 6rem 10rem 10rem;
+  grid-template-columns: 5rem calc(100% - 40rem) 7.5rem 7.5rem 10rem 10rem;
 }
 
 .table-weeks .table-header {
-  grid-template-columns: 3rem calc(100% - 29rem) 6rem 10rem 10rem;
+  grid-template-columns: 5rem calc(100% - 32.5rem) 7.5rem 10rem 10rem;
 }
 
 .table-weeks .table-content .table-row {
-  grid-template-columns: 3rem calc(100% - 29rem) 6rem 10rem 10rem;
+  grid-template-columns: 5rem calc(100% - 32.5rem) 7.5rem 10rem 10rem;
 }
 
 .table-tasks .table-header {
-  grid-template-columns: 3rem calc(100% - 55rem) 10rem 10rem 6rem 6rem 10rem 10rem;
+  grid-template-columns: 5rem calc(100% - 52.5rem) 10rem 10rem 7.5rem 10rem 10rem;
 }
 
 .table-tasks .table-content .table-row {
-  grid-template-columns: 3rem calc(100% - 55rem) 10rem 10rem 6rem 6rem 10rem 10rem;
+  grid-template-columns: 5rem calc(100% - 52.5rem) 10rem 10rem 7.5rem 10rem 10rem;
 }
 

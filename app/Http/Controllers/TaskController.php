@@ -6,6 +6,7 @@ use App\Project;
 use App\Week;
 use App\Member;
 use App\Task;
+use App\Hint;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -62,6 +63,8 @@ class TaskController extends Controller
 
         $task->save();
 
+        $this->saveHint($request->input('name'));
+
         return redirect()->route('tasks.index');
     }
 
@@ -88,7 +91,7 @@ class TaskController extends Controller
         $weeks = Week::all();
         $members = Member::all();
 
-        return view('tasks.create', ['task' => $task, 'projects' => $projects, 'weeks' => $weeks, 'members' => $members]);
+        return view('tasks.edit', ['task' => $task, 'projects' => $projects, 'weeks' => $weeks, 'members' => $members]);
     }
 
     /**
@@ -109,6 +112,8 @@ class TaskController extends Controller
 
         $task->save();
 
+        $this->saveHint($request->input('name'));
+
         return redirect()->route('tasks.index');
     }
 
@@ -121,5 +126,20 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         //
+    }
+
+    private function saveHint($value)
+    {
+        $hint = Hint::where('value', $value)->first();
+
+        if($hint !== NULL) {
+          return;
+        }
+
+        $hint = new Hint();
+
+        $hint->value = $value;
+
+        $hint->save();
     }
 }

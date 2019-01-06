@@ -50,7 +50,9 @@
             <span class="table-cell">
               <span class="color" style="background-color: {{ $project->color }}"></span>
             </span>
-            <span class="table-cell">{{ $project->closed }}</span>
+            <span class="table-cell">
+              <status-closed :status="{{ $project->closed }}"></status-closed>
+            </span>
             <span class="table-cell">
               <time datetime="{{ $project->updated_at }}">{{ $project->updated_at->format('Y-m-d H:i') }}</time>
             </span>

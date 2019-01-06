@@ -22,6 +22,12 @@
           <input type="text" name="name" class="form-control" value="{{ $week->name }}" placeholder="Ex: Week 10 - 2018" autocomplete="off">
         </div>
 
+        <div class="form-group">
+          <label>Start date</label>
+          <input type="text" class="form-control" placeholder="Ex: 18-11-2018">
+          <small class="form-text text-muted">Help us to sort data.</small>
+        </div>
+
         <div class="form-group custom-control custom-checkbox">
           <input type="checkbox" id="checkbox-closed" name="closed" class="custom-control-input" {{ $week->closed === false ? 'checked' : '' }}>
           <label class="custom-control-label" for="checkbox-closed">Close this week?</label>

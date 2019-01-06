@@ -1,0 +1,16 @@
+.page-tasks-create {
+
+  .form-group {
+
+    .selectize-control.single .selectize-input {
+      height: calc(2.25rem + 2px);
+      background-color: #ffffff;
+      background-image: unset;
+      border: 1px solid #ced4da;
+    }
+
+    .selectize-control.single .selectize-input:after {
+      display: none;
+    }
+  }
+}

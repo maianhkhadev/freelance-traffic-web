@@ -1,6 +1,6 @@
 <template>
   <div class="chart-container">
-    <chart ref="chart" :options="options"></chart>
+    <chart ref="chart" class="chart" :options="options"></chart>
   </div>
 </template>
 

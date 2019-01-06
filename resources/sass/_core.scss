@@ -20,6 +20,20 @@ a {
   }
 }
 
+.btn-white {
+  color: #6c757d;
+  background-color: #ffffff;
+  border-color: #6c757d;
+
+  &:hover {
+    background-color: darken(#ffffff, 10%);
+  }
+
+  &:focus {
+    box-shadow: unset;
+  }
+}
+
 .btn-gold {
   color: #5c5c5c;
   background-color: #FDD20A;
@@ -28,5 +42,9 @@ a {
   &:hover {
     background-color: #FDD20A;
     border-color: #FDD20A;
+  }
+
+  &:focus {
+    box-shadow: unset;
   }
 }

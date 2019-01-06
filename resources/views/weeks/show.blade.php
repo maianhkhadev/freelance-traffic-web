@@ -17,20 +17,39 @@
         <div class="col-xl-6">
           <div class="form-group">
             <label class="form-control-label">Name</label>
-            <input type="email" class="form-control-plaintext" value="{{ $week->name }}">
+            <input type="text" class="form-control-plaintext" value="{{ $week->name }}">
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Start date</label>
+            <input type="text" class="form-control-plaintext" value="{{ $week->start_date }}">
           </div>
         </div>
         <div class="col-xl-6">
           <div class="form-group">
             <label class="form-control-label">Status</label>
-            <input type="email" class="form-control-plaintext" value="{{ $week->closed }}">
+            <status-closed :status="{{ $week->closed }}"></status-closed>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="form-group">
+            <label class="form-control-label">Projects</label>
+            <chart-pie-projects :week="{{ $week }}"></chart-pie-projects>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="form-group">
+            <label class="form-control-label">Teams</label>
+            <chart-pie-teams :week="{{ $week }}"></chart-pie-teams>
           </div>
         </div>
       </div>
 
       <div class="form-group">
         <label class="form-control-label">Members</label>
-        <chart-week :week="{{ $week }}"></chart-week>
+        <chart-bar-members :week="{{ $week }}"></chart-bar-members>
       </div>
     </div>
   </div>

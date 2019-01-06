@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 class WeekController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -85,6 +95,7 @@ class WeekController extends Controller
     public function update(Request $request, Week $week)
     {
         $week->name = $request->input('name');
+        $week->closed = $request->input('closed');
 
         $week->save();
 

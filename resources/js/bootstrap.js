@@ -54,3 +54,11 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+window.showComment = function(event) {
+  event.preventDefault()
+  let comment = event.target.dataset.comment
+
+  document.querySelector('.modal-comment .comment').innerText = comment
+  $('.modal-comment').modal('show')
+}

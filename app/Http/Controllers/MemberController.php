@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 class MemberController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -94,6 +104,7 @@ class MemberController extends Controller
         $member->team_id = $request->input('team_id');
         $member->name = $request->input('name');
         $member->email = $request->input('email');
+        $member->disabled = $request->input('disabled');
 
         $member->save();
 

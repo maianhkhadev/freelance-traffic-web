@@ -36,6 +36,11 @@
           <input type="email" name="email" class="form-control" value="{{ $member->email }}" placeholder="Ex: maianhkha.dev@gmail.com" autocomplete="off">
         </div>
 
+        <div class="form-group custom-control custom-checkbox">
+          <input type="checkbox" id="checkbox-disabled" name="closed" class="custom-control-input" {{ $member->closed === false ? 'checked' : '' }}>
+          <label class="custom-control-label" for="checkbox-disabled">Disable this member?</label>
+        </div>
+
         <a class="btn btn-secondary" href="{{ route('members.index') }}">Cancel</a>
         <button class="btn btn-gold">Save & Close</button>
       </form>

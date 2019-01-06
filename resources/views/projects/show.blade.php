@@ -23,7 +23,7 @@
         <div class="col-xl-6">
           <div class="form-group">
             <label class="form-control-label">Status</label>
-            <input type="email" class="form-control-plaintext" value="{{ $project->closed }}">
+            <status-closed :status="{{ $project->closed }}"></status-closed>
           </div>
         </div>
       </div>

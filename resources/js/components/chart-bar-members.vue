@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal-filter-members">
+  <div class="chart-container">
+    <button type="button" class="btn btn-white" data-toggle="modal" data-target=".modal-filter-members">
       Filter the data
     </button>
 
-    <div class="chart-container">
-      <chart ref="chart" :options="options"></chart>
-    </div>
+    <chart ref="chart" class="chart" :options="options"></chart>
 
     <modal-filter-members ref="modal" v-on:click-filter="requestData"></modal-filter-members>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <input type="text" ref="field" name="name" class="form-control" placeholder="Ex: Meeting" autocomplete="off" />
+  <input type="text" ref="field" name="name" :value="value" placeholder="Ex: Meeting" autocomplete="off" />
 </template>
 
 <script>
@@ -11,26 +11,32 @@
   }
 
   export default {
+    props: {
+      value: {
+        default: function () {
+          return ''
+        }
+      }
+    },
     mounted() {
       let self = this
 
-      $(self.$refs.field).selectize({
-        maxItems: 1,
-        persist: false,
-        valueField: 'email',
-        labelField: 'name',
-        searchField: ['name', 'email'],
-        options: [
-            {email: 'brian@thirdroute.com', name: 'Brian Reavis'},
-            {email: 'nikola@tesla.com', name: 'Nikola Tesla'},
-            {email: 'someone@gmail.com'}
-        ],
-        create: function(input) {
-          return {
-            email: input,
-            name: input
+      axios.get('/api/hints').then(function (res) {
+        $(self.$refs.field).selectize({
+          maxItems: 1,
+          persist: false,
+          createOnBlur: true,
+          labelField: 'value',
+          options: res.data,
+          create: function(input) {
+            return {
+              value: input
+            }
           }
-        }
+        })
+      }).catch(function (error) {
+        // handle error
+        console.log(error);
       })
     }
   }

@@ -21,6 +21,12 @@
           <input type="text" name="name" class="form-control" placeholder="Ex: Week 10 - 2018" autocomplete="off">
         </div>
 
+        <div class="form-group">
+          <label>Start date</label>
+          <input type="text" class="form-control" placeholder="Ex: 18-11-2018">
+          <small class="form-text text-muted">Help us to sort data.</small>
+        </div>
+
         <a class="btn btn-secondary" href="{{ route('weeks.index') }}">Cancel</a>
         <button class="btn btn-gold">Save & Close</button>
       </form>

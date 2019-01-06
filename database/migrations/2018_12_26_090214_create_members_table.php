@@ -18,6 +18,7 @@ class CreateMembersTable extends Migration
             $table->integer('team_id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->boolean('disabled')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

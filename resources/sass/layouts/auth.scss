@@ -1,0 +1,25 @@
+.layout-auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  .main {
+    width: 29.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+
+    .page {
+
+      .page-header {
+        margin-bottom: 1.5rem;
+
+        .page-title {
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-bottom: 0.25rem;
+        }
+      }
+    }
+  }
+}

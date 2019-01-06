@@ -1,22 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Hint;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HintController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -24,26 +15,9 @@ class HintController extends Controller
      */
     public function index()
     {
-        $query = Hint::orderBy('updated_at', 'DESC');
+        $hints = Hint::all();
 
-        $search = $request->input('search');
-        if($search !== NULL) {
-            $query->where('name', 'like', '%'.$search.'%');
-        }
-
-        $hints = $query->paginate(10);
-
-        return view('hints.index', ['hints' => $hints]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return json_encode($hints);
     }
 
     /**
@@ -64,17 +38,6 @@ class HintController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }

@@ -47,7 +47,9 @@
           <div class="table-row">
             <span class="table-cell">{{ $weeks->firstItem() + $loop->index }}</span>
             <span class="table-cell">{{ $week->name }}</span>
-            <span class="table-cell">{{ $week->closed }}</span>
+            <span class="table-cell">
+              <status-closed :status="{{ $week->closed }}"></status-closed>
+            </span>
             <span class="table-cell">
               <time datetime="{{ $week->updated_at }}">{{ $week->updated_at->format('Y-m-d H:i') }}</time>
             </span>

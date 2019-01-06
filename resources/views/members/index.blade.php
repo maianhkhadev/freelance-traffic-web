@@ -37,6 +37,9 @@
             Email
           </span>
           <span class="table-column-title">
+            Status
+          </span>
+          <span class="table-column-title">
             Update At
           </span>
           <span class="table-column-title">
@@ -49,6 +52,7 @@
               <span class="table-cell">{{ $members->firstItem() + $loop->index }}</span>
               <span class="table-cell">{{ $member->name }}</span>
               <span class="table-cell">{{ $member->email }}</span>
+              <span class="table-cell">{{ $member->disabled }}</span>
               <span class="table-cell">
                 <time datetime="{{ $member->updated_at }}">{{ $member->updated_at->format('Y-m-d H:i') }}</time>
               </span>

@@ -1,0 +1,21 @@
+.modal-filter {
+
+  .modal-body {
+    padding-bottom: 0;
+
+    .custom-control {
+      margin-bottom: 1rem;
+    }
+
+    .custom-radio {
+
+      .custom-control-label {
+        font-weight: 500;
+      }
+    }
+
+    .custom-checkbox {
+      margin-left: 1.5rem;
+    }
+  }
+}

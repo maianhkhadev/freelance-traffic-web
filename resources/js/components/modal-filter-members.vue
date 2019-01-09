@@ -19,7 +19,7 @@
             <template v-for="member in members">
               <div class="col-xl-6">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" :id="`checkbox-member-${member.id}`" :data-member-id="member.id" class="custom-control-input" />
+                  <input type="checkbox" :id="`checkbox-member-${member.id}`" :data-member-id="member.id" :data-member-name="member.name" class="custom-control-input" />
                   <label class="custom-control-label" :for="`checkbox-member-${member.id}`">{{ member.name }}</label>
                 </div>
               </div>
@@ -40,6 +40,13 @@
     data() {
       return {
         members: []
+      }
+    },
+    props: {
+      params: {
+        default: function() {
+          return {}
+        }
       }
     },
     methods: {
@@ -72,7 +79,7 @@
         }
         else {
           let memberIds = []
-          let checkboxes = self.$refs.modal.querySelectorAll('.input[type="checkbox"]:checked')
+          let checkboxes = self.$refs.modal.querySelectorAll('input[type="checkbox"]:checked')
           checkboxes.forEach(function(checkbox) {
             memberIds.push(checkbox.dataset.memberId)
           })
@@ -84,13 +91,30 @@
       getChartData: function() {
         let self = this
 
-        return self.members.map(function(member) {
-          return {
-            id: member.id,
-            name: member.name,
-            value: 0
-          }
-        })
+        let radioSelectAll = document.querySelector('#radio-member-select-all')
+        if(radioSelectAll.checked) {
+
+          return self.members.map(function(member) {
+            return {
+              id: member.id,
+              name: member.name,
+              value: 0
+            }
+          })
+        }
+        else {
+          let members = []
+          let checkboxes = self.$refs.modal.querySelectorAll('input[type="checkbox"]:checked')
+          checkboxes.forEach(function(checkbox) {
+            members.push({
+              id: parseInt(checkbox.dataset.memberId),
+              name: checkbox.dataset.memberName,
+              value: 0
+            })
+          })
+
+          return members
+        }
       }
     },
     mounted() {
@@ -98,9 +122,13 @@
 
       document.querySelector("#radio-member-select-all").checked = true
 
-      axios.get('/api/members').then(function (res) {
+      axios.get('/api/members', {
+        params: self.params
+      })
+      .then(function (res) {
         self.members = res.data
-      }).catch(function (error) {
+      })
+      .catch(function (error) {
         // handle error
         console.log(error);
       })

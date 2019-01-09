@@ -50,7 +50,7 @@
 
         <div class="form-group">
           <label>Value</label>
-          <input type="number" name="value" class="form-control" placeholder="Ex: 50" autocomplete="off" tabindex="5">
+          <input type="number" name="value" class="form-control" placeholder="Ex: 50" autocomplete="off" tabindex="5" required>
         </div>
 
         <div class="form-group">

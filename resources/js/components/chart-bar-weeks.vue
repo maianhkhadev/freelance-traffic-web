@@ -6,7 +6,7 @@
 
     <chart ref="chart" class="chart" :options="options"></chart>
 
-    <modal-filter-weeks ref="modal" v-on:click-filter="requestData"></modal-filter-weeks>
+    <modal-filter-weeks ref="modal" :params="{ member_ids: [member.id] }" v-on:click-filter="requestData"></modal-filter-weeks>
   </div>
 </template>
 
@@ -57,6 +57,7 @@
     methods: {
       tranformTaskToDataset: function(tasks) {
         let self = this
+
         let labels = []
         let datasets = []
 
@@ -85,7 +86,10 @@
           let week = dataset.weeks.find(function(week) {
             return week.id === task.week_id
           })
-          week.value += task.value
+
+          if(week !== undefined) {
+            week.value += task.value
+          }
         })
 
         datasets.forEach(function(dataset) {

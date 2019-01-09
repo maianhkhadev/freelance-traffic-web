@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class MemberController extends Controller
@@ -13,9 +14,16 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $members = Member::all();
+        $query = DB::table('members')->join('tasks', 'members.id', '=', 'tasks.member_id')->select('members.id', 'members.name');
+
+        if($request->has('week_ids')) {
+            $week_ids = $request->input('week_ids');
+            $query->whereIn('tasks.week_id', $week_ids);
+        }
+
+        $members = $query->distinct('members.id')->get();
 
         return json_encode($members);
     }

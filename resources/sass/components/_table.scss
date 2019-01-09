@@ -129,13 +129,13 @@
 .table-weeks {
 
   .table-header {
-    grid-template-columns: 5rem calc(100% - 32.5rem) 7.5rem 10rem 10rem;
+    grid-template-columns: 5rem calc(50% - 16.25rem) calc(50% - 16.25rem) 7.5rem 10rem 10rem;
   }
 
   .table-content {
 
     .table-row {
-      grid-template-columns: 5rem calc(100% - 32.5rem) 7.5rem 10rem 10rem;
+      grid-template-columns: 5rem calc(50% - 16.25rem) calc(50% - 16.25rem) 7.5rem 10rem 10rem;
     }
   }
 }

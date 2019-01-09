@@ -19,6 +19,10 @@
             <label class="form-control-label">Name</label>
             <input type="text" class="form-control-plaintext" value="{{ $project->name }}">
           </div>
+          <div class="form-group">
+            <label class="form-control-label">Color</label>
+            <input type="text" class="form-control-plaintext" value="{{ $project->color }}">
+          </div>
         </div>
         <div class="col-xl-6">
           <div class="form-group">

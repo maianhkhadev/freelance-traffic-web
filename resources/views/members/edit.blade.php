@@ -28,12 +28,12 @@
 
         <div class="form-group">
           <label>Name</label>
-          <input type="text" name="name" class="form-control" value="{{ $member->name }}" placeholder="Ex: Mai Anh Kha" autocomplete="off">
+          <input type="text" name="name" class="form-control" value="{{ $member->name }}" placeholder="Ex: Mai Anh Kha" autocomplete="off" required>
         </div>
 
         <div class="form-group">
           <label>Email</label>
-          <input type="email" name="email" class="form-control" value="{{ $member->email }}" placeholder="Ex: maianhkha.dev@gmail.com" autocomplete="off">
+          <input type="email" name="email" class="form-control" value="{{ $member->email }}" placeholder="Ex: maianhkha.dev@gmail.com" autocomplete="off" required>
         </div>
 
         <div class="form-group custom-control custom-checkbox">

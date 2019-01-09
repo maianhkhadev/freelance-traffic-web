@@ -6,7 +6,7 @@
 
     <chart ref="chart" class="chart" :options="options"></chart>
 
-    <modal-filter-members ref="modal" v-on:click-filter="requestData"></modal-filter-members>
+    <modal-filter-members ref="modal" :params="{ week_ids: [week.id] }" v-on:click-filter="requestData"></modal-filter-members>
   </div>
 </template>
 
@@ -57,6 +57,7 @@
     methods: {
       tranformTaskToDataset: function(tasks) {
         let self = this
+
         let labels = []
         let datasets = []
 
@@ -75,7 +76,7 @@
               id: task.project_id,
               label: task.project_name,
               backgroundColor: task.project_color,
-              members: members,
+              members: self.$refs.modal.getChartData(),
               data: []
             }
 
@@ -85,7 +86,10 @@
           let member = dataset.members.find(function(member) {
             return member.id === task.member_id
           })
-          member.value += task.value
+
+          if(member !== undefined) {
+            member.value += task.value
+          }
         })
 
         datasets.forEach(function(dataset) {

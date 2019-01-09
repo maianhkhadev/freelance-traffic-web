@@ -22,13 +22,14 @@ window.Vue = require('vue');
 
 Vue.component('flatpickr', require('./components/flatpickr.vue').default);
 Vue.component('chart-bar-members', require('./components/chart-bar-members.vue').default);
+Vue.component('chart-bar-weeks', require('./components/chart-bar-weeks.vue').default);
 Vue.component('chart-pie-projects', require('./components/chart-pie-projects.vue').default);
 Vue.component('chart-pie-teams', require('./components/chart-pie-teams.vue').default);
-Vue.component('chart-member', require('./components/chart-member.vue').default);
 Vue.component('chart-timeline', require('./components/chart-timeline.vue').default);
 Vue.component('field-search', require('./components/field-search.vue').default);
 Vue.component('field-task-name', require('./components/field-task-name.vue').default);
 Vue.component('status-closed', require('./components/status-closed.vue').default);
+Vue.component('status-disabled', require('./components/status-disabled.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

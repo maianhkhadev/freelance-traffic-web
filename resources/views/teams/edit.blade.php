@@ -19,7 +19,7 @@
 
         <div class="form-group">
           <label>Name</label>
-          <input type="text" name="name" class="form-control" value="{{ $team->name }}" placeholder="Ex: Admin" autocomplete="off">
+          <input type="text" name="name" class="form-control" value="{{ $team->name }}" placeholder="Ex: Admin" autocomplete="off" required>
         </div>
 
         <a class="btn btn-secondary" href="{{ route('teams.index') }}">Cancel</a>

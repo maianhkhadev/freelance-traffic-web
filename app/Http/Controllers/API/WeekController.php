@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Week;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class WeekController extends Controller
@@ -13,9 +14,16 @@ class WeekController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $weeks = Week::all();
+        $query = DB::table('weeks')->join('tasks', 'weeks.id', '=', 'tasks.week_id')->select('weeks.id', 'weeks.name');
+
+        if($request->has('member_ids')) {
+            $member_ids = $request->input('member_ids');
+            $query->whereIn('tasks.member_id', $member_ids);
+        }
+
+        $weeks = $query->distinct('weeks.id')->get();
 
         return json_encode($weeks);
     }

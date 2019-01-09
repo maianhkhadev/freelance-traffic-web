@@ -19,7 +19,7 @@
 
         <div class="form-group">
           <label>Name</label>
-          <input type="text" name="name" class="form-control" value="{{ $project->name }}" placeholder="Ex: Omo" autocomplete="off">
+          <input type="text" name="name" class="form-control" value="{{ $project->name }}" placeholder="Ex: Omo" autocomplete="off" required>
         </div>
 
         <div class="form-group">

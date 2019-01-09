@@ -1,5 +1,5 @@
 <template>
-  <input type="text" ref="field" name="name" :value="value" placeholder="Ex: Meeting" autocomplete="off" />
+  <input type="text" ref="field" name="name" :value="value" placeholder="Ex: Meeting" autocomplete="off" required />
 </template>
 
 <script>

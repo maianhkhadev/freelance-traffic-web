@@ -27,12 +27,12 @@
 
         <div class="form-group">
           <label>Name</label>
-          <input type="text" name="name" class="form-control" placeholder="Ex: Mai Anh Kha" autocomplete="off">
+          <input type="text" name="name" class="form-control" placeholder="Ex: Mai Anh Kha" autocomplete="off" required>
         </div>
 
         <div class="form-group">
           <label>Email</label>
-          <input type="email" name="email" class="form-control" placeholder="Ex: maianhkha.dev@gmail.com" autocomplete="off">
+          <input type="email" name="email" class="form-control" placeholder="Ex: maianhkha.dev@gmail.com" autocomplete="off" required>
         </div>
 
         <a class="btn btn-secondary" href="{{ route('members.index') }}">Cancel</a>

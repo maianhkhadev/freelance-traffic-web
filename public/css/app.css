@@ -9587,7 +9587,7 @@ a:hover {
 }
 
 .layout-auth .main {
-  width: 29.5rem;
+  width: 20rem;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
 }
@@ -9765,7 +9765,7 @@ a:hover {
 }
 
 .chart-container .chart {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .table .table-header {
@@ -9873,11 +9873,11 @@ a:hover {
 }
 
 .table-weeks .table-header {
-  grid-template-columns: 5rem calc(100% - 32.5rem) 7.5rem 10rem 10rem;
+  grid-template-columns: 5rem calc(50% - 16.25rem) calc(50% - 16.25rem) 7.5rem 10rem 10rem;
 }
 
 .table-weeks .table-content .table-row {
-  grid-template-columns: 5rem calc(100% - 32.5rem) 7.5rem 10rem 10rem;
+  grid-template-columns: 5rem calc(50% - 16.25rem) calc(50% - 16.25rem) 7.5rem 10rem 10rem;
 }
 
 .table-tasks .table-header {

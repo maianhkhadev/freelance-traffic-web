@@ -1,5 +1,5 @@
 <template>
-  <input type="text" ref="flatpickr" placeholder="Select Date..">
+  <input type="text" ref="flatpickr" class="form-control" placeholder="Select Date..">
 </template>
 
 <script>
@@ -13,6 +13,11 @@
 
   export default {
     props: {
+      defaultDate: {
+        default: function() {
+          return ''
+        }
+      },
       options: {
         type: Object,
         default: function () {
@@ -35,7 +40,9 @@
     mounted() {
       let self = this
 
-      flatpickr(self.$refs.flatpickr, self.options)
+      let options = self.options
+      options.defaultDate = self.defaultDate
+      flatpickr(self.$refs.flatpickr, options)
     }
   }
 </script>

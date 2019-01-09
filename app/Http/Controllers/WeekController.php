@@ -57,6 +57,7 @@ class WeekController extends Controller
         $week = new Week();
 
         $week->name = $request->input('name');
+        $week->start_date = $request->input('start_date');
 
         $week->save();
 
@@ -95,6 +96,7 @@ class WeekController extends Controller
     public function update(Request $request, Week $week)
     {
         $week->name = $request->input('name');
+        $week->start_date = $request->input('start_date');
         $week->closed = $request->input('closed');
 
         $week->save();

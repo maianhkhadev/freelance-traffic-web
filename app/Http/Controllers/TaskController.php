@@ -39,7 +39,7 @@ class TaskController extends Controller
     {
         $projects = Project::where('closed', false)->get();
         $weeks = Week::where('closed', false)->get();
-        $members = Member::all();
+        $members = Member::where('disabled', false)->get();
 
         return view('tasks.create', ['projects' => $projects, 'weeks' => $weeks, 'members' => $members]);
     }

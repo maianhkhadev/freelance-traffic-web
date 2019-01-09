@@ -19,7 +19,7 @@
             <template v-for="week in weeks">
               <div class="col-xl-6">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" :id="`checkbox-week-${week.id}`" :data-week-id="week.id" class="custom-control-input" />
+                  <input type="checkbox" :id="`checkbox-week-${week.id}`" :data-week-id="week.id" :data-week-name="week.name" class="custom-control-input" />
                   <label class="custom-control-label" :for="`checkbox-week-${week.id}`">{{ week.name }}</label>
                 </div>
               </div>
@@ -40,6 +40,13 @@
     data() {
       return {
         weeks: []
+      }
+    },
+    props: {
+      params: {
+        default: function() {
+          return {}
+        }
       }
     },
     methods: {
@@ -72,7 +79,7 @@
         }
         else {
           let weekIds = []
-          let checkboxes = self.$refs.modal.querySelectorAll('.input[type="checkbox"]:checked')
+          let checkboxes = self.$refs.modal.querySelectorAll('input[type="checkbox"]:checked')
           checkboxes.forEach(function(checkbox) {
             weekIds.push(checkbox.dataset.weekId)
           })
@@ -84,13 +91,30 @@
       getChartData: function() {
         let self = this
 
-        return self.weeks.map(function(week) {
-          return {
-            id: week.id,
-            name: week.name,
-            value: 0
-          }
-        })
+        let radioSelectAll = document.querySelector('#radio-week-select-all')
+        if(radioSelectAll.checked) {
+
+          return self.weeks.map(function(week) {
+            return {
+              id: week.id,
+              name: week.name,
+              value: 0
+            }
+          })
+        }
+        else {
+          let weeks = []
+          let checkboxes = self.$refs.modal.querySelectorAll('input[type="checkbox"]:checked')
+          checkboxes.forEach(function(checkbox) {
+            weeks.push({
+              id: parseInt(checkbox.dataset.weekId),
+              name: checkbox.dataset.weekName,
+              value: 0
+            })
+          })
+
+          return weeks
+        }
       }
     },
     mounted() {
@@ -98,9 +122,13 @@
 
       document.querySelector("#radio-week-select-all").checked = true
 
-      axios.get('/api/weeks').then(function (res) {
+      axios.get('/api/weeks', {
+        params: self.params
+      })
+      .then(function (res) {
         self.weeks = res.data
-      }).catch(function (error) {
+      })
+      .catch(function (error) {
         // handle error
         console.log(error);
       })

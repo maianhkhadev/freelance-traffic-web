@@ -23,18 +23,22 @@
             <label class="form-control-label">Email</label>
             <input type="email" class="form-control-plaintext" value="{{ $member->email }}">
           </div>
-        </div>
-        <div class="col-xl-6">
           <div class="form-group">
             <label class="form-control-label">Team</label>
             <input type="email" class="form-control-plaintext" value="{{ $member->team->name }}">
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="form-group">
+            <label class="form-control-label">Status</label>
+            <status-disabled :status="{{ $member->disabled }}"></status-disabled>
           </div>
         </div>
       </div>
 
       <div class="form-group">
         <label class="form-control-label">Weeks</label>
-        <chart-member :member="{{ $member }}"></chart-member>
+        <chart-bar-weeks :member="{{ $member }}"></chart-bar-weeks>
       </div>
     </div>
   </div>

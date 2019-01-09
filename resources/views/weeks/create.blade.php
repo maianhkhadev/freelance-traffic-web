@@ -18,12 +18,12 @@
 
         <div class="form-group">
           <label>Name</label>
-          <input type="text" name="name" class="form-control" placeholder="Ex: Week 10 - 2018" autocomplete="off">
+          <input type="text" name="name" class="form-control" placeholder="Ex: Week 10 - 2018" autocomplete="off" required>
         </div>
 
         <div class="form-group">
           <label>Start date</label>
-          <input type="text" class="form-control" placeholder="Ex: 18-11-2018">
+          <flatpickr name="start_date"></flatpickr>
           <small class="form-text text-muted">Help us to sort data.</small>
         </div>
 

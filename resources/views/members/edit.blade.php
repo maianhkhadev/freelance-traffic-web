@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-group custom-control custom-checkbox">
-          <input type="checkbox" id="checkbox-disabled" name="closed" class="custom-control-input" {{ $member->closed === false ? 'checked' : '' }}>
+          <input type="checkbox" id="checkbox-disabled" name="closed" class="custom-control-input" {{ $member->disabled === 0 ? '' : 'checked' }}>
           <label class="custom-control-label" for="checkbox-disabled">Disable this member?</label>
         </div>
 

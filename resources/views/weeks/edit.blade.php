@@ -29,7 +29,7 @@
         </div>
 
         <div class="form-group custom-control custom-checkbox">
-          <input type="checkbox" id="checkbox-closed" name="closed" class="custom-control-input" {{ $week->closed === false ? 'checked' : '' }}>
+          <input type="checkbox" id="checkbox-closed" name="closed" class="custom-control-input" {{ $week->closed === 0 ? '' : 'checked' }}>
           <label class="custom-control-label" for="checkbox-closed">Close this week?</label>
         </div>
 

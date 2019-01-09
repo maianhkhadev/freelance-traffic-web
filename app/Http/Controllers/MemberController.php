@@ -104,7 +104,7 @@ class MemberController extends Controller
         $member->team_id = $request->input('team_id');
         $member->name = $request->input('name');
         $member->email = $request->input('email');
-        $member->disabled = $request->input('disabled');
+        $member->disabled = $request->input('disabled') === NULL ? false : true;
 
         $member->save();
 

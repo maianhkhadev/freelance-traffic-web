@@ -14,10 +14,7 @@
         </div>
         <div class="col-xl-6">
           <div class="tool-box">
-            <div class="field-search">
-              <img class="icon" src="/images/icon-search.png" alt="" />
-              <input type="text" class="form-control" placeholder="Type to search..."/>
-            </div>
+            <field-search></field-search>
             <a class="btn btn-gold btn-create" href="{{ route('tasks.create') }}">Create</a>
           </div>
         </div>

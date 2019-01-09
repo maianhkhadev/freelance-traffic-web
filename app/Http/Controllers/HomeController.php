@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $week = Week::orderBy('updated_at', 'DESC')->first();
+        $week = Week::orderBy('start_date', 'DESC')->first();
 
         return view('home', ['week' => $week]);
     }

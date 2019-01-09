@@ -97,7 +97,7 @@ class WeekController extends Controller
     {
         $week->name = $request->input('name');
         $week->start_date = $request->input('start_date');
-        $week->closed = $request->input('closed');
+        $week->closed = $request->input('closed') === NULL ? false : true;
 
         $week->save();
 

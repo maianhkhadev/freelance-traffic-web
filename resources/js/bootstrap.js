@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -55,10 +54,13 @@ if (token) {
 //     encrypted: true
 // });
 
-window.showComment = function(event) {
-  event.preventDefault()
-  let comment = event.target.dataset.comment
+window.showDetail = function(task, e) {
+  e.preventDefault()
 
-  document.querySelector('.modal-comment .comment').innerText = comment
-  $('.modal-comment').modal('show')
+  task.project_name = event.target.dataset.projectName
+  task.week_name = event.target.dataset.weekName
+  task.member_name = event.target.dataset.memberName
+  
+  vm.$refs['modal-detail'].setTask(task)
+  vm.$refs['modal-detail'].show()
 }

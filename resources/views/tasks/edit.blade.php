@@ -59,8 +59,10 @@
           <textarea type="text" name="comment" class="form-control" rows="2" tabindex="6">{{ $task->comment }}</textarea>
         </div>
 
-        <a class="btn btn-secondary" href="{{ route('tasks.index') }}">Cancel</a>
-        <button class="btn btn-gold">Save & Close</button>
+        <div class="form-footer">
+          <a class="btn btn-secondary" href="{{ route('tasks.index') }}">Cancel</a>
+          <button class="btn btn-gold">Save & Close</button>
+        </div>
       </form>
     </div>
   </div>

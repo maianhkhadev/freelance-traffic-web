@@ -1,5 +1,5 @@
 <template>
-  <input type="text" ref="field" name="name" :value="value" placeholder="Ex: Meeting" autocomplete="off" required />
+  <input type="text" ref="field" :name="name" :value="value" placeholder="Ex: Meeting" autocomplete="off" required />
 </template>
 
 <script>
@@ -12,8 +12,13 @@
 
   export default {
     props: {
+      name: {
+        default: function() {
+          return 'name'
+        }
+      },
       value: {
-        default: function () {
+        default: function() {
           return ''
         }
       }

@@ -35,8 +35,10 @@
           <input type="email" name="email" class="form-control" placeholder="Ex: maianhkha.dev@gmail.com" autocomplete="off" required>
         </div>
 
-        <a class="btn btn-secondary" href="{{ route('members.index') }}">Cancel</a>
-        <button class="btn btn-gold">Save & Close</button>
+        <div class="form-footer">
+          <a class="btn btn-secondary" href="{{ route('members.index') }}">Cancel</a>
+          <button class="btn btn-gold">Save & Close</button>
+        </div>
       </form>
     </div>
   </div>

@@ -31,10 +31,7 @@
             Name of Task
           </span>
           <span class="table-column-title">
-            Project
-          </span>
-          <span class="table-column-title">
-            Week
+            Member
           </span>
           <span class="table-column-title">
             Value
@@ -51,14 +48,13 @@
             <div class="table-row">
               <span class="table-cell">{{ $tasks->firstItem() + $loop->index }}</span>
               <span class="table-cell">{{ $task->name }}</span>
-              <span class="table-cell">{{ $task->project->name }}</span>
-              <span class="table-cell">{{ $task->week->name }}</span>
+              <span class="table-cell">{{ $task->member->name }}</span>
               <span class="table-cell">{{ $task->value }}</span>
               <span class="table-cell">
                 <time datetime="{{ $task->updated_at }}">{{ $task->updated_at->format('Y-m-d H:i') }}</time>
               </span>
               <span class="table-cell">
-                <a class="" href="#" data-comment="{{ $task->comment }}" onclick="showComment(event)">Comment</a>
+                <a class="" href="#" data-project-name="{{ $task->project->name }}" data-week-name="{{ $task->week->name }}" data-member-name="{{ $task->member->name }}" onclick="showDetail({{ $task }}, event)">Detail</a>
                 <a class="" href="{{ route('tasks.edit', ['id' => $task->id]) }}">Edit</a>
               </span>
             </div>
@@ -72,20 +68,6 @@
       </div>
     </div>
 
-    <div ref="modal" class="modal modal-comment fade" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Comment</h5>
-          </div>
-          <div class="modal-body">
-            <div class="comment"></div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <modal-task-detail ref="modal-detail"></modal-task-detail>
   </div>
 @endsection

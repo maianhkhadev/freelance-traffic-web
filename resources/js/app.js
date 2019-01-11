@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -6,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('./pages');
 
 window.Vue = require('vue');
 
@@ -30,6 +30,8 @@ Vue.component('field-search', require('./components/field-search.vue').default);
 Vue.component('field-task-name', require('./components/field-task-name.vue').default);
 Vue.component('status-closed', require('./components/status-closed.vue').default);
 Vue.component('status-disabled', require('./components/status-disabled.vue').default);
+Vue.component('create-multi-tasks', require('./components/create-multi-tasks.vue').default);
+Vue.component('modal-task-detail', require('./components/modal-task-detail.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -37,6 +39,6 @@ Vue.component('status-disabled', require('./components/status-disabled.vue').def
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app'
+window.vm = new Vue({
+  el: '#app'
 });

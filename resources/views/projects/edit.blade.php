@@ -32,8 +32,10 @@
           <label class="custom-control-label" for="checkbox-closed">Close this project?</label>
         </div>
 
-        <a class="btn btn-secondary" href="{{ route('projects.index') }}">Cancel</a>
-        <button class="btn btn-gold">Save & Close</button>
+        <div class="form-footer">
+          <a class="btn btn-secondary" href="{{ route('projects.index') }}">Cancel</a>
+          <button class="btn btn-gold">Save & Close</button>
+        </div>
       </form>
     </div>
   </div>

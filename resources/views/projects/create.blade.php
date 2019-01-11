@@ -26,8 +26,10 @@
           <input type="color" name="color" class="form-control">
         </div>
 
-        <a class="btn btn-secondary" href="{{ route('projects.index') }}">Cancel</a>
-        <button class="btn btn-gold">Save & Close</button>
+        <div class="form-footer">
+          <a class="btn btn-secondary" href="{{ route('projects.index') }}">Cancel</a>
+          <button class="btn btn-gold">Save & Close</button>
+        </div>
       </form>
     </div>
   </div>

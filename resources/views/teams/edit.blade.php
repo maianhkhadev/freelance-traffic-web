@@ -22,8 +22,10 @@
           <input type="text" name="name" class="form-control" value="{{ $team->name }}" placeholder="Ex: Admin" autocomplete="off" required>
         </div>
 
-        <a class="btn btn-secondary" href="{{ route('teams.index') }}">Cancel</a>
-        <button class="btn btn-gold">Save & Close</button>
+        <div class="form-footer">
+          <a class="btn btn-secondary" href="{{ route('teams.index') }}">Cancel</a>
+          <button class="btn btn-gold">Save & Close</button>
+        </div>
       </form>
     </div>
   </div>

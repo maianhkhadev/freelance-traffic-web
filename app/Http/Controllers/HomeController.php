@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Week;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +25,34 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $week = Week::orderBy('start_date', 'DESC')->first();
+        // check week
+        $start_date = Carbon::now();
+        $start_date->subWeek();
+
+        $end_date = Carbon::now();
+        $end_date->addWeeks(4);
+
+        $weeks = Week::where([
+          ['start_date', '>=', $start_date->startOfWeek()->format('Y-m-d')],
+          ['end_date', '<=', $end_date->endOfWeek()->format('Y-m-d')],
+          ['closed', true],
+        ])->get();
+
+        if(sizeof($weeks) > 0) {
+          $weeks = Week::where('closed', false)->update(['closed' => false]);
+
+          $weeks = Week::where([
+            ['start_date', '>=', $start_date->startOfWeek()->format('Y-m-d')],
+            ['end_date', '<=', $end_date->endOfWeek()->format('Y-m-d')],
+          ])->update(['closed' => false]);
+        }
+
+        $date = Carbon::now();
+        $week = Week::where([
+          ['start_date', '>=', $date->startOfWeek()->format('Y-m-d')],
+          ['end_date', '<=', $date->endOfWeek()->format('Y-m-d')],
+          ['closed', false],
+        ])->first();
 
         return view('home', ['week' => $week]);
     }

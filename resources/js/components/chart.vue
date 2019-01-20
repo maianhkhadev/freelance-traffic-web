@@ -22,7 +22,7 @@
     methods: {
       update: function(options) {
         let self = this
-        
+
         self.chart.destroy()
         self.run(options)
       },

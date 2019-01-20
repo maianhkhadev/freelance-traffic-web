@@ -2,30 +2,23 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Member;
+use App\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
-class MemberController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $query = DB::table('members')->join('tasks', 'members.id', '=', 'tasks.member_id')->select('members.team_id', 'members.id', 'members.name');
+        $teams = Team::all();
 
-        if($request->has('week_ids')) {
-            $week_ids = $request->input('week_ids');
-            $query->whereIn('tasks.week_id', $week_ids);
-        }
-
-        $members = $query->distinct('members.id')->get();
-
-        return json_encode($members);
+        return json_encode($teams);
     }
 
     /**

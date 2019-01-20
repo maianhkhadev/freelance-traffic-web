@@ -10,11 +10,12 @@
             <input type="radio" id="radio-week-select-all" name="select-week" class="custom-control-input" checked="checked" />
             <label class="custom-control-label" for="radio-week-select-all">Select All</label>
           </div>
+        </div>
+        <div class="modal-body">
           <div class="custom-control custom-radio">
             <input type="radio" id="radio-week-select-custom" name="select-week" class="custom-control-input" />
             <label class="custom-control-label" for="radio-week-select-custom">Custom Select</label>
           </div>
-
           <div class="row">
             <template v-for="week in weeks">
               <div class="col-xl-6">

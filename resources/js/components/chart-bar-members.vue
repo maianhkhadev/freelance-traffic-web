@@ -34,6 +34,9 @@
             scales: {
   						xAxes: [{
   							stacked: true,
+                ticks: {
+                  display: false
+                }
   						}],
   						yAxes: [{
   							stacked: true

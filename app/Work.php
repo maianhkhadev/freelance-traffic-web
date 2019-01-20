@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Member extends Model
+class Work extends Model
 {
     use SoftDeletes;
 
@@ -16,13 +16,13 @@ class Member extends Model
      */
     protected $dates = ['deleted_at'];
 
-    public function team()
+    public function parent()
     {
-        return $this->belongsTo('App\Team');
+        return $this->belongsTo('App\Work');
     }
 
-    public function tasks()
+    public function works()
     {
-       return $this->belongsToMany('App\Week');
+       return $this->belongsToMany('App\Work');
     }
 }

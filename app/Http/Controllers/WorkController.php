@@ -1,31 +1,32 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use App\Member;
+use App\Work;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 
-class MemberController extends Controller
+class WorkController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $query = DB::table('members')->join('tasks', 'members.id', '=', 'tasks.member_id')->select('members.team_id', 'members.id', 'members.name');
+        $works = Work::all();
 
-        if($request->has('week_ids')) {
-            $week_ids = $request->input('week_ids');
-            $query->whereIn('tasks.week_id', $week_ids);
-        }
+        return view('works.index', ['works' => $works]);
+    }
 
-        $members = $query->distinct('members.id')->get();
-
-        return json_encode($members);
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -46,6 +47,17 @@ class MemberController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         //
     }

@@ -13,10 +13,7 @@
           </ol>
         </div>
         <div class="col-xl-6">
-          <div class="tool-box">
-            <field-search></field-search>
-            <a class="btn btn-gold btn-create" href="{{ route('weeks.create') }}">Create</a>
-          </div>
+          <field-search></field-search>
         </div>
       </div>
     </div>
@@ -58,7 +55,6 @@
             </span>
             <span class="table-cell">
               <a class="" href="{{ route('weeks.show', ['id' => $week->id]) }}">Show</a>
-              <a class="" href="{{ route('weeks.edit', ['id' => $week->id]) }}">Edit</a>
             </span>
           </div>
         @endforeach

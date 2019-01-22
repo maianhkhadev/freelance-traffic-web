@@ -20,12 +20,28 @@
       }
     },
     methods: {
+      addClickEvent: function(callback) {
+        let self = this
+
+        self.$refs.chart.addEventListener('click', function(e) {
+          let firstPoint = self.chart.getElementAtEvent(e)
+
+          if (firstPoint) {
+            var label = self.chart.data.labels[firstPoint[0]._index];
+            var value = self.chart.data.datasets[firstPoint[0]._datasetIndex].data[firstPoint[0]._index];
+
+            callback(label, value)
+          }
+        })
+      },
+
       update: function(options) {
         let self = this
 
-        self.chart.destroy()
-        self.run(options)
+        self.chart.data = options.data
+        self.chart.update()
       },
+
       run: function(options) {
         let self = this
 

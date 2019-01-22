@@ -32,6 +32,11 @@ class TaskController extends Controller
             $query->whereIn('week_id', $week_ids);
         }
 
+        if($request->has('name')) {
+            $name = $request->input('name');
+            $query->where('name', $name);
+        }
+
         $tasks = $query->get();
 
         foreach($tasks as $index=>$task) {

@@ -29,4 +29,4 @@ Route::resource('weeks', 'WeekController');
 
 Route::resource('tasks', 'TaskController');
 
-Route::resource('hints', 'HintController');
+Route::resource('works', 'WorkController');

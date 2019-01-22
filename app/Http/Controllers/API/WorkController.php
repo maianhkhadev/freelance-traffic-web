@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Hint;
+use App\Work;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class HintController extends Controller
+class WorkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,13 @@ class HintController extends Controller
      */
     public function index()
     {
-        $hints = Hint::all();
+        $works = Work::all();
 
-        return json_encode($hints);
+        foreach($works as $index=>$work) {
+          $work->parent_name = $work->parent === null ? '' : $work->parent->name;
+        }
+
+        return json_encode($works);
     }
 
     /**

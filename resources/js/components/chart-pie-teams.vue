@@ -10,6 +10,7 @@
   export default {
     data() {
       return {
+        teams: [],
         options: {
     			type: 'pie',
     			data: {
@@ -20,7 +21,21 @@
     				responsive: true,
             legend: {
   						position: 'left'
-  					}
+  					},
+            tooltips: {
+              callbacks: {
+                label: function(tooltipItem, data) {
+                  let label = data.labels[tooltipItem.datasetIndex]
+                  let dataValue = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+
+                  let total = data.datasets[0].data.reduce(function(total, value) {
+                    return total + value;
+                  })
+
+                  return `${label}: ${Math.floor(dataValue / total * 100)}%`;
+                }
+              }
+            }
     			}
     		}
       }
@@ -39,10 +54,8 @@
       tranformTaskToDataset: function(tasks) {
         let self = this
 
-        let teams = []
-
         tasks.forEach(function(task) {
-          let team = teams.find(function(team) {
+          let team = self.teams.find(function(team) {
             return team.id === task.team_id
           })
 
@@ -53,7 +66,7 @@
               value: 0
             }
 
-            teams.push(team)
+            self.teams.push(team)
           }
 
           team.value += task.value
@@ -73,7 +86,7 @@
           ]
         }
 
-        teams.forEach(function(team) {
+        self.teams.forEach(function(team) {
           labels.push(team.name)
           dataset.data.push(team.value)
         })
@@ -89,7 +102,7 @@
         self.$refs['chart'].update(options)
       },
 
-      requestData: function() {
+      fetchData: function() {
         let self = this
 
         axios.get('/api/tasks', {
@@ -108,7 +121,7 @@
     mounted() {
       let self = this
 
-      self.requestData()
+      self.fetchData()
     }
   }
 </script>

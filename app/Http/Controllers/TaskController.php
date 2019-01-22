@@ -63,8 +63,6 @@ class TaskController extends Controller
 
         $task->save();
 
-        $this->saveHint($request->input('name'));
-
         return redirect()->route('tasks.index');
     }
 
@@ -87,9 +85,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        $projects = Project::all();
-        $weeks = Week::all();
-        $members = Member::all();
+        $projects = Project::where('closed', false)->get();
+        $weeks = Week::where('closed', false)->get();
+        $members = Member::where('disabled', false)->get();
 
         return view('tasks.edit', ['task' => $task, 'projects' => $projects, 'weeks' => $weeks, 'members' => $members]);
     }
@@ -112,8 +110,6 @@ class TaskController extends Controller
 
         $task->save();
 
-        $this->saveHint($request->input('name'));
-
         return redirect()->route('tasks.index');
     }
 
@@ -126,20 +122,5 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         //
-    }
-
-    private function saveHint($value)
-    {
-        $hint = Hint::where('value', $value)->first();
-
-        if($hint !== NULL) {
-          return;
-        }
-
-        $hint = new Hint();
-
-        $hint->value = $value;
-
-        $hint->save();
     }
 }

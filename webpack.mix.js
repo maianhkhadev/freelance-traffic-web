@@ -28,3 +28,10 @@ mix.webpackConfig({
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
+
+mix.styles([
+ 'node_modules/flatpickr/dist/flatpickr.min.css',
+ 'node_modules/flatpickr/dist/themes/airbnb.css',
+ 'node_modules/selectize/dist/css/selectize.css',
+ 'node_modules/selectize/dist/css/selectize.default.css',
+], 'public/css/vendor.css');

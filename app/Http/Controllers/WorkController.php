@@ -26,7 +26,9 @@ class WorkController extends Controller
      */
     public function create()
     {
-        //
+        $parents = Work::where('parent_id', null)->get();
+
+        return view('works.create', ['parents' => $parents]);
     }
 
     /**
@@ -37,7 +39,14 @@ class WorkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $work = new Work();
+
+        $work->parent_id = $request->input('parent_id');
+        $work->name = $request->input('name');
+
+        $work->save();
+
+        return redirect()->route('works.index');
     }
 
     /**
@@ -46,7 +55,7 @@ class WorkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Work $work)
     {
         //
     }
@@ -57,9 +66,11 @@ class WorkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Work $work)
     {
-        //
+        $parents = Work::where('parent_id', null)->where('id', '<>', $work->id)->get();
+
+        return view('works.edit', ['work' => $work, 'parents' => $parents]);
     }
 
     /**
@@ -69,9 +80,14 @@ class WorkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Work $work)
     {
-        //
+        $work->parent_id = $request->input('parent_id');
+        $work->name = $request->input('name');
+
+        $work->save();
+
+        return redirect()->route('works.index');
     }
 
     /**
@@ -80,7 +96,7 @@ class WorkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Work $work)
     {
         //
     }

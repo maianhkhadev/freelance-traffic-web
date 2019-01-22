@@ -20,6 +20,11 @@ a {
   }
 }
 
+.btn {
+  box-shadow: unset !important;
+  cursor: pointer;
+}
+
 .btn-white {
   color: #6c757d;
   background-color: #ffffff;

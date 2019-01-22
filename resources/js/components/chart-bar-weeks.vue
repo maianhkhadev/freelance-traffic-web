@@ -6,7 +6,7 @@
 
     <chart ref="chart" class="chart" :options="options"></chart>
 
-    <modal-filter-weeks ref="modal" :params="{ member_ids: [member.id] }" v-on:click-filter="requestData"></modal-filter-weeks>
+    <modal-filter-weeks ref="modal" :params="{ member_ids: [member.id] }" v-on:click-filter="fetchData"></modal-filter-weeks>
   </div>
 </template>
 
@@ -111,7 +111,7 @@
         self.$refs['chart'].update(options)
       },
 
-      requestData: function() {
+      fetchData: function() {
         let self = this
 
         axios.get('/api/tasks', {
@@ -131,7 +131,15 @@
     mounted() {
       let self = this
 
-      self.requestData()
+      self.fetchData()
+
+      self.$refs['chart'].addClickEvent(function(label, value) {
+        // let members = self.$refs.modal.getSelected()
+        // members.forEach(function(member) {
+        //   window
+        // })
+        console.log(`${label}-${value}`)
+      })
     }
   }
 </script>

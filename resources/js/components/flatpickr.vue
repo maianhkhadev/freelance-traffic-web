@@ -6,11 +6,6 @@
   import flatpickr from 'flatpickr'
   import weekSelectPlugin from 'flatpickr/dist/plugins/weekSelect/weekSelect.js'
 
-  if (process.browser) {
-    require('flatpickr/dist/flatpickr.min.css')
-    require('flatpickr/dist/themes/airbnb.css')
-  }
-
   export default {
     props: {
       defaultDate: {

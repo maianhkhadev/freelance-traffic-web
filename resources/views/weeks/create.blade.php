@@ -1,13 +1,13 @@
 @extends('layouts.blank')
 
 @section('content')
-  <div class="page page-projects-create">
+  <div class="page page-weeks-create">
     <div class="page-header">
       <h3 class="page-title">Create a Week</h3>
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('weeks.index') }}">List of Week</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('weeks.index') }}">List of Weeks</a></li>
         <li class="breadcrumb-item active" aria-current="page">Create</li>
       </ol>
     </div>

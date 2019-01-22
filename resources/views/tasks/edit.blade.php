@@ -1,4 +1,4 @@
-@extends('layouts.blank')
+@extends('layouts.default')
 
 @section('content')
   <div class="page page-tasks-create">
@@ -46,12 +46,12 @@
 
         <div class="form-group">
           <label>Name of Task</label>
-          <field-task-name value="{{ $task->name }}" tabindex="4"></field-task-name>
+          <select-works name="name" value="{{ $task->name }}" tabindex="4"></select-works>
         </div>
 
         <div class="form-group">
-          <label>Value</label>
-          <input type="number" name="value" class="form-control" value="{{ $task->value }}" placeholder="Ex: 50" autocomplete="off" tabindex="5" required>
+          <label>Time Estimate (hour)</label>
+          <input type="number" name="value" class="form-control" value="{{ $task->value }}" placeholder="Ex: 8" autocomplete="off" tabindex="5" required>
         </div>
 
         <div class="form-group">

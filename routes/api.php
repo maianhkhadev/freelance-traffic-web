@@ -25,4 +25,4 @@ Route::apiResource('weeks', 'API\WeekController');
 
 Route::apiResource('tasks', 'API\TaskController');
 
-Route::apiResource('hints', 'API\HintController');
+Route::apiResource('works', 'API\WorkController');

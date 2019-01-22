@@ -10,6 +10,7 @@
   export default {
     data() {
       return {
+        weeks: [],
         options: {
   				type: 'line',
   				data: {
@@ -64,19 +65,18 @@
           label: self.project.name,
           backgroundColor: self.project.color,
 					borderColor: self.project.color,
-          weeks: [],
           data: []
         }
 
         tasks.forEach(function(task) {
-          let week = dataset.weeks.find(function(week) {
+          let week = self.weeks.find(function(week) {
             return week.id === task.week_id
           })
 
           if(week === undefined) {
             labels.push(task.week_name)
 
-            dataset.weeks.push({
+            self.weeks.push({
               id: task.week_id,
               name: task.week_name,
               value: 0
@@ -85,17 +85,15 @@
         })
 
         tasks.forEach(function(task) {
-          let week = dataset.weeks.find(function(week) {
+          let week = self.weeks.find(function(week) {
             return week.id === task.week_id
           })
           week.value += task.value
         })
 
-        dataset.weeks.forEach(function(week) {
+        self.weeks.forEach(function(week) {
           dataset.data.push(week.value)
         })
-
-        delete dataset.weeks
 
         return { labels, datasets: [dataset] }
       },
@@ -108,7 +106,7 @@
         self.$refs['chart'].update(options)
       },
 
-      requestData: function() {
+      fetchData: function() {
         let self = this
 
         axios.get('/api/tasks', {
@@ -127,7 +125,15 @@
     mounted() {
       let self = this
 
-      self.requestData()
+      self.fetchData()
+
+      self.$refs['chart'].addClickEvent(function(label, value) {
+        self.weeks.forEach(function(week) {
+          if(week.name === label) {
+            window.open(`/weeks/${week.id}`, '_blank')
+          }
+        })
+      })
     }
   }
 </script>

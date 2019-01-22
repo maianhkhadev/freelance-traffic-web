@@ -34,7 +34,7 @@
             Member
           </span>
           <span class="table-column-title">
-            Value
+            Time Estimate
           </span>
           <span class="table-column-title">
             Update At

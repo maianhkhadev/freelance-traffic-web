@@ -88,6 +88,12 @@
         $(self.$refs.modal).modal('hide')
       },
 
+      getMembers: function() {
+        let self = this
+
+        return self.members
+      },
+
       getSelected: function() {
         let self = this
 

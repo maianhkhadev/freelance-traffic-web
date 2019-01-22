@@ -27,11 +27,12 @@ Vue.component('chart-pie-projects', require('./components/chart-pie-projects.vue
 Vue.component('chart-pie-teams', require('./components/chart-pie-teams.vue').default);
 Vue.component('chart-timeline', require('./components/chart-timeline.vue').default);
 Vue.component('field-search', require('./components/field-search.vue').default);
-Vue.component('field-task-name', require('./components/field-task-name.vue').default);
 Vue.component('status-closed', require('./components/status-closed.vue').default);
 Vue.component('status-disabled', require('./components/status-disabled.vue').default);
 Vue.component('create-multi-tasks', require('./components/create-multi-tasks.vue').default);
 Vue.component('modal-task-detail', require('./components/modal-task-detail.vue').default);
+Vue.component('select-works', require('./components/select-works.vue').default);
+Vue.component('table-tasks-01', require('./components/table-tasks-01.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -40,5 +41,10 @@ Vue.component('modal-task-detail', require('./components/modal-task-detail.vue')
  */
 
 window.vm = new Vue({
-  el: '#app'
+  el: '#app',
+  methods: {
+    test: function() {
+      vm.$refs['float'].fetch()
+    }
+  }
 });

@@ -10,6 +10,7 @@
   export default {
     data() {
       return {
+        projects: [],
         options: {
     			type: 'pie',
     			data: {
@@ -20,7 +21,21 @@
     				responsive: true,
             legend: {
   						position: 'left'
-  					}
+  					},
+            tooltips: {
+              callbacks: {
+                label: function(tooltipItem, data) {
+                  let label = data.labels[tooltipItem.datasetIndex]
+                  let dataValue = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+
+                  let total = data.datasets[0].data.reduce(function(total, value) {
+                    return total + value;
+                  })
+
+                  return `${label}: ${Math.floor(dataValue / total * 100)}%`;
+                }
+              }
+            }
     			}
     		}
       }
@@ -39,12 +54,11 @@
       tranformTaskToDataset: function(tasks) {
         let self = this
 
-        let projects = []
-
         tasks.forEach(function(task) {
-          let project = projects.find(function(project) {
+          let project = self.projects.find(function(project) {
             return project.id === task.project_id
           })
+
           if(project === undefined) {
             project = {
               id: task.project_id,
@@ -53,7 +67,7 @@
               value: 0
             }
 
-            projects.push(project)
+            self.projects.push(project)
           }
 
           project.value += task.value
@@ -65,7 +79,7 @@
           backgroundColor: []
         }
 
-        projects.forEach(function(project) {
+        self.projects.forEach(function(project) {
           labels.push(project.name)
           dataset.data.push(project.value)
           dataset.backgroundColor.push(project.color)
@@ -82,7 +96,7 @@
         self.$refs['chart'].update(options)
       },
 
-      requestData: function() {
+      fetchData: function() {
         let self = this
 
         axios.get('/api/tasks', {
@@ -101,7 +115,15 @@
     mounted() {
       let self = this
 
-      self.requestData()
+      self.fetchData()
+
+      self.$refs['chart'].addClickEvent(function(label, value) {
+        self.projects.forEach(function(project) {
+          if(project.name === label) {
+            window.open(`/projects/${project.id}`, '_blank')
+          }
+        })
+      })
     }
   }
 </script>

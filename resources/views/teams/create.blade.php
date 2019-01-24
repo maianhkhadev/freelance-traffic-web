@@ -21,6 +21,11 @@
           <input type="text" name="name" class="form-control" placeholder="Ex: Tech" autocomplete="off" required>
         </div>
 
+        <div class="form-group">
+          <label>Color</label>
+          <input type="color" name="color" class="form-control">
+        </div>
+
         <div class="form-footer">
           <a class="btn btn-secondary" href="{{ route('teams.index') }}">Cancel</a>
           <button class="btn btn-gold">Save & Close</button>

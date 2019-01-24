@@ -34,6 +34,7 @@
             scales: {
   						xAxes: [{
   							stacked: true,
+                maxBarThickness: 50
   						}],
   						yAxes: [{
   							stacked: true
@@ -134,11 +135,12 @@
       self.fetchData()
 
       self.$refs['chart'].addClickEvent(function(label, value) {
-        // let members = self.$refs.modal.getSelected()
-        // members.forEach(function(member) {
-        //   window
-        // })
-        console.log(`${label}-${value}`)
+        let weeks = self.$refs.modal.getWeeks()
+        weeks.forEach(function(week) {
+          if(week.name === label) {
+            window.open(`/weeks/${week.id}`, '_blank')
+          }
+        })
       })
     }
   }

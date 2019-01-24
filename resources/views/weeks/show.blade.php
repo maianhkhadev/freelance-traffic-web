@@ -23,6 +23,10 @@
             <label class="form-control-label">Start date</label>
             <input type="text" class="form-control-plaintext" value="{{ $week->start_date }}">
           </div>
+          <div class="form-group">
+            <label class="form-control-label">End date</label>
+            <input type="text" class="form-control-plaintext" value="{{ $week->end_date }}">
+          </div>
         </div>
         <div class="col-xl-6">
           <div class="form-group">
@@ -32,25 +36,7 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-xl-6">
-          <div class="form-group">
-            <label class="form-control-label">Projects</label>
-            <chart-pie-projects :week="{{ $week }}"></chart-pie-projects>
-          </div>
-        </div>
-        <div class="col-xl-6">
-          <div class="form-group">
-            <label class="form-control-label">Teams</label>
-            <chart-pie-teams :week="{{ $week }}"></chart-pie-teams>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-control-label">Members</label>
-        <chart-bar-members :week="{{ $week }}"></chart-bar-members>
-      </div>
+      <charts-of-week :week="{{ $week }}"></charts-of-week>
     </div>
   </div>
 @endsection

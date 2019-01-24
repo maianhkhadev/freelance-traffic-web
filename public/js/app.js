@@ -1799,6 +1799,7 @@ __webpack_require__.r(__webpack_exports__);
           scales: {
             xAxes: [{
               stacked: true,
+              maxBarThickness: 50,
               ticks: {
                 display: false
               }
@@ -1812,7 +1813,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    week: {
+    projectIds: {
+      default: function _default() {
+        return [];
+      }
+    },
+    weekId: {
       default: function _default() {
         return null;
       }
@@ -1874,11 +1880,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     fetchData: function fetchData() {
       var self = this;
+      var params = {
+        'member_ids': self.$refs.modal.getSelected(),
+        'week_ids': [self.weekId]
+      };
+
+      if (self.projectIds.length !== 0) {
+        params['project_ids'] = self.projectIds;
+      }
+
       axios.get('/api/tasks', {
-        params: {
-          'member_ids': self.$refs.modal.getSelected(),
-          'week_ids': [self.week.id]
-        }
+        params: params
       }).then(function (res) {
         self.runChart(res.data);
       }).catch(function (error) {
@@ -1946,7 +1958,8 @@ __webpack_require__.r(__webpack_exports__);
           },
           scales: {
             xAxes: [{
-              stacked: true
+              stacked: true,
+              maxBarThickness: 50
             }],
             yAxes: [{
               stacked: true
@@ -2035,11 +2048,12 @@ __webpack_require__.r(__webpack_exports__);
     var self = this;
     self.fetchData();
     self.$refs['chart'].addClickEvent(function (label, value) {
-      // let members = self.$refs.modal.getSelected()
-      // members.forEach(function(member) {
-      //   window
-      // })
-      console.log("".concat(label, "-").concat(value));
+      var weeks = self.$refs.modal.getWeeks();
+      weeks.forEach(function (week) {
+        if (week.name === label) {
+          window.open("/weeks/".concat(week.id), '_blank');
+        }
+      });
     });
   }
 });
@@ -2095,7 +2109,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    week: {
+    projectIds: {
+      default: function _default() {
+        return [];
+      }
+    },
+    weekId: {
       default: function _default() {
         return null;
       }
@@ -2147,10 +2166,16 @@ __webpack_require__.r(__webpack_exports__);
     },
     fetchData: function fetchData() {
       var self = this;
+      var params = {
+        'week_ids': [self.weekId]
+      };
+
+      if (self.projectIds.length !== 0) {
+        params['project_ids'] = self.projectIds;
+      }
+
       axios.get('/api/tasks', {
-        params: {
-          'week_ids': [self.week.id]
-        }
+        params: params
       }).then(function (res) {
         self.runChart(res.data);
       }).catch(function (error) {
@@ -2222,7 +2247,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    week: {
+    projectIds: {
+      default: function _default() {
+        return [];
+      }
+    },
+    weekId: {
       default: function _default() {
         return null;
       }
@@ -2243,6 +2273,7 @@ __webpack_require__.r(__webpack_exports__);
           team = {
             id: task.team_id,
             name: task.team_name,
+            color: task.team_color,
             value: 0
           };
           self.teams.push(team);
@@ -2253,11 +2284,12 @@ __webpack_require__.r(__webpack_exports__);
       var labels = [];
       var dataset = {
         data: [],
-        backgroundColor: ['rgba(255, 99, 132, 0.75)', 'rgba(255, 159, 64, 0.75)', 'rgba(255, 205, 86, 0.75)', 'rgba(75, 192, 192, 0.75)', 'rgba(54, 162, 235, 0.75)', 'rgba(153, 102, 255, 0.75)', 'rgba(201, 203, 207, 0.75)']
+        backgroundColor: []
       };
       self.teams.forEach(function (team) {
         labels.push(team.name);
         dataset.data.push(team.value);
+        dataset.backgroundColor.push(team.color);
       });
       return {
         labels: labels,
@@ -2272,10 +2304,16 @@ __webpack_require__.r(__webpack_exports__);
     },
     fetchData: function fetchData() {
       var self = this;
+      var params = {
+        'week_ids': [self.weekId]
+      };
+
+      if (self.projectIds.length !== 0) {
+        params['project_ids'] = self.projectIds;
+      }
+
       axios.get('/api/tasks', {
-        params: {
-          'week_ids': [self.week.id]
-        }
+        params: params
       }).then(function (res) {
         self.runChart(res.data);
       }).catch(function (error) {
@@ -2313,7 +2351,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       weeks: [],
       options: {
-        type: 'line',
+        type: 'bar',
         data: {
           labels: [],
           datasets: []
@@ -2335,7 +2373,8 @@ __webpack_require__.r(__webpack_exports__);
           },
           scales: {
             xAxes: [{
-              display: false
+              display: false,
+              maxBarThickness: 50
             }],
             yAxes: [{
               ticks: {
@@ -2486,6 +2525,77 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var self = this;
     self.run(self.options);
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/charts-of-week.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/charts-of-week.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modal_filter_projects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modal-filter-projects */ "./resources/js/components/modal-filter-projects.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      projectIds: []
+    };
+  },
+  props: {
+    week: {
+      default: function _default() {
+        return null;
+      }
+    }
+  },
+  components: {
+    'modal-filter-projects': _modal_filter_projects__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    fetchData: function fetchData(projectIds) {
+      var self = this;
+      self.projectIds.splice(0, self.projectIds.length);
+      projectIds.forEach(function (projectId) {
+        self.projectIds.push(parseInt(projectId));
+      });
+      self.$refs['chart-01'].fetchData();
+      self.$refs['chart-02'].fetchData();
+      self.$refs['chart-03'].fetchData();
+    }
   }
 });
 
@@ -2888,6 +2998,149 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal-filter-projects.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modal-filter-projects.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      projects: []
+    };
+  },
+  props: {
+    params: {
+      default: function _default() {
+        return {};
+      }
+    }
+  },
+  methods: {
+    show: function show() {
+      var self = this;
+      $(self.$refs.modal).modal('show');
+    },
+    hide: function hide() {
+      var self = this;
+      $(self.$refs.modal).modal('hide');
+    },
+    filter: function filter() {
+      var self = this;
+      self.$emit('click-filter', self.getSelected());
+      $(self.$refs.modal).modal('hide');
+    },
+    getSelected: function getSelected() {
+      var self = this;
+      var radioSelectAll = document.querySelector('#radio-project-select-all');
+
+      if (radioSelectAll.checked) {
+        return [];
+      } else {
+        var projectIds = [];
+        var checkboxes = self.$refs.modal.querySelectorAll('input[type="checkbox"]:checked');
+        checkboxes.forEach(function (checkbox) {
+          projectIds.push(checkbox.dataset.projectId);
+        });
+        return projectIds;
+      }
+    },
+    getChartData: function getChartData() {
+      var self = this;
+      var radioSelectAll = document.querySelector('#radio-project-select-all');
+
+      if (radioSelectAll.checked) {
+        return self.projects.map(function (project) {
+          return {
+            id: project.id,
+            name: project.name,
+            value: 0
+          };
+        });
+      } else {
+        var projects = [];
+        var checkboxes = self.$refs.modal.querySelectorAll('input[type="checkbox"]:checked');
+        checkboxes.forEach(function (checkbox) {
+          projects.push({
+            id: parseInt(checkbox.dataset.projectId),
+            name: checkbox.dataset.projectName,
+            value: 0
+          });
+        });
+        return projects;
+      }
+    }
+  },
+  mounted: function mounted() {
+    var self = this;
+    document.querySelector("#radio-project-select-all").checked = true;
+    axios.get('/api/tasks', {
+      params: self.params
+    }).then(function (res) {
+      res.data.forEach(function (task) {
+        var project = self.projects.find(function (project) {
+          return project.id === task.project_id;
+        });
+
+        if (project === undefined) {
+          project = {
+            id: task.project_id,
+            name: task.project_name
+          };
+          self.projects.push(project);
+        }
+      });
+    }).catch(function (error) {
+      // handle error
+      console.log(error);
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal-filter-weeks.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modal-filter-weeks.vue?vue&type=script&lang=js& ***!
@@ -2961,6 +3214,10 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
       self.$emit('click-filter');
       $(self.$refs.modal).modal('hide');
+    },
+    getWeeks: function getWeeks() {
+      var self = this;
+      return self.weeks;
     },
     getSelected: function getSelected() {
       var self = this;
@@ -77295,7 +77552,7 @@ var render = function() {
       _vm._v(" "),
       _c("modal-filter-members", {
         ref: "modal",
-        attrs: { params: { week_ids: [_vm.week.id] } },
+        attrs: { params: { week_ids: [_vm.weekId] } },
         on: { "click-filter": _vm.fetchData }
       })
     ],
@@ -77484,6 +77741,105 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("canvas", { ref: "chart" })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/charts-of-week.vue?vue&type=template&id=b598aa86&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/charts-of-week.vue?vue&type=template&id=b598aa86& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-white mb-3",
+          attrs: {
+            "data-toggle": "modal",
+            "data-target": ".modal-filter-projects"
+          }
+        },
+        [_vm._v("Filter by Projects")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-xl-6" }, [
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { staticClass: "form-control-label" }, [
+                _vm._v("Projects")
+              ]),
+              _vm._v(" "),
+              _c("chart-pie-projects", {
+                ref: "chart-01",
+                attrs: { "project-ids": _vm.projectIds, "week-id": _vm.week.id }
+              })
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-xl-6" }, [
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { staticClass: "form-control-label" }, [
+                _vm._v("Teams")
+              ]),
+              _vm._v(" "),
+              _c("chart-pie-teams", {
+                ref: "chart-02",
+                attrs: { "project-ids": _vm.projectIds, "week-id": _vm.week.id }
+              })
+            ],
+            1
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", { staticClass: "form-control-label" }, [
+            _vm._v("Members")
+          ]),
+          _vm._v(" "),
+          _c("chart-bar-members", {
+            ref: "chart-03",
+            attrs: { "project-ids": _vm.projectIds, "week-id": _vm.week.id }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("modal-filter-projects", {
+        attrs: { params: { week_ids: [_vm.week.id] } },
+        on: { "click-filter": _vm.fetchData }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -77931,6 +78287,173 @@ var staticRenderFns = [
           attrs: { for: "radio-member-select-custom" }
         },
         [_vm._v("Select by Member")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal-filter-projects.vue?vue&type=template&id=a8481158&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modal-filter-projects.vue?vue&type=template&id=a8481158& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      ref: "modal",
+      staticClass: "modal modal-filter modal-filter-projects fade",
+      attrs: { role: "dialog" }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "row" },
+              [
+                _vm._l(_vm.projects, function(project) {
+                  return [
+                    _c("div", { staticClass: "col-xl-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "custom-control custom-checkbox" },
+                        [
+                          _c("input", {
+                            staticClass: "custom-control-input",
+                            attrs: {
+                              type: "checkbox",
+                              id: "checkbox-project-" + project.id,
+                              "data-project-id": project.id,
+                              "data-project-name": project.name
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: "checkbox-project-" + project.id }
+                            },
+                            [_vm._v(_vm._s(project.name))]
+                          )
+                        ]
+                      )
+                    ])
+                  ]
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary",
+                attrs: { type: "button", "data-dismiss": "modal" }
+              },
+              [_vm._v("Close")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-gold",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.filter()
+                  }
+                }
+              },
+              [_vm._v("Filter")]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Filter projects")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("div", { staticClass: "custom-control custom-radio" }, [
+        _c("input", {
+          staticClass: "custom-control-input",
+          attrs: {
+            type: "radio",
+            id: "radio-project-select-all",
+            name: "select-project",
+            checked: "checked"
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          {
+            staticClass: "custom-control-label",
+            attrs: { for: "radio-week-select-all" }
+          },
+          [_vm._v("Select All")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "custom-control custom-radio" }, [
+      _c("input", {
+        staticClass: "custom-control-input",
+        attrs: {
+          type: "radio",
+          id: "radio-project-select-custom",
+          name: "select-project"
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "custom-control-label",
+          attrs: { for: "radio-project-select-custom" }
+        },
+        [_vm._v("Custom Select")]
       )
     ])
   }
@@ -89723,6 +90246,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('flatpickr', __webpack_require__(/*! ./components/flatpickr.vue */ "./resources/js/components/flatpickr.vue").default);
+Vue.component('charts-of-week', __webpack_require__(/*! ./components/charts-of-week.vue */ "./resources/js/components/charts-of-week.vue").default);
 Vue.component('chart-bar-members', __webpack_require__(/*! ./components/chart-bar-members.vue */ "./resources/js/components/chart-bar-members.vue").default);
 Vue.component('chart-bar-weeks', __webpack_require__(/*! ./components/chart-bar-weeks.vue */ "./resources/js/components/chart-bar-weeks.vue").default);
 Vue.component('chart-pie-projects', __webpack_require__(/*! ./components/chart-pie-projects.vue */ "./resources/js/components/chart-pie-projects.vue").default);
@@ -90234,6 +90758,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/charts-of-week.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/charts-of-week.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _charts_of_week_vue_vue_type_template_id_b598aa86___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./charts-of-week.vue?vue&type=template&id=b598aa86& */ "./resources/js/components/charts-of-week.vue?vue&type=template&id=b598aa86&");
+/* harmony import */ var _charts_of_week_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./charts-of-week.vue?vue&type=script&lang=js& */ "./resources/js/components/charts-of-week.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _charts_of_week_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _charts_of_week_vue_vue_type_template_id_b598aa86___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _charts_of_week_vue_vue_type_template_id_b598aa86___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/charts-of-week.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/charts-of-week.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/charts-of-week.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_charts_of_week_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./charts-of-week.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/charts-of-week.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_charts_of_week_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/charts-of-week.vue?vue&type=template&id=b598aa86&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/charts-of-week.vue?vue&type=template&id=b598aa86& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_charts_of_week_vue_vue_type_template_id_b598aa86___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./charts-of-week.vue?vue&type=template&id=b598aa86& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/charts-of-week.vue?vue&type=template&id=b598aa86&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_charts_of_week_vue_vue_type_template_id_b598aa86___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_charts_of_week_vue_vue_type_template_id_b598aa86___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/create-multi-tasks.vue":
 /*!********************************************************!*\
   !*** ./resources/js/components/create-multi-tasks.vue ***!
@@ -90505,6 +91098,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modal_filter_members_vue_vue_type_template_id_2859c4a2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modal_filter_members_vue_vue_type_template_id_2859c4a2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/modal-filter-projects.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/modal-filter-projects.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modal_filter_projects_vue_vue_type_template_id_a8481158___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modal-filter-projects.vue?vue&type=template&id=a8481158& */ "./resources/js/components/modal-filter-projects.vue?vue&type=template&id=a8481158&");
+/* harmony import */ var _modal_filter_projects_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal-filter-projects.vue?vue&type=script&lang=js& */ "./resources/js/components/modal-filter-projects.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _modal_filter_projects_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _modal_filter_projects_vue_vue_type_template_id_a8481158___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _modal_filter_projects_vue_vue_type_template_id_a8481158___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/modal-filter-projects.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/modal-filter-projects.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/modal-filter-projects.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_modal_filter_projects_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./modal-filter-projects.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal-filter-projects.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_modal_filter_projects_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/modal-filter-projects.vue?vue&type=template&id=a8481158&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/modal-filter-projects.vue?vue&type=template&id=a8481158& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modal_filter_projects_vue_vue_type_template_id_a8481158___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./modal-filter-projects.vue?vue&type=template&id=a8481158& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal-filter-projects.vue?vue&type=template&id=a8481158&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modal_filter_projects_vue_vue_type_template_id_a8481158___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modal_filter_projects_vue_vue_type_template_id_a8481158___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

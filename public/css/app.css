@@ -9799,8 +9799,8 @@ a:hover {
   margin-bottom: 1.5rem;
 }
 
-.chart-container .chart {
-  margin-top: 1rem;
+.chart-container .btn {
+  margin-bottom: 0.75rem;
 }
 
 .field-search {
@@ -9929,11 +9929,11 @@ a:hover {
 }
 
 .table-teams .table-header {
-  grid-template-columns: 5rem calc(100% - 25rem) 10rem 10rem;
+  grid-template-columns: 5rem calc(100% - 32.5rem) 7.5rem 10rem 10rem;
 }
 
 .table-teams .table-content .table-row {
-  grid-template-columns: 5rem calc(100% - 25rem) 10rem 10rem;
+  grid-template-columns: 5rem calc(100% - 32.5rem) 7.5rem 10rem 10rem;
 }
 
 .table-members .table-header {

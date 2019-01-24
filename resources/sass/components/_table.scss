@@ -87,13 +87,13 @@
 .table-teams {
 
   .table-header {
-    grid-template-columns: 5rem calc(100% - 25rem) 10rem 10rem;
+    grid-template-columns: 5rem calc(100% - 32.5rem) 7.5rem 10rem 10rem;
   }
 
   .table-content {
 
     .table-row {
-      grid-template-columns: 5rem calc(100% - 25rem) 10rem 10rem;
+      grid-template-columns: 5rem calc(100% - 32.5rem) 7.5rem 10rem 10rem;
     }
   }
 }

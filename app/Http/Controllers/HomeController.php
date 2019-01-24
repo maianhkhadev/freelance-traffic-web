@@ -30,7 +30,7 @@ class HomeController extends Controller
         $start_date->subWeek();
 
         $end_date = Carbon::now();
-        $end_date->addWeeks(4);
+        $end_date->addWeeks(3);
 
         $weeks = Week::where([
           ['start_date', '>=', $start_date->startOfWeek()->format('Y-m-d')],

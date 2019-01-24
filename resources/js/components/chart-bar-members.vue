@@ -6,7 +6,7 @@
 
     <chart ref="chart" class="chart" :options="options"></chart>
 
-    <modal-filter-members ref="modal" :params="{ week_ids: [week.id] }" v-on:click-filter="fetchData"></modal-filter-members>
+    <modal-filter-members ref="modal" :params="{ week_ids: [weekId] }" v-on:click-filter="fetchData"></modal-filter-members>
   </div>
 </template>
 
@@ -34,8 +34,9 @@
             scales: {
   						xAxes: [{
   							stacked: true,
+                maxBarThickness: 50,
                 ticks: {
-                  display: false
+                  display: false,
                 }
   						}],
   						yAxes: [{
@@ -47,7 +48,12 @@
       }
     },
     props: {
-      week: {
+      projectIds: {
+        default: function () {
+          return []
+        }
+      },
+      weekId: {
         default: function () {
           return null
         }
@@ -117,11 +123,17 @@
       fetchData: function() {
         let self = this
 
+        let params = {
+          'member_ids': self.$refs.modal.getSelected(),
+          'week_ids': [self.weekId]
+        }
+
+        if(self.projectIds.length !== 0) {
+          params['project_ids'] = self.projectIds
+        }
+
         axios.get('/api/tasks', {
-          params: {
-            'member_ids': self.$refs.modal.getSelected(),
-            'week_ids': [self.week.id]
-          }
+          params: params
         })
         .then(function (res) {
           self.runChart(res.data)

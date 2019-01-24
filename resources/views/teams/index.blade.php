@@ -30,6 +30,9 @@
           Name of Team
         </span>
         <span class="table-column-title">
+          Color
+        </span>
+        <span class="table-column-title">
           Update At
         </span>
         <span class="table-column-title">
@@ -41,6 +44,9 @@
           <div class="table-row">
             <span class="table-cell">{{ $teams->firstItem() + $loop->index }}</span>
             <span class="table-cell">{{ $team->name }}</span>
+            <span class="table-cell">
+              <span class="color" style="background-color: {{ $team->color }}"></span>
+            </span>
             <span class="table-cell">
               <time datetime="{{ $team->updated_at }}">{{ $team->updated_at->format('Y-m-d H:i') }}</time>
             </span>

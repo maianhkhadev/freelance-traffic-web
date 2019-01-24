@@ -21,6 +21,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('flatpickr', require('./components/flatpickr.vue').default);
+Vue.component('charts-of-week', require('./components/charts-of-week.vue').default);
 Vue.component('chart-bar-members', require('./components/chart-bar-members.vue').default);
 Vue.component('chart-bar-weeks', require('./components/chart-bar-weeks.vue').default);
 Vue.component('chart-pie-projects', require('./components/chart-pie-projects.vue').default);

@@ -12,7 +12,7 @@
       return {
         weeks: [],
         options: {
-  				type: 'line',
+  				type: 'bar',
   				data: {
       			labels: [],
       			datasets: []
@@ -34,7 +34,8 @@
             },
             scales: {
               xAxes: [{
-                display: false
+                display: false,
+                maxBarThickness: 50
               }],
               yAxes: [{
                 ticks: {

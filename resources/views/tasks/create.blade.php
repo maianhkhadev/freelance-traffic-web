@@ -28,7 +28,7 @@
             <label>Week</label>
             <select name="week_id" class="form-control" tabindex="2">
               @foreach ($weeks as $week)
-              <option value="{{ $week->id }}">{{ $week->name }}</option>
+              <option value="{{ $week->id }}" {{ $week->start_date < $date && $date < $week->end_date ? 'selected' : '' }}>{{ $week->name }}</option>
               @endforeach
             </select>
           </div>

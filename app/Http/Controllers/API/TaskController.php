@@ -42,6 +42,7 @@ class TaskController extends Controller
         foreach($tasks as $index=>$task) {
           $task->team_id = $task->member->team->id;
           $task->team_name = $task->member->team->name;
+          $task->team_color = $task->member->team->color;
           $task->member_name = $task->member->name;
           $task->project_name = $task->project->name;
           $task->project_color = $task->project->color;

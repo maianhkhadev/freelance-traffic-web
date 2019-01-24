@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.blank')
 
 @section('content')
   <div class="page page-tasks-create">

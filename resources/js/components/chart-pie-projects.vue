@@ -41,7 +41,12 @@
       }
     },
     props: {
-      week: {
+      projectIds: {
+        default: function () {
+          return []
+        }
+      },
+      weekId: {
         default: function () {
           return null
         }
@@ -99,10 +104,16 @@
       fetchData: function() {
         let self = this
 
+        let params = {
+          'week_ids': [self.weekId]
+        }
+
+        if(self.projectIds.length !== 0) {
+          params['project_ids'] = self.projectIds
+        }
+
         axios.get('/api/tasks', {
-          params: {
-            'week_ids': [self.week.id]
-          }
+          params: params
         })
         .then(function (res) {
           self.runChart(res.data)

@@ -6,7 +6,7 @@ use App\Project;
 use App\Week;
 use App\Member;
 use App\Task;
-use App\Hint;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -40,8 +40,9 @@ class TaskController extends Controller
         $projects = Project::where('closed', false)->get();
         $weeks = Week::where('closed', false)->get();
         $members = Member::where('disabled', false)->get();
+        $date = Carbon::now();
 
-        return view('tasks.create', ['projects' => $projects, 'weeks' => $weeks, 'members' => $members]);
+        return view('tasks.create', ['projects' => $projects, 'weeks' => $weeks, 'members' => $members, 'date' => $date]);
     }
 
     /**

@@ -43,7 +43,7 @@
             <span class="table-cell">{{ $loop->index + 1 }}</span>
             <span class="table-cell">
               @if ($work->parent !== null)
-                  {{ $work->parent->name }}
+                {{ $work->parent->name }}
               @endif
             </span>
             <span class="table-cell">{{ $work->name }}</span>

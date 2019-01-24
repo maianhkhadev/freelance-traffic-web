@@ -16,7 +16,7 @@ class TeamController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -57,6 +57,7 @@ class TeamController extends Controller
         $team = new Team();
 
         $team->name = $request->input('name');
+        $team->color = $request->input('color');
 
         $team->save();
 
@@ -95,6 +96,7 @@ class TeamController extends Controller
     public function update(Request $request, Team $team)
     {
         $team->name = $request->input('name');
+        $team->color = $request->input('color');
 
         $team->save();
 

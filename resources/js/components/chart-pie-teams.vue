@@ -41,7 +41,12 @@
       }
     },
     props: {
-      week: {
+      projectIds: {
+        default: function () {
+          return []
+        }
+      },
+      weekId: {
         default: function () {
           return null
         }
@@ -63,6 +68,7 @@
             team = {
               id: task.team_id,
               name: task.team_name,
+              color: task.team_color,
               value: 0
             }
 
@@ -75,20 +81,13 @@
         let labels = []
         let dataset = {
           data: [],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.75)',
-          	'rgba(255, 159, 64, 0.75)',
-          	'rgba(255, 205, 86, 0.75)',
-          	'rgba(75, 192, 192, 0.75)',
-          	'rgba(54, 162, 235, 0.75)',
-          	'rgba(153, 102, 255, 0.75)',
-          	'rgba(201, 203, 207, 0.75)'
-          ]
+          backgroundColor: []
         }
 
         self.teams.forEach(function(team) {
           labels.push(team.name)
           dataset.data.push(team.value)
+          dataset.backgroundColor.push(team.color)
         })
 
         return { labels, datasets: [dataset] }
@@ -105,10 +104,16 @@
       fetchData: function() {
         let self = this
 
+        let params = {
+          'week_ids': [self.weekId]
+        }
+
+        if(self.projectIds.length !== 0) {
+          params['project_ids'] = self.projectIds
+        }
+
         axios.get('/api/tasks', {
-          params: {
-            'week_ids': [self.week.id]
-          }
+          params: params
         })
         .then(function (res) {
           self.runChart(res.data)

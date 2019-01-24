@@ -1,27 +1,27 @@
 <template>
-  <div ref="modal" class="modal modal-filter modal-filter-weeks fade" role="dialog">
+  <div ref="modal" class="modal modal-filter modal-filter-projects fade" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Filter weeks</h5>
+          <h5 class="modal-title">Filter projects</h5>
         </div>
         <div class="modal-body">
           <div class="custom-control custom-radio">
-            <input type="radio" id="radio-week-select-all" name="select-week" class="custom-control-input" checked="checked" />
+            <input type="radio" id="radio-project-select-all" name="select-project" class="custom-control-input" checked="checked" />
             <label class="custom-control-label" for="radio-week-select-all">Select All</label>
           </div>
         </div>
         <div class="modal-body">
           <div class="custom-control custom-radio">
-            <input type="radio" id="radio-week-select-custom" name="select-week" class="custom-control-input" />
-            <label class="custom-control-label" for="radio-week-select-custom">Custom Select</label>
+            <input type="radio" id="radio-project-select-custom" name="select-project" class="custom-control-input" />
+            <label class="custom-control-label" for="radio-project-select-custom">Custom Select</label>
           </div>
           <div class="row">
-            <template v-for="week in weeks">
+            <template v-for="project in projects">
               <div class="col-xl-6">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" :id="`checkbox-week-${week.id}`" :data-week-id="week.id" :data-week-name="week.name" class="custom-control-input" />
-                  <label class="custom-control-label" :for="`checkbox-week-${week.id}`">{{ week.name }}</label>
+                  <input type="checkbox" :id="`checkbox-project-${project.id}`" :data-project-id="project.id" :data-project-name="project.name" class="custom-control-input" />
+                  <label class="custom-control-label" :for="`checkbox-project-${project.id}`">{{ project.name }}</label>
                 </div>
               </div>
             </template>
@@ -40,7 +40,7 @@
   export default {
     data() {
       return {
-        weeks: []
+        projects: []
       }
     },
     props: {
@@ -66,74 +66,82 @@
       filter: function() {
         let self = this
 
-        self.$emit('click-filter')
+        self.$emit('click-filter', self.getSelected())
 
         $(self.$refs.modal).modal('hide')
-      },
-
-      getWeeks: function() {
-        let self = this
-
-        return self.weeks
       },
 
       getSelected: function() {
         let self = this
 
-        let radioSelectAll = document.querySelector('#radio-week-select-all')
+        let radioSelectAll = document.querySelector('#radio-project-select-all')
         if(radioSelectAll.checked) {
           return []
         }
         else {
-          let weekIds = []
+          let projectIds = []
           let checkboxes = self.$refs.modal.querySelectorAll('input[type="checkbox"]:checked')
           checkboxes.forEach(function(checkbox) {
-            weekIds.push(checkbox.dataset.weekId)
+            projectIds.push(checkbox.dataset.projectId)
           })
 
-          return weekIds
+          return projectIds
         }
       },
 
       getChartData: function() {
         let self = this
 
-        let radioSelectAll = document.querySelector('#radio-week-select-all')
+        let radioSelectAll = document.querySelector('#radio-project-select-all')
         if(radioSelectAll.checked) {
 
-          return self.weeks.map(function(week) {
+          return self.projects.map(function(project) {
             return {
-              id: week.id,
-              name: week.name,
+              id: project.id,
+              name: project.name,
               value: 0
             }
           })
         }
         else {
-          let weeks = []
+          let projects = []
           let checkboxes = self.$refs.modal.querySelectorAll('input[type="checkbox"]:checked')
           checkboxes.forEach(function(checkbox) {
-            weeks.push({
-              id: parseInt(checkbox.dataset.weekId),
-              name: checkbox.dataset.weekName,
+            projects.push({
+              id: parseInt(checkbox.dataset.projectId),
+              name: checkbox.dataset.projectName,
               value: 0
             })
           })
 
-          return weeks
+          return projects
         }
       }
     },
     mounted() {
       let self = this
 
-      document.querySelector("#radio-week-select-all").checked = true
+      document.querySelector("#radio-project-select-all").checked = true
 
-      axios.get('/api/weeks', {
+      axios.get('/api/tasks', {
         params: self.params
       })
       .then(function (res) {
-        self.weeks = res.data
+
+        res.data.forEach(function(task) {
+          let project = self.projects.find(function(project) {
+            return project.id === task.project_id
+          })
+
+          if(project === undefined) {
+            project = {
+              id: task.project_id,
+              name: task.project_name,
+            }
+
+            self.projects.push(project)
+          }
+        })
       })
       .catch(function (error) {
         // handle error

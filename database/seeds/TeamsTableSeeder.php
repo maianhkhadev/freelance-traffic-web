@@ -12,13 +12,14 @@ class TeamsTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->createTeam('account');
-        $this->createTeam('design');
+        $this->createTeam('account', '#8A2BE2');
+        $this->createTeam('design', '#5F9EA0');
     }
 
-    private function createTeam($name) {
+    private function createTeam($name, $color) {
       $team = new Team();
       $team->name = $name;
+      $team->color = $color;
       $team->save();
     }
 }

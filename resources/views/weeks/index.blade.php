@@ -27,7 +27,7 @@
           Name of Week
         </span>
         <span class="table-column-title">
-          Start date
+          Date Range
         </span>
         <span class="table-column-title">
           Status
@@ -46,6 +46,8 @@
             <span class="table-cell">{{ $week->name }}</span>
             <span class="table-cell">
               <time datetime="{{ $week->start_date }}">{{ $week->start_date }}</time>
+              <span class="mx-2">to</span>
+              <time datetime="{{ $week->end_date }}">{{ $week->end_date }}</time>
             </span>
             <span class="table-cell">
               <status-closed :status="{{ $week->closed }}"></status-closed>

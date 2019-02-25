@@ -48,9 +48,11 @@
                     <li class="nav-item">
                       <a class="nav-link" href="{{ route('members.index') }}">Members</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{{ route('works.index') }}">Works</a>
-                    </li>
+                    @if (Auth::user()->email === 'maianhkha.dev@gmail.com' || Auth::user()->email === 'admin@focus-asia.com')
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ route('works.index') }}">Works</a>
+                      </li>
+                    @endif
                   </ul>
 
                   <!-- Right Side Of Navbar -->

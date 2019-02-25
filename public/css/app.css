@@ -9732,27 +9732,6 @@ a:hover {
   margin-bottom: 1rem;
 }
 
-.page-kickoff section {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.page-kickoff section .section-title {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-.page-kickoff section .text-muted {
-  display: block;
-  margin-bottom: 1.5rem;
-}
-
-.page-kickoff section .task {
-  border-bottom: 1px solid #e5e5e5;
-  padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
 .page-show .form-group {
   margin-bottom: 1.5rem;
 }

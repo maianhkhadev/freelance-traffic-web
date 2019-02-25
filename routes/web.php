@@ -15,10 +15,6 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/kickoff', 'KickOffController@index')->name('kickoff');
-
-Route::post('/kickoff', 'KickOffController@store')->name('kickoff.store');
-
 Route::resource('teams', 'TeamController');
 
 Route::resource('members', 'MemberController');
